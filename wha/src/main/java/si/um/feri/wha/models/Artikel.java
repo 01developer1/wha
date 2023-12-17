@@ -8,7 +8,8 @@ import java.util.*;
 public class Artikel{
 
     @Id
-    private String ID_artikel;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long ID_artikel;
 
     private String naziv;
     private int kolicina;
@@ -34,11 +35,11 @@ public class Artikel{
         throw new UnsupportedOperationException();
     }
 
-    public void setID_artikel(String ID_artikel) {
+    public void setID_artikel(Long ID_artikel) {
         this.ID_artikel = ID_artikel;
     }
 
-    public String getID_artikel() {
+    public Long getID_artikel() {
         return this.ID_artikel;
     }
 

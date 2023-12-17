@@ -4,26 +4,30 @@ import jakarta.persistence.*;
 
 import java.util.*;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime
 
 @Entity
 public class Narocilo {
-    private String ID_narocilo;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long ID_narocilo;
+
     private int cenaSkupaj;
     private Object seznamKolicin;
     private boolean zakljuceno;
     /**
      * Ko dokumentarist ustvari narocilo
      */
-    private DateTime datumVnosa;
+    private LocalDateTime datumVnosa;
     /**
      * Rok, do kdaj mora skladiscnik pripraviti narocilo
      */
-    private DateTime rokPriprave;
+    private LocalDateTime rokPriprave;
     /**
      * Cas, ko skladiscnik pripravi narocilo
      */
-    private DateTime casPriprave;
+    private LocalDateTime casPriprave;
     private ArrayList<Artikel> seznamArtiklov = new ArrayList<Artikel>();
     public Zaposleni zaposleni;
 
@@ -31,11 +35,11 @@ public class Narocilo {
         throw new UnsupportedOperationException();
     }
 
-    public void setID_narocilo(String ID_narocilo) {
+    public void setID_narocilo(Long ID_narocilo) {
         this.ID_narocilo = ID_narocilo;
     }
 
-    public String getID_narocilo() {
+    public Long getID_narocilo() {
         return this.ID_narocilo;
     }
 
@@ -67,7 +71,7 @@ public class Narocilo {
         this.datumVnosa = datumVnosa;
     }
 
-    public DateTime getDatumVnosa() {
+    public LocalDateTime getDatumVnosa() {
         return this.datumVnosa;
     }
 
@@ -75,7 +79,7 @@ public class Narocilo {
         this.rokPriprave = rokPriprave;
     }
 
-    public DateTime getRokPriprave() {
+    public LocalDateTime getRokPriprave() {
         return this.rokPriprave;
     }
 
@@ -83,7 +87,7 @@ public class Narocilo {
         this.casPriprave = casPriprave;
     }
 
-    public DateTime getCasPriprave() {
+    public LocalDateTime getCasPriprave() {
         return this.casPriprave;
     }
 }

@@ -4,22 +4,28 @@ import jakarta.persistence.*;
 
 import java.util.*;
 
+import java.time.LocalDateTime
+
 @Entity
 public class Delovni_cas {
-    private Object ID_delovni_cas;
-    private DateTime ura_zacetka;
-    private DateTime ura_zakljucka;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long ID_delovni_cas;
+
+    private LocalDateTime ura_zacetka;
+    private LocalDateTime ura_zakljucka;
     public Zaposleni zaposlen;
 
     public void dodajDelovniCas() {
         throw new UnsupportedOperationException();
     }
 
-    public void setID_delovni_cas(Object ID_delovni_cas) {
+    public void setID_delovni_cas(Long ID_delovni_cas) {
         this.ID_delovni_cas = ID_delovni_cas;
     }
 
-    public void getID_delovni_cas() {
+    public Long getID_delovni_cas() {
         return this.ID_delovni_cas;
     }
 
@@ -27,7 +33,7 @@ public class Delovni_cas {
         this.ura_zacetka = ura_zacetka;
     }
 
-    public DateTime getUra_zacetka() {
+    public LocalDateTime getUra_zacetka() {
         return this.ura_zacetka;
     }
 
@@ -35,7 +41,7 @@ public class Delovni_cas {
         this.ura_zakljucka = ura_zakljucka;
     }
 
-    public DateTime getUra_zakljucka() {
+    public LocalDateTime getUra_zakljucka() {
         return this.ura_zakljucka;
     }
 }

@@ -6,7 +6,11 @@ import java.util.*;
 
 @Entity
 public class Zaposleni {
-    private Object ID_zaposleni;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long ID_zaposleni;
+
     private String ime;
     private String priimek;
     private String telefon;
@@ -20,11 +24,11 @@ public class Zaposleni {
         throw new UnsupportedOperationException();
     }
 
-    public void setID_zaposleni(Object ID_zaposleni) {
+    public void setID_zaposleni(Long ID_zaposleni) {
         this.ID_zaposleni = ID_zaposleni;
     }
 
-    public void getID_zaposleni() {
+    public Long getID_zaposleni() {
         return this.ID_zaposleni;
     }
 
