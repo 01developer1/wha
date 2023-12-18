@@ -2,8 +2,6 @@ package si.feri.um.wha.models;
 
 import jakarta.persistence.*;
 
-import java.util.*;
-
 @Entity
 public class Artikel {
     @Id
@@ -14,21 +12,28 @@ public class Artikel {
     private double prodajnaCena;
     private double dobavnaCena;
     private String lokacijaArtikla;
+    private Tip_artikla tip_artikla;
 
-    public void dodajKolicinoArtiklu(int kolicina) {
-        throw new UnsupportedOperationException();
+    public Artikel() {
     }
 
-    public void znizajKolicino(int kolicina) {
-        throw new UnsupportedOperationException();
+    public Artikel(Long ID_artikel, String naziv, int kolicina, double prodajnaCena, double dobavnaCena, String lokacijaArtikla, Tip_artikla tip_artikla) {
+        this.ID_artikel = ID_artikel;
+        this.naziv = naziv;
+        this.kolicina = kolicina;
+        this.prodajnaCena = prodajnaCena;
+        this.dobavnaCena = dobavnaCena;
+        this.lokacijaArtikla = lokacijaArtikla;
+        this.tip_artikla = tip_artikla;
     }
 
-    public void spremeniProdajnoCeno(double novaCena) {
-        throw new UnsupportedOperationException();
-    }
-
-    public void spremeniDobavnoCeno(double novaCena) {
-        throw new UnsupportedOperationException();
+    public Artikel(String naziv, int kolicina, double prodajnaCena, double dobavnaCena, String lokacijaArtikla, Tip_artikla tip_artikla) {
+        this.naziv = naziv;
+        this.kolicina = kolicina;
+        this.prodajnaCena = prodajnaCena;
+        this.dobavnaCena = dobavnaCena;
+        this.lokacijaArtikla = lokacijaArtikla;
+        this.tip_artikla = tip_artikla;
     }
 
     public Long getID_artikel() {
@@ -79,23 +84,11 @@ public class Artikel {
         this.lokacijaArtikla = lokacijaArtikla;
     }
 
-    public Artikel() {
+    public Tip_artikla getTip_artikla() {
+        return tip_artikla;
     }
 
-    public Artikel(Long ID_artikel, String naziv, int kolicina, double prodajnaCena, double dobavnaCena, String lokacijaArtikla) {
-        this.ID_artikel = ID_artikel;
-        this.naziv = naziv;
-        this.kolicina = kolicina;
-        this.prodajnaCena = prodajnaCena;
-        this.dobavnaCena = dobavnaCena;
-        this.lokacijaArtikla = lokacijaArtikla;
-    }
-
-    public Artikel(String naziv, int kolicina, double prodajnaCena, double dobavnaCena, String lokacijaArtikla) {
-        this.naziv = naziv;
-        this.kolicina = kolicina;
-        this.prodajnaCena = prodajnaCena;
-        this.dobavnaCena = dobavnaCena;
-        this.lokacijaArtikla = lokacijaArtikla;
+    public void setTip_artikla(Tip_artikla tip_artikla) {
+        this.tip_artikla = tip_artikla;
     }
 }
