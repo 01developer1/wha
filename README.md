@@ -1,2 +1,0 @@
-# WHA
-WareHouse Assistant
