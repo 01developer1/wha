@@ -12,7 +12,9 @@ public class Delovni_Cas {
     private Long ID_delovni_cas;
     private LocalDateTime ura_zacetka;
     private LocalDateTime ura_zakljucka;
-    public Zaposleni zaposlen;
+    @ManyToOne
+    @JoinColumn(name = "ID_zaposleni")  // Replace with the appropriate column name
+    private Zaposleni zaposlen;
 
     public Delovni_Cas() {
     }

@@ -2,6 +2,8 @@ package si.feri.um.wha.models;
 
 import jakarta.persistence.*;
 
+import java.util.*;
+
 @Entity
 public class Artikel {
     @Id
@@ -12,7 +14,13 @@ public class Artikel {
     private double prodajnaCena;
     private double dobavnaCena;
     private String lokacijaArtikla;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tip_artikla")
     private Tip_artikla tip_artikla;
+    @ManyToMany(mappedBy = "artikli")
+    private List<Narocilo> narocila = new ArrayList<>();
+    @ManyToMany(mappedBy = "artikli")
+    private List<Narocilo> zaloge = new ArrayList<>();
 
     public Artikel() {
     }

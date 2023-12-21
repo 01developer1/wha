@@ -14,12 +14,21 @@ public class Narocilo {
     private double cenaSkupaj;
     private ArrayList seznamKolicin;
     private boolean zakljuceno;
+    @ManyToOne
+    @JoinColumn(name = "ID_zaposleni")
     private Zaposleni zaposlen;
-    private ArrayList<Artikel> artikli = new ArrayList<Artikel>();
+    @ManyToMany
+    @JoinTable(
+            name = "narocilo_artikel",
+            joinColumns = @JoinColumn(name = "ID_narocilo"),
+            inverseJoinColumns = @JoinColumn(name = "ID_artikel")
+    )
+    private List<Artikel> artikli = new ArrayList<>();
+   // private ArrayList<Artikel> artikli = new ArrayList<Artikel>();
     private LocalDateTime datumVnosa;
     private LocalDateTime rokPriprave;
     private LocalDateTime casPriprave;
-
+/*
     public Narocilo() {
     }
 
@@ -121,6 +130,6 @@ public class Narocilo {
     public void dodajArtikelNaNarocilo(Artikel artikel, int kolicina) {
         throw new UnsupportedOperationException();
     }
-
+*/
 
 }

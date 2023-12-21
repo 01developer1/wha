@@ -13,11 +13,18 @@ public class Zaloga {
     private ArrayList seznamKolicin;
 
     //@OneToMany(mappedBy = "zaloga", fetch= FetchType.LAZY, cascade = CascadeType.ALL)
-    private ArrayList<Artikel> seznamArtiklov = new ArrayList<Artikel>() ;
+   // private ArrayList<Artikel> seznamArtiklov = new ArrayList<Artikel>() ;
 
+    @ManyToMany
+    @JoinTable(
+            name = "zaloga_artikel",
+            joinColumns = @JoinColumn(name = "ID_narocilo"),
+            inverseJoinColumns = @JoinColumn(name = "ID_zaloga")
+    )
+    private List<Artikel> artikli = new ArrayList<>();
     public Zaloga() {
     }
-
+/*
     public Zaloga(Long ID_zaloga, ArrayList seznamKolicin, ArrayList<Artikel> seznamArtiklov) {
         this.ID_zaloga = ID_zaloga;
         this.seznamKolicin = seznamKolicin;
@@ -51,5 +58,5 @@ public class Zaloga {
 
     public void setSeznamArtiklov(ArrayList<Artikel> seznamArtiklov) {
         this.seznamArtiklov = seznamArtiklov;
-    }
+    }*/
 }

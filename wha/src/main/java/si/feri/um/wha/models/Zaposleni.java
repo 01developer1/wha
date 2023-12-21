@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Zaposleni {
@@ -14,6 +15,8 @@ public class Zaposleni {
     private String priimek;
     private String telefon;
     private double placa;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tip_zaposlenega")
     private Tip_zaposlenega tip_zaposlenega;
 
     public int izracunajUre() {
