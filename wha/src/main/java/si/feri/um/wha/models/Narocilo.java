@@ -12,7 +12,7 @@ public class Narocilo {
     private Long ID_narocilo;
 
     private double cenaSkupaj;
-    private ArrayList seznamKolicin;
+    private ArrayList<Integer> seznamKolicin = new ArrayList<>();
     private boolean zakljuceno;
     @ManyToOne
     @JoinColumn(name = "ID_zaposleni")
@@ -24,16 +24,14 @@ public class Narocilo {
             inverseJoinColumns = @JoinColumn(name = "ID_artikel")
     )
     private List<Artikel> artikli = new ArrayList<>();
-   // private ArrayList<Artikel> artikli = new ArrayList<Artikel>();
     private LocalDateTime datumVnosa;
     private LocalDateTime rokPriprave;
     private LocalDateTime casPriprave;
-/*
+
     public Narocilo() {
     }
 
-    public Narocilo(Long ID_narocilo, double cenaSkupaj, ArrayList seznamKolicin, boolean zakljuceno, Zaposleni zaposlen, ArrayList<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave) {
-        this.ID_narocilo = ID_narocilo;
+    public Narocilo(double cenaSkupaj, ArrayList<Integer> seznamKolicin, boolean zakljuceno, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave) {
         this.cenaSkupaj = cenaSkupaj;
         this.seznamKolicin = seznamKolicin;
         this.zakljuceno = zakljuceno;
@@ -44,7 +42,8 @@ public class Narocilo {
         this.casPriprave = casPriprave;
     }
 
-    public Narocilo(double cenaSkupaj, ArrayList seznamKolicin, boolean zakljuceno, Zaposleni zaposlen, ArrayList<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave) {
+    public Narocilo(Long ID_narocilo, double cenaSkupaj, ArrayList<Integer> seznamKolicin, boolean zakljuceno, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave) {
+        this.ID_narocilo = ID_narocilo;
         this.cenaSkupaj = cenaSkupaj;
         this.seznamKolicin = seznamKolicin;
         this.zakljuceno = zakljuceno;
@@ -71,11 +70,11 @@ public class Narocilo {
         this.cenaSkupaj = cenaSkupaj;
     }
 
-    public ArrayList getSeznamKolicin() {
+    public ArrayList<Integer> getSeznamKolicin() {
         return seznamKolicin;
     }
 
-    public void setSeznamKolicin(ArrayList seznamKolicin) {
+    public void setSeznamKolicin(ArrayList<Integer> seznamKolicin) {
         this.seznamKolicin = seznamKolicin;
     }
 
@@ -95,11 +94,11 @@ public class Narocilo {
         this.zaposlen = zaposlen;
     }
 
-    public ArrayList<Artikel> getArtikli() {
+    public List<Artikel> getArtikli() {
         return artikli;
     }
 
-    public void setArtikli(ArrayList<Artikel> artikli) {
+    public void setArtikli(List<Artikel> artikli) {
         this.artikli = artikli;
     }
 
@@ -127,9 +126,18 @@ public class Narocilo {
         this.casPriprave = casPriprave;
     }
 
-    public void dodajArtikelNaNarocilo(Artikel artikel, int kolicina) {
-        throw new UnsupportedOperationException();
+    @Override
+    public String toString() {
+        return "Narocilo{" +
+                "ID_narocilo=" + ID_narocilo +
+                ", cenaSkupaj=" + cenaSkupaj +
+                ", seznamKolicin=" + seznamKolicin +
+                ", zakljuceno=" + zakljuceno +
+                ", zaposlen=" + zaposlen +
+                ", artikli=" + artikli +
+                ", datumVnosa=" + datumVnosa +
+                ", rokPriprave=" + rokPriprave +
+                ", casPriprave=" + casPriprave +
+                '}';
     }
-*/
-
 }

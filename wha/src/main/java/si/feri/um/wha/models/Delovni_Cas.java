@@ -13,7 +13,7 @@ public class Delovni_Cas {
     private LocalDateTime ura_zacetka;
     private LocalDateTime ura_zakljucka;
     @ManyToOne
-    @JoinColumn(name = "ID_zaposleni")  // Replace with the appropriate column name
+    @JoinColumn(name = "ID_zaposleni")
     private Zaposleni zaposlen;
 
     public Delovni_Cas() {
@@ -68,6 +68,13 @@ public class Delovni_Cas {
         throw new UnsupportedOperationException();
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Delovni_Cas{" +
+                "ID_delovni_cas=" + ID_delovni_cas +
+                ", ura_zacetka=" + ura_zacetka +
+                ", ura_zakljucka=" + ura_zakljucka +
+                ", zaposlen=" + zaposlen +
+                '}';
+    }
 }

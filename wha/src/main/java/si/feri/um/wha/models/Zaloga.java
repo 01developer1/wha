@@ -10,11 +10,7 @@ public class Zaloga {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long ID_zaloga;
 
-    private ArrayList seznamKolicin;
-
-    //@OneToMany(mappedBy = "zaloga", fetch= FetchType.LAZY, cascade = CascadeType.ALL)
-   // private ArrayList<Artikel> seznamArtiklov = new ArrayList<Artikel>() ;
-
+    private ArrayList<Integer> seznamKolicin = new ArrayList<>();
     @ManyToMany
     @JoinTable(
             name = "zaloga_artikel",
@@ -22,18 +18,19 @@ public class Zaloga {
             inverseJoinColumns = @JoinColumn(name = "ID_zaloga")
     )
     private List<Artikel> artikli = new ArrayList<>();
+
     public Zaloga() {
     }
-/*
-    public Zaloga(Long ID_zaloga, ArrayList seznamKolicin, ArrayList<Artikel> seznamArtiklov) {
-        this.ID_zaloga = ID_zaloga;
+
+    public Zaloga(ArrayList<Integer> seznamKolicin, List<Artikel> artikli) {
         this.seznamKolicin = seznamKolicin;
-        this.seznamArtiklov = seznamArtiklov;
+        this.artikli = artikli;
     }
 
-    public Zaloga(ArrayList seznamKolicin, ArrayList<Artikel> seznamArtiklov) {
+    public Zaloga(Long ID_zaloga, ArrayList<Integer> seznamKolicin, List<Artikel> artikli) {
+        this.ID_zaloga = ID_zaloga;
         this.seznamKolicin = seznamKolicin;
-        this.seznamArtiklov = seznamArtiklov;
+        this.artikli = artikli;
     }
 
     public Long getID_zaloga() {
@@ -44,19 +41,28 @@ public class Zaloga {
         this.ID_zaloga = ID_zaloga;
     }
 
-    public ArrayList getSeznamKolicin() {
+    public ArrayList<Integer> getSeznamKolicin() {
         return seznamKolicin;
     }
 
-    public void setSeznamKolicin(ArrayList seznamKolicin) {
+    public void setSeznamKolicin(ArrayList<Integer> seznamKolicin) {
         this.seznamKolicin = seznamKolicin;
     }
 
-    public ArrayList<Artikel> getSeznamArtiklov() {
-        return seznamArtiklov;
+    public List<Artikel> getArtikli() {
+        return artikli;
     }
 
-    public void setSeznamArtiklov(ArrayList<Artikel> seznamArtiklov) {
-        this.seznamArtiklov = seznamArtiklov;
-    }*/
+    public void setArtikli(List<Artikel> artikli) {
+        this.artikli = artikli;
+    }
+
+    @Override
+    public String toString() {
+        return "Zaloga{" +
+                "ID_zaloga=" + ID_zaloga +
+                ", seznamKolicin=" + seznamKolicin +
+                ", artikli=" + artikli +
+                '}';
+    }
 }

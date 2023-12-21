@@ -99,4 +99,19 @@ public class Artikel {
     public void setTip_artikla(Tip_artikla tip_artikla) {
         this.tip_artikla = tip_artikla;
     }
+
+    @Override
+    public String toString() {
+        return "Artikel{" +
+                "ID_artikel=" + ID_artikel +
+                ", naziv='" + naziv + '\'' +
+                ", kolicina=" + kolicina +
+                ", prodajnaCena=" + prodajnaCena +
+                ", dobavnaCena=" + dobavnaCena +
+                ", lokacijaArtikla='" + lokacijaArtikla + '\'' +
+                ", tip_artikla=" + tip_artikla +
+                ", narocila=" + narocila +
+                ", zaloge=" + zaloge +
+                '}';
+    }
 }

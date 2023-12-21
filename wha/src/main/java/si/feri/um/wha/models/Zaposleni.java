@@ -46,4 +46,64 @@ public class Zaposleni {
         this.placa = placa;
         this.tip_zaposlenega = tip_zaposlenega;
     }
+
+    public Long getID_zaposleni() {
+        return ID_zaposleni;
+    }
+
+    public void setID_zaposleni(Long ID_zaposleni) {
+        this.ID_zaposleni = ID_zaposleni;
+    }
+
+    public String getIme() {
+        return ime;
+    }
+
+    public void setIme(String ime) {
+        this.ime = ime;
+    }
+
+    public String getPriimek() {
+        return priimek;
+    }
+
+    public void setPriimek(String priimek) {
+        this.priimek = priimek;
+    }
+
+    public String getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
+    }
+
+    public double getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(double placa) {
+        this.placa = placa;
+    }
+
+    public Tip_zaposlenega getTip_zaposlenega() {
+        return tip_zaposlenega;
+    }
+
+    public void setTip_zaposlenega(Tip_zaposlenega tip_zaposlenega) {
+        this.tip_zaposlenega = tip_zaposlenega;
+    }
+
+    @Override
+    public String toString() {
+        return "Zaposleni{" +
+                "ID_zaposleni=" + ID_zaposleni +
+                ", ime='" + ime + '\'' +
+                ", priimek='" + priimek + '\'' +
+                ", telefon='" + telefon + '\'' +
+                ", placa=" + placa +
+                ", tip_zaposlenega=" + tip_zaposlenega +
+                '}';
+    }
 }
