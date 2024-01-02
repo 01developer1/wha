@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="Znova ustvarjen git projekt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ArtikelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ArtikelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/Delovni_CasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/Delovni_CasController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/NarociloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/NarociloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZalogaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZalogaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/ZaposleniRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/ZaposleniRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +46,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/Users/rokfonovic/Desktop/Sola/2_LETNIK/RIS/Projekt/WHA/wha",
+    "last_opened_file_path": "C:/Users/aljaz/OneDrive/Dokumenti/FERI/RIS/Projekt1/WHA/wha",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
 }]]></component>

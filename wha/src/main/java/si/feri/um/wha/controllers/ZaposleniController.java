@@ -12,9 +12,14 @@ public class ZaposleniController {
     @Autowired
     private ZaposleniRepository zaposleniDao;
 
-    @GetMapping("/hello")
-    public String hello(){
-        return "hello";
+    @GetMapping
+    public Iterable<Zaposleni> vrniZaposleni(){
+        return zaposleniDao.findAll();
+    }
+
+    @PostMapping
+    public Zaposleni dodajZaposlenega(@RequestBody Zaposleni zaposleni){
+        return zaposleniDao.save(zaposleni);
     }
 
 }
