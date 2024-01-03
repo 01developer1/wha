@@ -17,6 +17,8 @@ export default function ArtikliTable({artikli}) {
           <TableRow>
             <TableCell>Id</TableCell>
             <TableCell align="right">naziv</TableCell>
+            <TableCell align="right">kolicina</TableCell>
+            <TableCell align="right">prodajna cena</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -29,6 +31,8 @@ export default function ArtikliTable({artikli}) {
                 {artikel.id_artikel}
               </TableCell>
               <TableCell align="right">{artikel.naziv}</TableCell>
+              <TableCell align="right">{artikel.kolicina}</TableCell>
+              <TableCell align="right">{artikel.prodajnaCena}</TableCell>
             </TableRow>
           ))}
         </TableBody>
