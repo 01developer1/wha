@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import si.feri.um.wha.models.Zaposleni;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/zaloge")
 public class ZalogaController {
 

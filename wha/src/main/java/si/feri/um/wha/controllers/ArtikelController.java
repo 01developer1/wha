@@ -9,6 +9,7 @@ import si.feri.um.wha.models.Tip_artikla;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping("/artikli")
 public class ArtikelController {
 

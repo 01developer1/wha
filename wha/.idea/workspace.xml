@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="Znova ustvarjen git projekt">
-      <change afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/Stanje_narocila.java" afterDir="false" />
+    <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="Enum stanje narocila">
+      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/components/routing/Routing.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/components/routing/Routing.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/Narocilo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/Narocilo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ArtikelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ArtikelController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/Delovni_CasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/Delovni_CasController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/NarociloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/NarociloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZalogaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZalogaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +82,21 @@
       <option name="project" value="LOCAL" />
       <updated>1702906803638</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Enum stanje narocila">
+      <created>1704285265764</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1704285265764</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Enum stanje narocila">
+      <created>1704285273302</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1704285273302</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -94,6 +112,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Znova ustvarjen git projekt" />
-    <option name="LAST_COMMIT_MESSAGE" value="Znova ustvarjen git projekt" />
+    <MESSAGE value="Enum stanje narocila" />
+    <option name="LAST_COMMIT_MESSAGE" value="Enum stanje narocila" />
   </component>
 </project>

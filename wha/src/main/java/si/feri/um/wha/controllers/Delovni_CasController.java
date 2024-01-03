@@ -8,6 +8,7 @@ import si.feri.um.wha.models.Delovni_Cas;
 import si.feri.um.wha.models.Zaposleni;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/delovni_casi")
 public class Delovni_CasController {
 
