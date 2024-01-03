@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@mui/material/Button';
+import { Link } from "react-router-dom";
 
 const PageNotFound = () => {
     return (
@@ -22,7 +23,7 @@ const PageNotFound = () => {
             <div style={{
                 marginTop: '-40px', // Space between image and text/button
             }}>
-                <Button 
+                <Link to="/"><Button 
                     variant="contained" 
                     style={{
                         backgroundColor: '#000', // Black background for the button
@@ -31,7 +32,7 @@ const PageNotFound = () => {
                     }}
                 >
                     Back To Homepage
-                </Button>
+                </Button></Link>
             </div>
         </div >
     )
