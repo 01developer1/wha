@@ -33,7 +33,7 @@ public class Narocilo {
     public Narocilo() {
     }
 
-    public Narocilo(double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave, Stanje_narocila stanjeNarocila) {
+    public Narocilo(double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave) {
         this.cenaSkupaj = cenaSkupaj;
         this.seznamKolicin = seznamKolicin;
         this.zaposlen = zaposlen;
@@ -41,10 +41,10 @@ public class Narocilo {
         this.datumVnosa = datumVnosa;
         this.rokPriprave = rokPriprave;
         this.casPriprave = casPriprave;
-        this.stanjeNarocila = stanjeNarocila;
+        this.stanjeNarocila = Stanje_narocila.TODO;
     }
 
-    public Narocilo(Long ID_narocilo, double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave, Stanje_narocila stanjeNarocila) {
+    public Narocilo(Long ID_narocilo, double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave) {
         this.ID_narocilo = ID_narocilo;
         this.cenaSkupaj = cenaSkupaj;
         this.seznamKolicin = seznamKolicin;
@@ -53,7 +53,7 @@ public class Narocilo {
         this.datumVnosa = datumVnosa;
         this.rokPriprave = rokPriprave;
         this.casPriprave = casPriprave;
-        this.stanjeNarocila = stanjeNarocila;
+        this.stanjeNarocila = stanjeNarocila.TODO;
     }
 
     public Long getID_narocilo() {
