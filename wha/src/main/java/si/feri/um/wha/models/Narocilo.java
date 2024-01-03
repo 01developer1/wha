@@ -13,7 +13,9 @@ public class Narocilo {
 
     private double cenaSkupaj;
     private ArrayList<Integer> seznamKolicin = new ArrayList<>();
-    private boolean zakljuceno;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "stanje_narocila")
+    private Stanje_narocila stanjeNarocila;
     @ManyToOne
     @JoinColumn(name = "ID_zaposleni")
     private Zaposleni zaposlen;
@@ -31,27 +33,27 @@ public class Narocilo {
     public Narocilo() {
     }
 
-    public Narocilo(double cenaSkupaj, ArrayList<Integer> seznamKolicin, boolean zakljuceno, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave) {
+    public Narocilo(double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave, Stanje_narocila stanjeNarocila) {
         this.cenaSkupaj = cenaSkupaj;
         this.seznamKolicin = seznamKolicin;
-        this.zakljuceno = zakljuceno;
         this.zaposlen = zaposlen;
         this.artikli = artikli;
         this.datumVnosa = datumVnosa;
         this.rokPriprave = rokPriprave;
         this.casPriprave = casPriprave;
+        this.stanjeNarocila = stanjeNarocila;
     }
 
-    public Narocilo(Long ID_narocilo, double cenaSkupaj, ArrayList<Integer> seznamKolicin, boolean zakljuceno, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave) {
+    public Narocilo(Long ID_narocilo, double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave, Stanje_narocila stanjeNarocila) {
         this.ID_narocilo = ID_narocilo;
         this.cenaSkupaj = cenaSkupaj;
         this.seznamKolicin = seznamKolicin;
-        this.zakljuceno = zakljuceno;
         this.zaposlen = zaposlen;
         this.artikli = artikli;
         this.datumVnosa = datumVnosa;
         this.rokPriprave = rokPriprave;
         this.casPriprave = casPriprave;
+        this.stanjeNarocila = stanjeNarocila;
     }
 
     public Long getID_narocilo() {
@@ -76,14 +78,6 @@ public class Narocilo {
 
     public void setSeznamKolicin(ArrayList<Integer> seznamKolicin) {
         this.seznamKolicin = seznamKolicin;
-    }
-
-    public boolean isZakljuceno() {
-        return zakljuceno;
-    }
-
-    public void setZakljuceno(boolean zakljuceno) {
-        this.zakljuceno = zakljuceno;
     }
 
     public Zaposleni getZaposlen() {
@@ -126,18 +120,26 @@ public class Narocilo {
         this.casPriprave = casPriprave;
     }
 
+    public Stanje_narocila getStanjeNarocila() {
+        return stanjeNarocila;
+    }
+
+    public void setStanjeNarocila(Stanje_narocila stanjeNarocila) {
+        this.stanjeNarocila = stanjeNarocila;
+    }
+
     @Override
     public String toString() {
         return "Narocilo{" +
                 "ID_narocilo=" + ID_narocilo +
                 ", cenaSkupaj=" + cenaSkupaj +
                 ", seznamKolicin=" + seznamKolicin +
-                ", zakljuceno=" + zakljuceno +
                 ", zaposlen=" + zaposlen +
                 ", artikli=" + artikli +
                 ", datumVnosa=" + datumVnosa +
                 ", rokPriprave=" + rokPriprave +
                 ", casPriprave=" + casPriprave +
+                ", stanjeNarocila=" + stanjeNarocila +
                 '}';
     }
 }
