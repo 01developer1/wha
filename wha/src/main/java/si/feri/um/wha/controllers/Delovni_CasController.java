@@ -5,7 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import si.feri.um.wha.dao.Delovni_CasRepository;
 import si.feri.um.wha.models.Delovni_Cas;
-import si.feri.um.wha.models.Zaposleni;
+import si.feri.um.wha.models.Delovni_Cas;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -13,25 +15,54 @@ import si.feri.um.wha.models.Zaposleni;
 public class Delovni_CasController {
 
     @Autowired
-    private Delovni_CasRepository delovni_casRepositoryDao;
+    private Delovni_CasRepository delovni_casDao;
     @GetMapping
     public Iterable<Delovni_Cas> vrniDelovni_Cas(){
-        return delovni_casRepositoryDao.findAll();
+        return delovni_casDao.findAll();
     }
 
     @PostMapping
     public Delovni_Cas dodajDelovni_Cas(@RequestBody Delovni_Cas delovni_cas){
-        return delovni_casRepositoryDao.save(delovni_cas);
+        return delovni_casDao.save(delovni_cas);
     }
 
     @GetMapping("/{ID_delovni_cas}")
     public Delovni_Cas vrniDolocenDelovniCas(@PathVariable(name = "ID_delovni_cas") Long ID_delovni_cas){
-        return delovni_casRepositoryDao.vrniDolocenDelovniCas(ID_delovni_cas);
+        return delovni_casDao.vrniDolocenDelovniCas(ID_delovni_cas);
     }
 
     @DeleteMapping("/izbrisi/{ID_delovni_cas}")
     public ResponseEntity<String> izbrisiDelovniCas(@PathVariable(name = "ID_delovni_cas") Long ID_delovni_cas) throws Exception {
-        delovni_casRepositoryDao.deleteById(ID_delovni_cas);
+        delovni_casDao.deleteById(ID_delovni_cas);
         return ResponseEntity.ok("Uspesno izbrisan delovni_cas.");
+    }
+
+    @PostMapping("/dodaj")
+    public ResponseEntity<String> dodajDelovniCas(@RequestBody List<Delovni_Cas> delovni_cas) {
+        Iterable<Delovni_Cas> savedDelovni_Cas = delovni_casDao.saveAll(delovni_cas);
+        return ResponseEntity.ok("Uspesno dodan delovni cas.");
+    }
+
+    @PutMapping("/posodobi/{ID_delovni_cas}")
+    public ResponseEntity<String> posodobiDelovniCas(@PathVariable(name = "ID_delovni_cas") Long ID_delovni_cas, @RequestBody Delovni_Cas updatedDelovni_Cas) {
+        Delovni_Cas existingDelovni_Cas = delovni_casDao.vrniDolocenDelovniCas(ID_delovni_cas);
+
+        if (existingDelovni_Cas == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        if (updatedDelovni_Cas.getUra_zacetka() != null) {
+            existingDelovni_Cas.setUra_zacetka(updatedDelovni_Cas.getUra_zacetka());
+        }
+        if (updatedDelovni_Cas.getUra_zakljucka() != null) {
+            existingDelovni_Cas.setUra_zakljucka(updatedDelovni_Cas.getUra_zakljucka());
+        }
+        if (updatedDelovni_Cas.getZaposlen() != null) {
+            existingDelovni_Cas.setZaposlen(updatedDelovni_Cas.getZaposlen());
+        }
+
+        delovni_casDao.save(existingDelovni_Cas);
+
+        return ResponseEntity.ok("Delovni cas uspešno posodobljen.");
     }
 }
