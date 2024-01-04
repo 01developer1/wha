@@ -19,13 +19,11 @@ public class Artikel {
     private Tip_artikla tip_artikla;
     @ManyToMany(mappedBy = "artikli")
     private List<Narocilo> narocila = new ArrayList<>();
-    @ManyToMany(mappedBy = "artikli")
-    private List<Narocilo> zaloge = new ArrayList<>();
 
     public Artikel() {
     }
 
-    public Artikel(Long ID_artikel, String naziv, int kolicina, double prodajnaCena, double dobavnaCena, String lokacijaArtikla, Tip_artikla tip_artikla) {
+    public Artikel(Long ID_artikel, String naziv, int kolicina, double prodajnaCena, double dobavnaCena, String lokacijaArtikla, Tip_artikla tip_artikla, List<Narocilo> narocila) {
         this.ID_artikel = ID_artikel;
         this.naziv = naziv;
         this.kolicina = kolicina;
@@ -33,15 +31,17 @@ public class Artikel {
         this.dobavnaCena = dobavnaCena;
         this.lokacijaArtikla = lokacijaArtikla;
         this.tip_artikla = tip_artikla;
+        this.narocila = narocila;
     }
 
-    public Artikel(String naziv, int kolicina, double prodajnaCena, double dobavnaCena, String lokacijaArtikla, Tip_artikla tip_artikla) {
+    public Artikel(String naziv, int kolicina, double prodajnaCena, double dobavnaCena, String lokacijaArtikla, Tip_artikla tip_artikla, List<Narocilo> narocila) {
         this.naziv = naziv;
         this.kolicina = kolicina;
         this.prodajnaCena = prodajnaCena;
         this.dobavnaCena = dobavnaCena;
         this.lokacijaArtikla = lokacijaArtikla;
         this.tip_artikla = tip_artikla;
+        this.narocila = narocila;
     }
 
     public Long getID_artikel() {
@@ -100,6 +100,14 @@ public class Artikel {
         this.tip_artikla = tip_artikla;
     }
 
+    public List<Narocilo> getNarocila() {
+        return narocila;
+    }
+
+    public void setNarocila(List<Narocilo> narocila) {
+        this.narocila = narocila;
+    }
+
     @Override
     public String toString() {
         return "Artikel{" +
@@ -111,7 +119,6 @@ public class Artikel {
                 ", lokacijaArtikla='" + lokacijaArtikla + '\'' +
                 ", tip_artikla=" + tip_artikla +
                 ", narocila=" + narocila +
-                ", zaloge=" + zaloge +
                 '}';
     }
 }

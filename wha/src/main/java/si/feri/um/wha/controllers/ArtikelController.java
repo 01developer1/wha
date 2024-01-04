@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import si.feri.um.wha.models.Tip_artikla;
 
+import java.util.List;
+
 
 @RestController
 @CrossOrigin
@@ -37,17 +39,24 @@ public class ArtikelController {
         return ResponseEntity.ok("Uspesno izbrisan artikel.");
     }
 
-
-
-    @GetMapping("/search") //vrne Artikle,ki imajo enak tip in ceno visjo od vnesene
-    public Iterable<Artikel> vrniArtikleCenaTip(
-            @RequestParam(name = "tipArtikla", required = false) String tipArtikla,
-            @RequestParam(name = "prodajnaCena", required = false) Double prodajnaCena
+    @GetMapping("/search")
+    public Iterable<Artikel> vrniArtikleFilter(
+            @RequestParam(name = "naziv", required = false) String naziv,
+            @RequestParam(name = "kolicina", required = false) Integer kolicina,
+            @RequestParam(name = "prodajna_cena", required = false) Double prodajna_cena,
+            @RequestParam(name = "dobavna_cena", required = false) Double dobavna_cena,
+            @RequestParam(name = "lokacija_artikla", required = false) String lokacija_artikla,
+            @RequestParam(name = "tipArtikla", required = false) String tipArtikla
     ) {
         Tip_artikla tipArtiklaEnum = (tipArtikla != null) ? Tip_artikla.valueOf(tipArtikla) : null;
-        return artikelDao.poisciGledeNaCenoTip(tipArtiklaEnum, prodajnaCena);
+        return artikelDao.poisceVseArtiklePoKriteriju(tipArtiklaEnum, naziv, kolicina, prodajna_cena, dobavna_cena, lokacija_artikla);
     }
 
+    @PostMapping("/dodaj")
+    public ResponseEntity<String> dodajArtikle(@RequestBody List<Artikel> artikli) {
+        Iterable<Artikel> savedArtikli = artikelDao.saveAll(artikli);
+        return ResponseEntity.ok("Uspesno dodani artikli.");
+    }
 
 
 
