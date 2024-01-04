@@ -42,14 +42,17 @@ public class ArtikelController {
     @GetMapping("/search")
     public Iterable<Artikel> vrniArtikleFilter(
             @RequestParam(name = "naziv", required = false) String naziv,
-            @RequestParam(name = "kolicina", required = false) Integer kolicina,
-            @RequestParam(name = "prodajna_cena", required = false) Double prodajna_cena,
-            @RequestParam(name = "dobavna_cena", required = false) Double dobavna_cena,
+            @RequestParam(name = "kolicinaMin", required = false) Integer kolicinaMin,
+            @RequestParam(name = "kolicinaMax", required = false) Integer kolicinaMax,
+            @RequestParam(name = "prodajna_cenaMin", required = false) Double prodajna_cenaMin,
+            @RequestParam(name = "prodajna_cenaMax", required = false) Double prodajna_cenaMax,
+            @RequestParam(name = "dobavna_cenaMin", required = false) Double dobavna_cenaMin,
+            @RequestParam(name = "dobavna_cenaMax", required = false) Double dobavna_cenaMax,
             @RequestParam(name = "lokacija_artikla", required = false) String lokacija_artikla,
             @RequestParam(name = "tipArtikla", required = false) String tipArtikla
     ) {
         Tip_artikla tipArtiklaEnum = (tipArtikla != null) ? Tip_artikla.valueOf(tipArtikla) : null;
-        return artikelDao.poisceVseArtiklePoKriteriju(tipArtiklaEnum, naziv, kolicina, prodajna_cena, dobavna_cena, lokacija_artikla);
+        return artikelDao.poisceVseArtiklePoKriteriju(tipArtiklaEnum, naziv, kolicinaMin, kolicinaMax, prodajna_cenaMin, prodajna_cenaMax, dobavna_cenaMin, dobavna_cenaMax, lokacija_artikla);
     }
 
     @PostMapping("/dodaj")

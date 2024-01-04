@@ -14,17 +14,23 @@ public interface ArtikelRepository extends CrudRepository<Artikel, Long> {
 
     @Query("SELECT a FROM Artikel a WHERE " +
             "(:naziv IS NULL OR a.naziv LIKE %:naziv%) " +
-            "AND (:kolicina IS NULL OR a.kolicina = :kolicina) " +
-            "AND (:prodajna_cena IS NULL OR a.prodajnaCena > :prodajna_cena) " +
-            "AND (:dobavna_cena IS NULL OR a.dobavnaCena = :dobavna_cena) " +
+            "AND (:kolicinaMin IS NULL OR a.kolicina >= :kolicinaMin) " +
+            "AND (:kolicinaMax IS NULL OR a.kolicina < :kolicinaMax) " +
+            "AND (:prodajna_cenaMin IS NULL OR a.prodajnaCena >= :prodajna_cenaMin) " +
+            "AND (:prodajna_cenaMax IS NULL OR a.prodajnaCena < :prodajna_cenaMax) " +
+            "AND (:dobavna_cenaMin IS NULL OR a.dobavnaCena >= :dobavna_cenaMin) " +
+            "AND (:dobavna_cenaMax IS NULL OR a.dobavnaCena < :dobavna_cenaMax) " +
             "AND (:lokacijaArtikla IS NULL OR a.lokacijaArtikla = :lokacijaArtikla) " +
             "AND (:tipArtiklaEnum IS NULL OR a.tip_artikla = :tipArtiklaEnum)")
     Iterable<Artikel> poisceVseArtiklePoKriteriju(
             @Param("tipArtiklaEnum") Tip_artikla tipArtiklaEnum,
             @Param("naziv") String naziv,
-            @Param("kolicina") Integer kolicina,
-            @Param("prodajna_cena") Double prodajna_cena,
-            @Param("dobavna_cena") Double dobavna_cena,
+            @Param("kolicinaMin") Integer kolicinaMin,
+            @Param("kolicinaMax") Integer kolicinaMax,
+            @Param("prodajna_cenaMin") Double prodajna_cenaMin,
+            @Param("prodajna_cenaMax") Double prodajna_cenaMax,
+            @Param("dobavna_cenaMin") Double dobavna_cenaMin,
+            @Param("dobavna_cenaMax") Double dobavna_cenaMax,
             @Param("lokacijaArtikla") String lokacijaArtikla
     );
 
