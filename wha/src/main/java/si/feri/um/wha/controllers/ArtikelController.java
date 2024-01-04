@@ -61,7 +61,37 @@ public class ArtikelController {
         return ResponseEntity.ok("Uspesno dodani artikli.");
     }
 
+    @PutMapping("/posodobi/{ID_artikla}")
+    public ResponseEntity<String> posodobiArtikel(@PathVariable(name = "ID_artikla") Long ID_artikel, @RequestBody Artikel updatedArtikel) {
+        Artikel existingArtikel = artikelDao.vrniDolocenArtikel(ID_artikel);
 
+        if (existingArtikel == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        if (updatedArtikel.getNaziv() != null) {
+            existingArtikel.setNaziv(updatedArtikel.getNaziv());
+        }
+        if (updatedArtikel.getKolicina() != 0) {
+            existingArtikel.setKolicina(updatedArtikel.getKolicina());
+        }
+        if (updatedArtikel.getProdajnaCena() != 0.0) {
+            existingArtikel.setProdajnaCena(updatedArtikel.getProdajnaCena());
+        }
+        if (updatedArtikel.getDobavnaCena() != 0.0) {
+            existingArtikel.setDobavnaCena(updatedArtikel.getDobavnaCena());
+        }
+        if (updatedArtikel.getLokacijaArtikla() != null) {
+            existingArtikel.setLokacijaArtikla(updatedArtikel.getLokacijaArtikla());
+        }
+        if (updatedArtikel.getTip_artikla() != null) {
+            existingArtikel.setTip_artikla(updatedArtikel.getTip_artikla());
+        }
+
+        artikelDao.save(existingArtikel);
+
+        return ResponseEntity.ok("Artikel uspešno posodobljen.");
+    }
 
 
 
