@@ -39,7 +39,7 @@ const Index = () => {
        <>
            {showAlert && <Alert  style={alertStyle} severity="success">Artikel uspešno izbrisan</Alert>}
            <h1>Artikli</h1>
-           <Link to="/hise/dodaj"><Button variant="contained">Dodaj artikli</Button></Link>
+           <Link to="/zaposleni"><Button variant="contained">Dodaj zaposljenega</Button></Link>
            <ArtikliTable artikli={artikli} fetchArtikli={fetchArtikli} showDeleteAlert={showDeleteAlert} />
        </>
    );

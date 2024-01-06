@@ -3,13 +3,12 @@ package si.feri.um.wha.controllers;
 
 import org.springframework.http.ResponseEntity;
 import si.feri.um.wha.dao.ZaposleniRepository;
-import si.feri.um.wha.models.Artikel;
-import si.feri.um.wha.models.Zaposleni;
-import si.feri.um.wha.models.Tip_artikla;
+import si.feri.um.wha.models.*;
 import si.feri.um.wha.models.Zaposleni;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -25,8 +24,24 @@ public class ZaposleniController {
     }
 
     @PostMapping
-    public Zaposleni dodajZaposlenega(@RequestBody Zaposleni zaposleni){
-        return zaposleniDao.save(zaposleni);
+    public ResponseEntity<Zaposleni> dodajZaposlenega(@RequestBody Zaposleni zaposleni){
+        // Before saving, you might want to perform some checks or modify the data if needed
+        // For example, you could encode the password before saving
+        //zaposleni.setPassword(passwordEncoder.encode(zaposleni.getPassword()));
+        //Role defaultRole = roleRepository.findByName("ROLE_USER"); // or any other default role name
+
+        /*if (defaultRole != null) {
+
+            zaposleni.setRoles(Arrays.asList(defaultRole));
+        } else {
+
+        }*/
+        // Set the user as enabled by default or based on some condition
+        zaposleni.setEnabled(true);
+
+        // Save the new Zaposleni (user) to the database
+        Zaposleni savedZaposleni = zaposleniDao.save(zaposleni);
+        return ResponseEntity.ok(savedZaposleni);
     }
 
     @GetMapping("/{ID_zaposleni}")
