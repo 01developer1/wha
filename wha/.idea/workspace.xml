@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="WHA-17, WHA-24, WHA-27">
+    <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="Role in Privilege">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/PrivilegeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/PrivilegeRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/RoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/ZaposleniRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/ZaposleniRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/SetupDataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/SetupDataLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/Zaposleni.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/Zaposleni.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +101,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704289041974</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Role in Privilege">
+      <created>1704631494220</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1704631494220</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -125,6 +126,7 @@
     <MESSAGE value="Znova ustvarjen git projekt" />
     <MESSAGE value="Enum stanje narocila" />
     <MESSAGE value="delovanje povezave frontend + backend" />
-    <option name="LAST_COMMIT_MESSAGE" value="delovanje povezave frontend + backend" />
+    <MESSAGE value="Role in Privilege" />
+    <option name="LAST_COMMIT_MESSAGE" value="Role in Privilege" />
   </component>
 </project>
