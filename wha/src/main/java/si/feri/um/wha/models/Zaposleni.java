@@ -177,6 +177,11 @@ public class Zaposleni {
                 ", telefon='" + telefon + '\'' +
                 ", placa=" + placa +
                 ", tip_zaposlenega=" + tip_zaposlenega +
+                ", email=" + email +
+                ", username=" + username +
+                ", geslo=" + password +
+                ", placa=" + placa +
+                ", roles=" + roles +
                 '}';
     }
 }

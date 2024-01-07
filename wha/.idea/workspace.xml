@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="WHA-17, WHA-24, WHA-27">
-      <change afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/PrivilegeRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/RoleRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/Privilege.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/SetupDataLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/PrivilegeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/PrivilegeRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/RoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/ZaposleniRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/ZaposleniRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/SetupDataLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/SetupDataLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/Zaposleni.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/Zaposleni.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

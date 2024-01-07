@@ -2,6 +2,7 @@ package si.feri.um.wha.controllers;
 
 
 import org.springframework.http.ResponseEntity;
+import si.feri.um.wha.dao.RoleRepository;
 import si.feri.um.wha.dao.ZaposleniRepository;
 import si.feri.um.wha.models.*;
 import si.feri.um.wha.models.Zaposleni;
@@ -17,6 +18,8 @@ import java.util.List;
 public class ZaposleniController {
     @Autowired
     private ZaposleniRepository zaposleniDao;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @GetMapping
     public Iterable<Zaposleni> vrniZaposleni(){
@@ -27,8 +30,10 @@ public class ZaposleniController {
     public ResponseEntity<Zaposleni> dodajZaposlenega(@RequestBody Zaposleni zaposleni){
         // Before saving, you might want to perform some checks or modify the data if needed
         // For example, you could encode the password before saving
+        System.out.println(zaposleni);
         //zaposleni.setPassword(passwordEncoder.encode(zaposleni.getPassword()));
-        //Role defaultRole = roleRepository.findByName("ROLE_USER"); // or any other default role name
+
+        Role defaultRole = roleRepository.findByName("ROLE_SKLADISCNIK"); // or any other default role name
 
         /*if (defaultRole != null) {
 

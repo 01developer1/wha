@@ -4,14 +4,15 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
 import si.feri.um.wha.dao.*;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-public class SetupDataLoader implements
-        ApplicationListener<ContextRefreshedEvent> {
+@Component
+public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     boolean alreadySetup = false;
 
