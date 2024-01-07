@@ -22,4 +22,7 @@ public class Privilege {
     public Privilege (String name) {
         this.name = name;
     }
+
+    public Privilege() {
+    }
 }

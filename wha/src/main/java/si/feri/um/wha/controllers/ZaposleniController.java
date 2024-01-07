@@ -28,12 +28,9 @@ public class ZaposleniController {
 
     @PostMapping
     public ResponseEntity<Zaposleni> dodajZaposlenega(@RequestBody Zaposleni zaposleni){
-        // Before saving, you might want to perform some checks or modify the data if needed
-        // For example, you could encode the password before saving
-        System.out.println(zaposleni);
         //zaposleni.setPassword(passwordEncoder.encode(zaposleni.getPassword()));
 
-        Role defaultRole = roleRepository.findByName("ROLE_SKLADISCNIK"); // or any other default role name
+        Role defaultRole = roleRepository.findByName("ROLE_SKLADISCNIK");
 
         /*if (defaultRole != null) {
 
@@ -41,10 +38,8 @@ public class ZaposleniController {
         } else {
 
         }*/
-        // Set the user as enabled by default or based on some condition
         zaposleni.setEnabled(true);
 
-        // Save the new Zaposleni (user) to the database
         Zaposleni savedZaposleni = zaposleniDao.save(zaposleni);
         return ResponseEntity.ok(savedZaposleni);
     }

@@ -25,7 +25,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Autowired
     private PrivilegeRepository privilegeRepository;
 
-    @Autowired
+    //@Autowired
     //private PasswordEncoder passwordEncoder;
 
     @Override

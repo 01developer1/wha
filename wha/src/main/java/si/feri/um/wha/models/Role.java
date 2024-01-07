@@ -35,6 +35,15 @@ public class Role {
         this.name = name;
     }
 
+    public Role() {
+    }
+
+    public Role(Long ID_role, String name, Collection<Zaposleni> users, Collection<Privilege> privileges) {
+        this.ID_role = ID_role;
+        this.name = name;
+        this.users = users;
+        this.privileges = privileges;
+    }
 
     public Collection<Privilege> getPrivileges() {
         return privileges;
