@@ -2,14 +2,14 @@ package si.feri.um.wha.controllers;
 
 
 import org.springframework.http.ResponseEntity;
+import si.feri.um.wha.dao.RoleRepository;
 import si.feri.um.wha.dao.ZaposleniRepository;
-import si.feri.um.wha.models.Artikel;
-import si.feri.um.wha.models.Zaposleni;
-import si.feri.um.wha.models.Tip_artikla;
+import si.feri.um.wha.models.*;
 import si.feri.um.wha.models.Zaposleni;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -18,6 +18,8 @@ import java.util.List;
 public class ZaposleniController {
     @Autowired
     private ZaposleniRepository zaposleniDao;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @GetMapping
     public Iterable<Zaposleni> vrniZaposleni(){
@@ -25,8 +27,21 @@ public class ZaposleniController {
     }
 
     @PostMapping
-    public Zaposleni dodajZaposlenega(@RequestBody Zaposleni zaposleni){
-        return zaposleniDao.save(zaposleni);
+    public ResponseEntity<Zaposleni> dodajZaposlenega(@RequestBody Zaposleni zaposleni){
+        //zaposleni.setPassword(passwordEncoder.encode(zaposleni.getPassword()));
+
+        Role defaultRole = roleRepository.findByName("ROLE_SKLADISCNIK");
+
+        /*if (defaultRole != null) {
+
+            zaposleni.setRoles(Arrays.asList(defaultRole));
+        } else {
+
+        }*/
+        zaposleni.setEnabled(true);
+
+        Zaposleni savedZaposleni = zaposleniDao.save(zaposleni);
+        return ResponseEntity.ok(savedZaposleni);
     }
 
     @GetMapping("/{ID_zaposleni}")
