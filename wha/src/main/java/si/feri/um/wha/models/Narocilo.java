@@ -29,6 +29,9 @@ public class Narocilo {
     private LocalDateTime datumVnosa;
     private LocalDateTime rokPriprave;
     private LocalDateTime casPriprave;
+    @ManyToOne
+    @JoinColumn(name = "ID_stranka")
+    private Stranka Stranka;
 
     public Narocilo() {
     }
