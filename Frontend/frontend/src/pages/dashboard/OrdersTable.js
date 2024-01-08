@@ -15,7 +15,7 @@ function createData(trackingNo, name, fat, carbs, protein) {
   return { trackingNo, name, fat, carbs, protein };
 }
 
-/*const rows = [
+const rows = [
   createData(84564564, 'Camera Lens', 40, 2, 40570),
   createData(98764564, 'Laptop', 300, 0, 180139),
   createData(98756325, 'Mobile', 355, 1, 90989),
@@ -26,7 +26,7 @@ function createData(trackingNo, name, fat, carbs, protein) {
   createData(98753263, 'Mouse', 89, 2, 10570),
   createData(98753275, 'Desktop', 185, 1, 98063),
   createData(98753291, 'Chair', 100, 0, 14001)
-];*/
+];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -186,8 +186,8 @@ export default function OrderTable({artikli}) {
         >
           <OrderTableHead order={order} orderBy={orderBy} />
           <TableBody>
-            {stableSort(artikli, getComparator(order, orderBy)).map((artikli, index) => {
-              const isItemSelected = isSelected(artikli.trackingNo);
+            {stableSort(rows, getComparator(order, orderBy)).map((rows, index) => {
+              const isItemSelected = isSelected(rows.trackingNo);
               const labelId = `enhanced-table-checkbox-${index}`;
 
               return (
@@ -197,21 +197,21 @@ export default function OrderTable({artikli}) {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   aria-checked={isItemSelected}
                   tabIndex={-1}
-                  key={artikli.naziv}
+                  key={rows.naziv}
                   selected={isItemSelected}
                 >
                   <TableCell component="th" id={labelId} scope="row" align="left">
                     <Link color="secondary" component={RouterLink} to="">
-                      {artikli.trackingNo}
+                      {rows.trackingNo}
                     </Link>
                   </TableCell>
-                  <TableCell align="left">{artikli.priimek}</TableCell>
-                  <TableCell align="right">{artikli.fat}</TableCell>
+                  <TableCell align="left">{rows.priimek}</TableCell>
+                  <TableCell align="right">{rows.fat}</TableCell>
                   <TableCell align="left">
-                    <OrderStatus status={artikli.carbs} />
+                    <OrderStatus status={rows.carbs} />
                   </TableCell>
                   <TableCell align="right">
-                    <NumberFormat value={artikli.protein} displayType="text" thousandSeparator prefix="$" />
+                    <NumberFormat value={rows.protein} displayType="text" thousandSeparator prefix="$" />
                   </TableCell>
                 </TableRow>
               );
