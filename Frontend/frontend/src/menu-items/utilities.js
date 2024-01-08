@@ -22,10 +22,10 @@ const icons = {
 
 const utilities = {
   id: 'utilities',
-  title: 'Utilities',
+  //title: 'Utilities',
   type: 'group',
   children: [
-    {
+    /*{
       id: 'util-typography',
       title: 'Typography',
       type: 'item',
@@ -53,7 +53,7 @@ const utilities = {
       url: '/icons/ant',
       icon: icons.AntDesignOutlined,
       breadcrumbs: false
-    }
+    }*/
   ]
 };
 

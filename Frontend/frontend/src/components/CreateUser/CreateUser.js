@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import api from "../../services/api";
-import UserTable from "./UserTable";
+import UserTable from "../../pages/authentication/zaposleni/UserTable";
 import Alert from '@mui/material/Alert';
 
 

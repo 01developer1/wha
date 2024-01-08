@@ -11,8 +11,8 @@ const icons = {
 
 const support = {
   id: 'support',
-  title: 'Support',
-  type: 'group',
+  //title: 'Support',
+  type: 'group',/*
   children: [
     {
       id: 'sample-page',
@@ -30,7 +30,7 @@ const support = {
       external: true,
       target: true
     }
-  ]
+  ]*/
 };
 
 export default support;
