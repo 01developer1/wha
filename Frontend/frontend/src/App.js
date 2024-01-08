@@ -1,18 +1,16 @@
-import React from 'react';
-//import logo from './logo.svg';
-import './App.css';
-import Routing from './components/routing/Routing';
-//import * as ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+// project import
+import Routes from 'routes';
+import ThemeCustomization from 'themes';
+import ScrollTop from 'components/ScrollTop';
 
-function App() {
-  return (
-    <div className="App">
-       <BrowserRouter>
-        <Routing />
-      </BrowserRouter>
-    </div>
-  );
-}
+// ==============================|| APP - THEME, ROUTER, LOCAL  ||============================== //
+
+const App = () => (
+  <ThemeCustomization>
+    <ScrollTop>
+      <Routes />
+    </ScrollTop>
+  </ThemeCustomization>
+);
 
 export default App;
