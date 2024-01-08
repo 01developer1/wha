@@ -3,6 +3,7 @@ package si.feri.um.wha.models;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import com.google.zxing.BarcodeFormat;
@@ -26,6 +27,14 @@ public class QRCodeGenerator {
 
         String filePath = IMAGE_PATH + "/" + fileName;
         Path path = FileSystems.getDefault().getPath(filePath);
+
+        // Check if the file with the same name already exists
+        while (Files.exists(path)) {
+            fileName = getImageFileName();
+            filePath = IMAGE_PATH + "/" + fileName;
+            path = FileSystems.getDefault().getPath(filePath);
+        }
+
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
     }
 
@@ -37,6 +46,7 @@ public class QRCodeGenerator {
         imageNumber++;
         return fileName;
     }
+
 
 
 
