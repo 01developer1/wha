@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import api from "../../../services/api";
+import EditIcon from '@mui/icons-material/Edit';
 
 
 export default function UserTable({ users, fetchUser, showDeleteAlert }) {
@@ -40,13 +41,13 @@ export default function UserTable({ users, fetchUser, showDeleteAlert }) {
         <TableHead>
           <TableRow>
             <TableCell>Id</TableCell>
-            <TableCell align="right">ime</TableCell>
-            <TableCell align="right">priimek</TableCell>
-            <TableCell align="right">username</TableCell>
-            <TableCell align="right">geslo</TableCell>
-            <TableCell align="right">email</TableCell>
-            <TableCell align="right">placa</TableCell>
-            <TableCell align="right">telefon</TableCell>
+            <TableCell align="right">Ime</TableCell>
+            <TableCell align="right">Priimek</TableCell>
+            <TableCell align="right">Username</TableCell>
+            <TableCell align="right">Geslo</TableCell>
+            <TableCell align="right">Email</TableCell>
+            <TableCell align="right">Plača</TableCell>
+            <TableCell align="right">Telefon</TableCell>
             <TableCell align="right"> </TableCell>
           </TableRow>
         </TableHead>
@@ -67,6 +68,9 @@ export default function UserTable({ users, fetchUser, showDeleteAlert }) {
               <TableCell align="right">{user.placa}</TableCell>
               <TableCell align="right">{user.telefon}</TableCell>
               <TableCell align="right">
+                  <IconButton aria-label="edit" size="large">
+                     <EditIcon />
+                  </IconButton>
                   <IconButton aria-label="delete" size="large" onClick={handleDeleteClick(user.id_zaposleni)}>
                      <DeleteIcon />
                   </IconButton>

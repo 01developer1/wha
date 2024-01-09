@@ -8,7 +8,10 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import api from "../../../services/api";
+import { Edit } from '../../../../node_modules/@mui/icons-material/index';
+
  
  
 export default function ArtikliTable({ artikli, fetchArtikli, showDeleteAlert }) {
@@ -40,9 +43,9 @@ export default function ArtikliTable({ artikli, fetchArtikli, showDeleteAlert })
         <TableHead>
           <TableRow>
             <TableCell>Id</TableCell>
-            <TableCell align="right">naziv</TableCell>
-            <TableCell align="right">kolicina</TableCell>
-            <TableCell align="right">prodajna cena</TableCell>
+            <TableCell align="right">Naziv</TableCell>
+            <TableCell align="right">Količina</TableCell>
+            <TableCell align="right">Prodajna cena</TableCell>
             <TableCell align="right"> </TableCell>
           </TableRow>
         </TableHead>
@@ -59,6 +62,9 @@ export default function ArtikliTable({ artikli, fetchArtikli, showDeleteAlert })
               <TableCell align="right">{artikel.kolicina}</TableCell>
               <TableCell align="right">{artikel.prodajnaCena}</TableCell>
               <TableCell align="right">
+                  <IconButton aria-label="edit" size="large">
+                     <EditIcon />
+                  </IconButton>
                   <IconButton aria-label="delete" size="large" onClick={handleDeleteClick(artikel.id_artikel)}>
                      <DeleteIcon />
                   </IconButton>

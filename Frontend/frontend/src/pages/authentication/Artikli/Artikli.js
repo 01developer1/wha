@@ -5,6 +5,7 @@ import api from "../../../services/api";
 import ArtikliTable from "./ArtikliTable";
 import { Button } from "@mui/material";
 import Alert from '@mui/material/Alert';
+import AddIcon from '@mui/icons-material/Add';
 // material-ui
 import { Grid, Stack, Typography } from '@mui/material';
 
@@ -46,7 +47,11 @@ const Artikli = () => {
     return (
         <><MainCard>
             {showAlert && <Alert  style={alertStyle} severity="success">Artikel uspešno izbrisan</Alert>}
-            <Link to="/artikli/dodaj"><Button variant="contained">Dodaj artikli</Button></Link>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Link to="/artikli/dodaj">
+                    <Button variant="contained">Dodaj artikli</Button>
+                </Link>
+            </div>
             <ArtikliTable artikli={artikli} fetchArtikli={fetchArtikli} showDeleteAlert={showDeleteAlert} />
             </MainCard>
         </>

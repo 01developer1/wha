@@ -84,7 +84,9 @@ const Zaposleni = () => {
      <>
      <MainCard>
         {showAlert && <Alert  style={alertStyle} severity="success">Zaposleni uspešno izbrisan!</Alert>}
-        <Link to="/zaposleni/dodaj"><Button variant="contained">Dodaj Zaposlenega</Button></Link>
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Link to="/zaposleni/dodaj"><Button variant="contained">Dodaj Zaposlenega</Button></Link>
+            </div>
         <UserTable users={user} fetchUser={fetchUser} showDeleteAlert={showDeleteAlert} />
       </MainCard>
      </>
