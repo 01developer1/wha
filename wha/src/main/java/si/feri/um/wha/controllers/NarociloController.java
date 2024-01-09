@@ -6,6 +6,7 @@ import si.feri.um.wha.models.Artikel;
 import si.feri.um.wha.models.Narocilo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import si.feri.um.wha.models.Tip_artikla;
 import si.feri.um.wha.models.Zaposleni;
 
 import java.util.List;
@@ -81,5 +82,21 @@ public class NarociloController {
         narociloDao.save(existingNarocilo);
 
         return ResponseEntity.ok("Naročilo uspešno posodobljeno.");
+    }
+
+    @GetMapping("/search")
+    public Iterable<Artikel> vrniArtikleFilter(
+            @RequestParam(name = "naziv", required = false) String naziv,
+            @RequestParam(name = "kolicinaMin", required = false) Integer kolicinaMin,
+            @RequestParam(name = "kolicinaMax", required = false) Integer kolicinaMax,
+            @RequestParam(name = "prodajna_cenaMin", required = false) Double prodajna_cenaMin,
+            @RequestParam(name = "prodajna_cenaMax", required = false) Double prodajna_cenaMax,
+            @RequestParam(name = "dobavna_cenaMin", required = false) Double dobavna_cenaMin,
+            @RequestParam(name = "dobavna_cenaMax", required = false) Double dobavna_cenaMax,
+            @RequestParam(name = "lokacija_artikla", required = false) String lokacija_artikla,
+            @RequestParam(name = "tipArtikla", required = false) String tipArtikla
+    ) {
+        Tip_artikla tipArtiklaEnum = (tipArtikla != null) ? Tip_artikla.valueOf(tipArtikla) : null;
+        return artikelDao.poisceVseArtiklePoKriteriju(tipArtiklaEnum, naziv, kolicinaMin, kolicinaMax, prodajna_cenaMin, prodajna_cenaMax, dobavna_cenaMin, dobavna_cenaMax, lokacija_artikla);
     }
 }
