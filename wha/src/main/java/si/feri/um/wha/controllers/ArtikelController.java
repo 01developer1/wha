@@ -25,6 +25,8 @@ public class ArtikelController {
 
     @PostMapping
     public Artikel dodajArtikel(@RequestBody Artikel artikel){
+
+        // Dodaj if stavek za preverjanje TIP_Artikla
         return artikelDao.save(artikel);
     }
 

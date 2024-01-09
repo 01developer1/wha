@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import api from "../../../services/api";
 
 // material-ui
 import {
@@ -21,6 +22,7 @@ import {
 // third party
 import * as Yup from 'yup';
 import { Formik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
 // project import
 import FirebaseSocial from './FirebaseSocial';
@@ -28,11 +30,14 @@ import AnimateButton from 'components/@extended/AnimateButton';
 
 // assets
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import { VpnLock } from '../../../../node_modules/@mui/icons-material/index';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const AuthLogin = () => {
   const [checked, setChecked] = React.useState(false);
+
+  const navigate = useNavigate(); 
 
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => {
@@ -43,20 +48,48 @@ const AuthLogin = () => {
     event.preventDefault();
   };
 
+  const values = {
+   username: ' ', // Replace with the actual username
+   password: ' ', // Replace with the actual password
+ };
+
+  const prijava = (formValues) => {
+   console.log(formValues)
+   api.post(`/zaposleni/prijava`, formValues)
+     .then((result) => {
+       console.log(result.data);
+       if (result.data && result.data.ime && result.data.priimek && result.data.id) {
+         const user = {
+            ime: result.data.ime,
+            priimek: result.data.priimek,
+            id: result.data.id
+         }
+         sessionStorage.setItem('user', JSON.stringify(user));
+         // Redirect to the home page if login is successful
+         navigate('/');
+       }
+     })
+     .catch((error) => {
+       console.error('There was an error login in!', error);
+     });
+   };
+
   return (
     <>
       <Formik
         initialValues={{
-          email: 'info@codedthemes.com',
-          password: '123456',
+          username: '',
+          password: '',
           submit: null
         }}
-        validationSchema={Yup.object().shape({
-          email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+        /*validationSchema={Yup.object().shape({
+          username: Yup.string().username('Must be a valid username').max(255).required('username is required'),
           password: Yup.string().max(255).required('Password is required')
-        })}
+        })}*/
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
+         console.log(values)
           try {
+            prijava(values);
             setStatus({ success: false });
             setSubmitting(false);
           } catch (err) {
@@ -71,21 +104,21 @@ const AuthLogin = () => {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="email-login">Email Address</InputLabel>
+                  <InputLabel htmlFor="username-login">username Address</InputLabel>
                   <OutlinedInput
-                    id="email-login"
-                    type="email"
-                    value={values.email}
-                    name="email"
+                    id="username-login"
+                    type="username"
+                    value={values.username}
+                    name="username"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    placeholder="Enter email address"
+                    placeholder="Enter username address"
                     fullWidth
-                    error={Boolean(touched.email && errors.email)}
+                    error={Boolean(touched.username && errors.username)}
                   />
-                  {touched.email && errors.email && (
-                    <FormHelperText error id="standard-weight-helper-text-email-login">
-                      {errors.email}
+                  {touched.username && errors.username && (
+                    <FormHelperText error id="standard-weight-helper-text-username-login">
+                      {errors.username}
                     </FormHelperText>
                   )}
                 </Stack>

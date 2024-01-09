@@ -1,6 +1,7 @@
 package si.feri.um.wha.controllers;
 
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import si.feri.um.wha.dao.RoleRepository;
 import si.feri.um.wha.dao.ZaposleniRepository;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -29,7 +32,7 @@ public class ZaposleniController {
     @PostMapping
     public ResponseEntity<Zaposleni> dodajZaposlenega(@RequestBody Zaposleni zaposleni){
         //zaposleni.setPassword(passwordEncoder.encode(zaposleni.getPassword()));
-
+        System.out.print(zaposleni.getEmail());
         Role defaultRole = roleRepository.findByName("ROLE_SKLADISCNIK");
 
         /*if (defaultRole != null) {
@@ -60,6 +63,35 @@ public class ZaposleniController {
         Iterable<Zaposleni> savedZaposleni = zaposleniDao.saveAll(zaposleni);
         return ResponseEntity.ok("Uspesno dodani zaposleni.");
     }
+
+    @PostMapping("/prijava")
+    public ResponseEntity<?> prijaviZaposlenega(@RequestBody Map<String, String> credentials) {
+        String username = credentials.get("username");
+        String password = credentials.get("password");
+        System.out.println(username);
+
+        try {
+            Zaposleni zaposleniPodatki = zaposleniDao.vrniDolocenegaZaposlenegaUsername(username);
+
+            if (zaposleniPodatki != null && zaposleniPodatki.getPassword().equals(password)) {
+                // Passwords match, return the authenticated user
+                // Customize the response as needed, e.g., return only ime, priimek, and id
+                Map<String, Object> response = new HashMap<>();
+                response.put("ime", zaposleniPodatki.getIme());
+                response.put("priimek", zaposleniPodatki.getPriimek());
+                response.put("id", zaposleniPodatki.getID_zaposleni());
+                return ResponseEntity.ok(response);
+            } else {
+                // Passwords do not match or user not found
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+            }
+        } catch (Exception e) {
+            // Handle any exceptions here
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
+        }
+    }
+
 
     @PutMapping("/posodobi/{ID_zaposleni}")
     public ResponseEntity<String> posodobiZaposleni(@PathVariable(name = "ID_zaposleni") Long ID_zaposleni, @RequestBody Zaposleni updatedZaposleni) {
