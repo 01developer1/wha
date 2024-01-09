@@ -84,18 +84,16 @@ public class StrankaController {
     }
 
     @GetMapping("/search")
-    public Iterable<Artikel> vrniArtikleFilter(
+    public Iterable<Stranka> vrniStrankeFilter(
             @RequestParam(name = "naziv", required = false) String naziv,
-            @RequestParam(name = "kolicinaMin", required = false) Integer kolicinaMin,
-            @RequestParam(name = "kolicinaMax", required = false) Integer kolicinaMax,
-            @RequestParam(name = "prodajna_cenaMin", required = false) Double prodajna_cenaMin,
-            @RequestParam(name = "prodajna_cenaMax", required = false) Double prodajna_cenaMax,
-            @RequestParam(name = "dobavna_cenaMin", required = false) Double dobavna_cenaMin,
-            @RequestParam(name = "dobavna_cenaMax", required = false) Double dobavna_cenaMax,
-            @RequestParam(name = "lokacija_artikla", required = false) String lokacija_artikla,
-            @RequestParam(name = "tipArtikla", required = false) String tipArtikla
+            @RequestParam(name = "kraj", required = false) String kraj,
+            @RequestParam(name = "ulica", required = false) String ulica,
+            @RequestParam(name = "postnaSt", required = false) Integer postnaSt,
+            @RequestParam(name = "drzava", required = false) String drzava,
+            @RequestParam(name = "telefon", required = false) String telefon,
+            @RequestParam(name = "email", required = false) String email
     ) {
-        Tip_artikla tipArtiklaEnum = (tipArtikla != null) ? Tip_artikla.valueOf(tipArtikla) : null;
-        return artikelDao.poisceVseArtiklePoKriteriju(tipArtiklaEnum, naziv, kolicinaMin, kolicinaMax, prodajna_cenaMin, prodajna_cenaMax, dobavna_cenaMin, dobavna_cenaMax, lokacija_artikla);
+        return strankaDao.poisceVseStrankePoKriteriju(naziv, kraj, ulica, postnaSt, drzava, telefon, email);
     }
+
 }
