@@ -3,6 +3,9 @@ import api from "../../../services/api";
 import React, { useEffect, useState } from "react";
 import UserTable from "./UserTable";
 import Alert from '@mui/material/Alert';
+import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close';
+import CreateUser from './UserForm';
 
 
 // material-ui
@@ -17,6 +20,7 @@ import { Button, TextField, FormControl, InputLabel, Select, MenuItem } from "@m
 // ================================|| REGISTER ||================================ //
 
 const Zaposleni = () => {
+   const [showForm, setShowForm] = useState(false);
   const [userData, setUserData] = useState({
      ime: '',
      priimek: '',
@@ -67,6 +71,10 @@ const Zaposleni = () => {
      setTimeout(() => setShowAlert(false), 3000);
  };
 
+ const toggleForm = () => {
+   setShowForm(!showForm);
+};
+
  const alertStyle = {
     position: 'fixed', // Fixed position
     top: 15,          // 10px from the top
@@ -80,17 +88,33 @@ const Zaposleni = () => {
 };
 
 
-  return (
-     <>
+return (
+   <>
+     {showAlert && <Alert style={alertStyle} severity="success">Zaposleni uspešno izbrisan!</Alert>}
+     {showForm &&  <MainCard style={{marginBottom: '20px'}}>
+
+                  <CreateUser
+                  //formData={userData}
+                  setFormData={userData}
+                  fetchUser={fetchUser}
+                  handleSubmit={(event) => {
+                     event.preventDefault();
+                  }}
+              />
+              
+         </MainCard>
+         }
      <MainCard>
-        {showAlert && <Alert  style={alertStyle} severity="success">Zaposleni uspešno izbrisan!</Alert>}
-            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Link to="/zaposleni/dodaj"><Button variant="contained">Dodaj Zaposlenega</Button></Link>
-            </div>
-        <UserTable users={user} fetchUser={fetchUser} showDeleteAlert={showDeleteAlert} />
-      </MainCard>
-     </>
-  );
+       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}> {/* Added marginBottom */}
+       <Button variant="contained" onClick={toggleForm}>
+                      {showForm ? <><CloseIcon /> Zapri</> : <><AddIcon /> Ustvari</>}
+                  </Button>
+       </div>
+       <UserTable users={user} fetchUser={fetchUser} showDeleteAlert={showDeleteAlert} />
+     </MainCard>
+   </>
+ );
+ 
 };
 
 export default Zaposleni;

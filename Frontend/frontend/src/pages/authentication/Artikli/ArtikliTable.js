@@ -45,7 +45,10 @@ export default function ArtikliTable({ artikli, fetchArtikli, showDeleteAlert })
             <TableCell>Id</TableCell>
             <TableCell align="right">Naziv</TableCell>
             <TableCell align="right">Količina</TableCell>
-            <TableCell align="right">Prodajna cena</TableCell>
+            <TableCell align="right">Prodajna Cena</TableCell>
+            <TableCell align="right">Dobavna Cena</TableCell>
+            <TableCell align="right">Lokacija</TableCell>
+            <TableCell align="right">Tip</TableCell>
             <TableCell align="right"> </TableCell>
           </TableRow>
         </TableHead>
@@ -55,12 +58,15 @@ export default function ArtikliTable({ artikli, fetchArtikli, showDeleteAlert })
               key={artikel.id_artikel}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" style={{ color: 'grey' }}>
                 {artikel.id_artikel}
               </TableCell>
               <TableCell align="right">{artikel.naziv}</TableCell>
               <TableCell align="right">{artikel.kolicina}</TableCell>
-              <TableCell align="right">{artikel.prodajnaCena}</TableCell>
+              <TableCell align="right">{artikel.prodajnaCena} €</TableCell>
+              <TableCell align="right">{artikel.dobavnaCena} €</TableCell>
+              <TableCell align="right">{artikel.lokacijaArtikla}</TableCell>
+              <TableCell align="right">{artikel.tip_artikla}</TableCell>
               <TableCell align="right">
                   <IconButton aria-label="edit" size="large">
                      <EditIcon />

@@ -14,13 +14,14 @@ const DrawerHeader = ({ open }) => {
   const theme = useTheme();
 
   return (
-    // only available in paid version
-    <DrawerHeaderStyled theme={theme} open={open}>
-      <Stack direction="row" spacing={1} alignItems="center">
-        <h1>WHA</h1>
-      </Stack>
-    </DrawerHeaderStyled>
-  );
+   // only available in paid version
+   <DrawerHeaderStyled theme={theme} open={open}>
+     <Stack direction="row" spacing={1} alignItems="left">
+       <h1 style={{ textAlign: 'left' }}>WareHouse Assistant</h1>
+     </Stack>
+   </DrawerHeaderStyled>
+ );
+ 
 };
 
 DrawerHeader.propTypes = {
