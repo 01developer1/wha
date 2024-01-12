@@ -10,10 +10,7 @@ import si.feri.um.wha.models.Zaposleni;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -30,21 +27,38 @@ public class ZaposleniController {
     }
 
     @PostMapping
-    public ResponseEntity<Zaposleni> dodajZaposlenega(@RequestBody Zaposleni zaposleni){
-        //zaposleni.setPassword(passwordEncoder.encode(zaposleni.getPassword()));
-        System.out.print(zaposleni.getEmail());
-        Role defaultRole = roleRepository.findByName("ROLE_SKLADISCNIK");
+    public ResponseEntity<String> dodajZaposlenega(@RequestBody Zaposleni zaposleni){
 
-        /*if (defaultRole != null) {
+        Optional<Zaposleni> existingZaposleni = Optional.ofNullable(zaposleniDao.vrniDolocenegaZaposlenegaUsername(zaposleni.getUsername()));
 
-            zaposleni.setRoles(Arrays.asList(defaultRole));
+        if (existingZaposleni.isPresent()) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT) // Set the HTTP status to 'Conflict' or another appropriate status
+                    .body("Uporabniško ime že obstaja!");
         } else {
+            Role role = null;
+            Tip_zaposlenega selected_role = zaposleni.getTip_zaposlenega();
 
-        }*/
-        zaposleni.setEnabled(true);
+            System.out.print(zaposleni);
+            if (selected_role.toString().equals("DOKUMENTARIST")) {
+                role = roleRepository.findByName("ROLE_DOKUMENTARIST");
+            } else if (selected_role.toString().equals("SKLADISCNIK")) {
+                role = roleRepository.findByName("ROLE_SKLADISCNIK");
+            } else if (selected_role.toString().equals("VODJA_PODJETJA")) {
+                role = roleRepository.findByName("ROLE_VODJA_PODJETJA");
+            } else if (selected_role.toString().equals("VODJA_SKLADISCA")) {
+                role = roleRepository.findByName("ROLE_VODJA_SKLADISCA");
+            } else {
+                role = null;
+            }
 
-        Zaposleni savedZaposleni = zaposleniDao.save(zaposleni);
-        return ResponseEntity.ok(savedZaposleni);
+            zaposleni.setRoles(Arrays.asList(role));
+
+            zaposleni.setEnabled(true);
+
+            Zaposleni savedZaposleni = zaposleniDao.save(zaposleni);
+            return ResponseEntity.ok("Nov zaposleni uspešno dodan.");
+        }
     }
 
     @GetMapping("/{ID_zaposleni}")
@@ -80,6 +94,7 @@ public class ZaposleniController {
                 response.put("ime", zaposleniPodatki.getIme());
                 response.put("priimek", zaposleniPodatki.getPriimek());
                 response.put("id", zaposleniPodatki.getID_zaposleni());
+                response.put("role", zaposleniPodatki.getRoles());
                 return ResponseEntity.ok(response);
             } else {
                 // Passwords do not match or user not found

@@ -4,19 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/layout/MainLayout/Drawer/DrawerHeader/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/layout/MainLayout/Drawer/DrawerHeader/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/menu-items/pages.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/menu-items/pages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Artikli/Artikli.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Artikli/Artikli.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Artikli/ArtikliTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Artikli/ArtikliTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/zaposleni/UserTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/zaposleni/UserTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/zaposleni/Zaposleni.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/zaposleni/Zaposleni.js" afterDir="false" />
+    <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="Role in Privilege">
       <change beforePath="$PROJECT_DIR$/../Frontend/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_3_2024_1_36_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_3_2024_1_36_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_3_2024_1_48_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_3_2024_1_48_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_3_2024_2_37_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_3_2024_2_37_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_4_2024_5_50_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_4_2024_5_50_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3__01__24,_08_49_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3__01__24,_14_34_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3__01__24__08_49__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_3__01__24__14_34__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4__01__24,_19_00_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_4__01__24__19_00__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ArtikelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ArtikelController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/ZaposleniRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/ZaposleniRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
