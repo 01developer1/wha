@@ -58,6 +58,7 @@ const Zaposleni = () => {
   const fetchUser = () => {
      api.get("/zaposleni").then((result) => {
          setUsers(result.data);
+         console.log(result.data)
      });
   };
 

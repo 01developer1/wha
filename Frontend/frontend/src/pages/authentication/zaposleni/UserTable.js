@@ -43,15 +43,16 @@ export default function UserTable({ users, fetchUser, showDeleteAlert }) {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-          <TableCell align="right"></TableCell>
+          <TableCell align="left"></TableCell>
             <TableCell>Id</TableCell>
             <TableCell align="right">Ime</TableCell>
             <TableCell align="right">Priimek</TableCell>
-            <TableCell align="right">Uporabniško ime</TableCell>
-            <TableCell align="right">Geslo</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Bruto Plača</TableCell>
-            <TableCell align="right">Telefon</TableCell>
+            <TableCell align="center">Uporabniško ime</TableCell>
+            <TableCell align="left">Geslo</TableCell>
+            <TableCell align="left">Email</TableCell>
+            <TableCell align="left">Telefon</TableCell>
+            <TableCell align="center">Bruto Plača</TableCell>
+            <TableCell align="left">Delovno Mesto</TableCell>
 
             <TableCell align="right"> </TableCell>
           </TableRow>
@@ -62,7 +63,7 @@ export default function UserTable({ users, fetchUser, showDeleteAlert }) {
               key={user.id_zaposleni}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-       <TableCell align="center">
+       <TableCell align="left">
         <HoverDot user={user} />
       </TableCell>
             <TableCell component="th" scope="row" style={{ color: 'grey' }}>
@@ -71,11 +72,13 @@ export default function UserTable({ users, fetchUser, showDeleteAlert }) {
 
               <TableCell align="right">{user.ime}</TableCell>
               <TableCell align="right">{user.priimek}</TableCell>
-              <TableCell align="right">{user.username}</TableCell>
-              <TableCell align="right">{user.password}</TableCell>
-              <TableCell align="right">{user.email}</TableCell>
-              <TableCell align="right">{user.placa} €</TableCell>
-              <TableCell align="right">{user.telefon}</TableCell>
+              <TableCell align="center">{user.username}</TableCell>
+              <TableCell align="left">{user.password}</TableCell>
+              <TableCell align="left">{user.email}</TableCell>
+              <TableCell align="left">{user.telefon}</TableCell>
+              <TableCell align="center">{user.placa} €</TableCell>
+              <TableCell align="left">{user.tip_zaposlenega}</TableCell>
+
              
               <TableCell align="right">
                   <IconButton aria-label="edit" size="large">

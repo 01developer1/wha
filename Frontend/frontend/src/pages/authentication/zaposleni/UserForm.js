@@ -14,7 +14,7 @@ export default function UserForm({fetchUser}) {
       email: '',
       placa: '',
       telefon: '',
-      role: ''
+      tip_zaposlenega: ''
    });
    const [showAlert, setShowAlert] = useState(false);
 
@@ -23,6 +23,7 @@ export default function UserForm({fetchUser}) {
    };
 
    const createUser = () => {
+      console.log(userData)
       api.post(`/zaposleni`, userData)
         .then((result) => {
           console.log(result.data);
@@ -79,15 +80,15 @@ export default function UserForm({fetchUser}) {
                <InputLabel id="role-select-label">Delovno Mesto</InputLabel>
                <Select
                   labelId="role-select-label"
-                  name="role"
-                  value={userData.role}
+                  name="tip_zaposlenega"
+                  value={userData.tip_zaposlenega}
                   label="Delovno Mesto"
                   onChange={handleChange}
                >
-                  <MenuItem value="Vodja podjetja">Vodja podjetja</MenuItem>
-                  <MenuItem value="Dokumentarist">Dokumentarist</MenuItem>
-                  <MenuItem value="Skladiščnik">Skladiščnik</MenuItem>
-                  <MenuItem value="Vodja skladišča">Vodja skladišča</MenuItem>
+                  <MenuItem value="VODJA_PODJETJA">Vodja podjetja</MenuItem>
+                  <MenuItem value="DOKUMENTARIST">Dokumentarist</MenuItem>
+                  <MenuItem value="SKLADISCNIK">Skladiščnik</MenuItem>
+                  <MenuItem value="VODJA_SKLADISCA">Vodja skladišča</MenuItem>
                </Select>
             </FormControl>
             <Button type="submit" variant="contained">Ustvari</Button>
