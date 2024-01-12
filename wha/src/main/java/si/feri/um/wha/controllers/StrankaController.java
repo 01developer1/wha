@@ -31,6 +31,12 @@ public class StrankaController {
         return strankaDao.vrniDolocenoStranko(ID_stranka);
     }
 
+    @GetMapping("/suggestions")
+    public ResponseEntity<List<Stranka>> getStrankaSuggestions(@RequestParam String q) {
+        List<Stranka> suggestions = strankaDao.findByNazivContainingIgnoreCase(q);
+        return ResponseEntity.ok(suggestions);
+    }
+
     @DeleteMapping("/izbrisi/{ID_stranka}")
     public ResponseEntity<String> izbrisiStranko(@PathVariable(name = "ID_stranka") Long ID_stranka) throws Exception {
         strankaDao.deleteById(ID_stranka);
