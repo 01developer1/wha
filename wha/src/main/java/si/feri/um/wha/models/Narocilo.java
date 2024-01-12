@@ -1,6 +1,7 @@
 package si.feri.um.wha.models;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -15,6 +16,7 @@ public class Narocilo {
     private ArrayList<Integer> seznamKolicin = new ArrayList<>();
     @Enumerated(EnumType.STRING)
     @Column(name = "stanje_narocila")
+    @ColumnDefault("'TODO'")
     private Stanje_narocila stanjeNarocila;
     @ManyToOne
     @JoinColumn(name = "ID_zaposleni")
@@ -29,11 +31,14 @@ public class Narocilo {
     private LocalDateTime datumVnosa;
     private LocalDateTime rokPriprave;
     private LocalDateTime casPriprave;
+    @ManyToOne
+    @JoinColumn(name = "ID_stranka")
+    private Stranka stranka;
 
     public Narocilo() {
     }
 
-    public Narocilo(double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave) {
+    public Narocilo(double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave, Stranka stranka) {
         this.cenaSkupaj = cenaSkupaj;
         this.seznamKolicin = seznamKolicin;
         this.zaposlen = zaposlen;
@@ -42,9 +47,10 @@ public class Narocilo {
         this.rokPriprave = rokPriprave;
         this.casPriprave = casPriprave;
         this.stanjeNarocila = Stanje_narocila.TODO;
+        this.stranka = stranka;
     }
 
-    public Narocilo(Long ID_narocilo, double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave) {
+    public Narocilo(Long ID_narocilo, double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave, Stranka stranka) {
         this.ID_narocilo = ID_narocilo;
         this.cenaSkupaj = cenaSkupaj;
         this.seznamKolicin = seznamKolicin;
@@ -53,7 +59,8 @@ public class Narocilo {
         this.datumVnosa = datumVnosa;
         this.rokPriprave = rokPriprave;
         this.casPriprave = casPriprave;
-        this.stanjeNarocila = stanjeNarocila.TODO;
+        this.stanjeNarocila = Stanje_narocila.TODO;
+        this.stranka = stranka;
     }
 
     public Long getID_narocilo() {
@@ -128,18 +135,28 @@ public class Narocilo {
         this.stanjeNarocila = stanjeNarocila;
     }
 
+    public Stranka getStranka() {
+        return stranka;
+    }
+
+    public void setStranka(Stranka stranka) {
+        this.stranka = stranka;
+    }
+
+
     @Override
     public String toString() {
         return "Narocilo{" +
                 "ID_narocilo=" + ID_narocilo +
                 ", cenaSkupaj=" + cenaSkupaj +
                 ", seznamKolicin=" + seznamKolicin +
+                ", stanjeNarocila=" + stanjeNarocila +
                 ", zaposlen=" + zaposlen +
                 ", artikli=" + artikli +
                 ", datumVnosa=" + datumVnosa +
                 ", rokPriprave=" + rokPriprave +
                 ", casPriprave=" + casPriprave +
-                ", stanjeNarocila=" + stanjeNarocila +
+                ", stranka=" + stranka +
                 '}';
     }
 }

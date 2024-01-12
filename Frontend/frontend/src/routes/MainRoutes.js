@@ -17,7 +17,7 @@ const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
 //const AntIcons = Loadable(lazy(() => import('pages/components-overview/AntIcons')));
 const Zaposleni = Loadable(lazy(() => import('pages/authentication/zaposleni/Zaposleni')));
 const Artikli = Loadable(lazy(() => import('pages/authentication/Artikli/Artikli')));
-const Narocila = Loadable(lazy(() => import('pages/components-overview/Narocila')));
+const Narocila = Loadable(lazy(() => import('pages/authentication/Narocila/Narocila')));
 const DodajArtikel = Loadable(lazy(() => import('pages/authentication/Artikli/DodajArtikel')));
 
 
