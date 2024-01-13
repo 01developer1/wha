@@ -116,11 +116,29 @@ public class ZaposleniController {
             return ResponseEntity.notFound().build();
         }
 
+        // Check if the updated username already exists
+        Zaposleni zaposleniWithSameUsername = zaposleniDao.vrniDolocenegaZaposlenegaUsername(updatedZaposleni.getUsername());
+        if (zaposleniWithSameUsername != null && !existingZaposleni.getID_zaposleni().equals(zaposleniWithSameUsername.getID_zaposleni())) {
+            // A different user with the same username already exists, return a conflict response
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT) // Set the HTTP status to 'Conflict' or another appropriate status
+                    .body("Uporabniško ime že obstaja!");
+        }
+
         if (updatedZaposleni.getIme() != null) {
             existingZaposleni.setIme(updatedZaposleni.getIme());
         }
         if (updatedZaposleni.getPriimek() != null) {
             existingZaposleni.setPriimek(updatedZaposleni.getPriimek());
+        }
+        if (updatedZaposleni.getUsername() != null) {
+            existingZaposleni.setUsername(updatedZaposleni.getUsername());
+        }
+        if (updatedZaposleni.getPassword() != null) {
+            existingZaposleni.setPassword(updatedZaposleni.getPassword());
+        }
+        if (updatedZaposleni.getEmail() != null) {
+            existingZaposleni.setEmail(updatedZaposleni.getEmail());
         }
         if (updatedZaposleni.getTelefon() != null) {
             existingZaposleni.setTelefon(updatedZaposleni.getTelefon());

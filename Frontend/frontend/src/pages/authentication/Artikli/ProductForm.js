@@ -38,7 +38,7 @@ export default function ProductForm({fetchArtikli}) {
           fetchArtikli();
         })
         .catch((error) => {
-          console.error('There was an error creating new user!', error);
+          console.error('There was an error creating new product!', error);
         });
    };
 
