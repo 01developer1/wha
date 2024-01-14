@@ -58,7 +58,6 @@ const Narocila = () => {
     opacity: 0.95,  // 85% opacity
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
 };
-console.log(narocila)
 
 return (
    <MainCard>

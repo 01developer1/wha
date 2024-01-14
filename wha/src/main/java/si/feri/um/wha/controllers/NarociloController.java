@@ -30,6 +30,7 @@ public class NarociloController {
 
     @PostMapping
     public Narocilo dodajNarocilo(@RequestBody Narocilo narocilo){
+
         return narociloDao.save(narocilo);
     }
 
@@ -82,4 +83,5 @@ public class NarociloController {
 
         return ResponseEntity.ok("Naročilo uspešno posodobljeno.");
     }
+
 }

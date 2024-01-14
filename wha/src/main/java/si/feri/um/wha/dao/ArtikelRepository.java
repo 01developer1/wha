@@ -35,6 +35,7 @@ public interface ArtikelRepository extends CrudRepository<Artikel, Long> {
     );
 
 
-
+    @Query("SELECT a FROM Artikel a")
+    Iterable<Artikel> findArtikle();
 }
 

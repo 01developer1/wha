@@ -21,13 +21,13 @@ public class Narocilo {
     @ManyToOne
     @JoinColumn(name = "ID_zaposleni")
     private Zaposleni zaposlen;
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(
             name = "narocilo_artikel",
-            joinColumns = @JoinColumn(name = "ID_narocilo"),
-            inverseJoinColumns = @JoinColumn(name = "ID_artikel")
-    )
-    private List<Artikel> artikli = new ArrayList<>();
+            joinColumns = @JoinColumn(name = "narocilo_id", referencedColumnName = "ID_narocilo"),
+            inverseJoinColumns = @JoinColumn(name = "artikel_id", referencedColumnName = "ID_artikel")
+    )*/
+    private ArrayList<Integer> artikli = new ArrayList<>();
     private LocalDateTime datumVnosa;
     private LocalDateTime rokPriprave;
     private LocalDateTime casPriprave;
@@ -38,7 +38,7 @@ public class Narocilo {
     public Narocilo() {
     }
 
-    public Narocilo(double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave, Stranka stranka) {
+    public Narocilo(double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, ArrayList<Integer> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave, Stranka stranka) {
         this.cenaSkupaj = cenaSkupaj;
         this.seznamKolicin = seznamKolicin;
         this.zaposlen = zaposlen;
@@ -50,7 +50,7 @@ public class Narocilo {
         this.stranka = stranka;
     }
 
-    public Narocilo(Long ID_narocilo, double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, List<Artikel> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave, Stranka stranka) {
+    public Narocilo(Long ID_narocilo, double cenaSkupaj, ArrayList<Integer> seznamKolicin, Zaposleni zaposlen, ArrayList<Integer> artikli, LocalDateTime datumVnosa, LocalDateTime rokPriprave, LocalDateTime casPriprave, Stranka stranka) {
         this.ID_narocilo = ID_narocilo;
         this.cenaSkupaj = cenaSkupaj;
         this.seznamKolicin = seznamKolicin;
@@ -95,11 +95,11 @@ public class Narocilo {
         this.zaposlen = zaposlen;
     }
 
-    public List<Artikel> getArtikli() {
+    public ArrayList<Integer> getArtikli() {
         return artikli;
     }
 
-    public void setArtikli(List<Artikel> artikli) {
+    public void setArtikli(ArrayList<Integer> artikli) {
         this.artikli = artikli;
     }
 

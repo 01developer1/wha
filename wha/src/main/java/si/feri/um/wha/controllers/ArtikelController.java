@@ -23,6 +23,9 @@ public class ArtikelController {
         return artikelDao.findAll();
     }
 
+    @GetMapping("/vsiArtikli")
+    public Iterable<Artikel> vrniArtikle() { return artikelDao.findArtikle(); }
+
     @PostMapping
     public Artikel dodajArtikel(@RequestBody Artikel artikel){
 
