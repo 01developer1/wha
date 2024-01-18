@@ -4,20 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="Role in Privilege">
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/AuthWrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/AuthWrapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Narocila/dodajNarocilo.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Narocila/dodajNarocilo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/auth-forms/AuthLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/auth-forms/AuthLogin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/routes/MainRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/routes/MainRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_7_2024_8_20_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_7_2024_8_20_PM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9__01__24,_20_02_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_9__01__24__20_02__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" afterDir="false" />
-    </list>
+    <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="Role in Privilege" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
