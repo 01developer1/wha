@@ -85,11 +85,13 @@ const Profile = () => {
   const userString = sessionStorage.getItem('user');
   let ime = '';
   let priimek = '';
+  let role = '';
 
   if (userString) {
     const user = JSON.parse(userString);
     ime = user.ime;
     priimek = user.priimek;
+    role = user.role;
   }
 
   return (
@@ -154,7 +156,7 @@ const Profile = () => {
                             <Stack>
                               <Typography variant="h6">{ime && priimek ? `${ime} ${priimek}` : 'No user data'}</Typography>
                               <Typography variant="body2" color="textSecondary">
-                                UI/UX Designer
+                                 {`${role}`}
                               </Typography>
                             </Stack>
                           </Stack>

@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="Role in Privilege" />
+    <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="Varovane poti pred prijavo">
+      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/layout/MainLayout/Header/HeaderContent/Profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/layout/MainLayout/Header/HeaderContent/Profile/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/auth-forms/AuthLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/auth-forms/AuthLogin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/routes/ProtectedRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/routes/ProtectedRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1704285273302</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Varovane poti pred prijavo">
+      <created>1705610924466</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1705610924467</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -105,6 +118,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Znova ustvarjen git projekt" />
     <MESSAGE value="Enum stanje narocila" />
-    <option name="LAST_COMMIT_MESSAGE" value="Enum stanje narocila" />
+    <MESSAGE value="Varovane poti pred prijavo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Varovane poti pred prijavo" />
   </component>
 </project>

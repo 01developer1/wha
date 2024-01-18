@@ -34,8 +34,9 @@ import { VpnLock } from '../../../../node_modules/@mui/icons-material/index';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
-const AuthLogin = () => {
+const AuthLogin = ({ setLoginError }) => {
   const [checked, setChecked] = React.useState(false);
+
 
   const navigate = useNavigate(); 
 
@@ -49,31 +50,33 @@ const AuthLogin = () => {
   };
 
   const values = {
-   username: ' ', // Replace with the actual username
-   password: ' ', // Replace with the actual password
+   username: ' ', 
+   password: ' ', 
  };
 
   const prijava = (formValues) => {
    console.log(formValues)
    api.post(`/zaposleni/prijava`, formValues)
-     .then((result) => {
-       console.log(result.data);
-       if (result.data && result.data.ime && result.data.priimek && result.data.id && result.data.isAuthenticated) {
-         const user = {
-            ime: result.data.ime,
-            priimek: result.data.priimek,
-            id: result.data.id,
-            role: result.data.role,
-            isAuthenticated: result.data.isAuthenticated
-         }
-         sessionStorage.setItem('user', JSON.stringify(user));
-         navigate('/');
-       }
-     })
-     .catch((error) => {
-       console.error('There was an error login in!', error);
-       
-     });
+    .then((result) => {
+      console.log(result.data);
+      if (result.data && result.data.ime && result.data.priimek && result.data.id && result.data.isAuthenticated) {
+        const user = {
+          ime: result.data.ime,
+          priimek: result.data.priimek,
+          id: result.data.id,
+          role: result.data.role,
+          isAuthenticated: result.data.isAuthenticated
+        }
+        sessionStorage.setItem('user', JSON.stringify(user));
+        navigate('/');
+      } else {
+         setLoginError('Login failed. Please check your username and password.');
+      }
+    })
+    .catch((error) => {
+      console.error('There was an error logging in!', error);
+      setLoginError('Napaka. Napačno uporabniško ime ali geslo.');
+    });
    };
 
   return (
@@ -84,10 +87,12 @@ const AuthLogin = () => {
           password: '',
           submit: null
         }}
-        /*validationSchema={Yup.object().shape({
-          username: Yup.string().username('Must be a valid username').max(255).required('username is required'),
-          password: Yup.string().max(255).required('Password is required')
-        })}*/
+        validationSchema={Yup.object().shape({
+         username: Yup.string()
+           .required('Potrebno je vnesti uporabniško ime'),
+         password: Yup.string()
+           .required('Potrebno je vnesti geslo')
+       })}       
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
          console.log(values)
           try {
