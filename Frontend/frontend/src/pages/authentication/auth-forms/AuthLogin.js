@@ -58,19 +58,21 @@ const AuthLogin = () => {
    api.post(`/zaposleni/prijava`, formValues)
      .then((result) => {
        console.log(result.data);
-       if (result.data && result.data.ime && result.data.priimek && result.data.id) {
+       if (result.data && result.data.ime && result.data.priimek && result.data.id && result.data.isAuthenticated) {
          const user = {
             ime: result.data.ime,
             priimek: result.data.priimek,
-            id: result.data.id
+            id: result.data.id,
+            role: result.data.role,
+            isAuthenticated: result.data.isAuthenticated
          }
          sessionStorage.setItem('user', JSON.stringify(user));
-         // Redirect to the home page if login is successful
          navigate('/');
        }
      })
      .catch((error) => {
        console.error('There was an error login in!', error);
+       
      });
    };
 
@@ -104,7 +106,7 @@ const AuthLogin = () => {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="username-login">username Address</InputLabel>
+                  <InputLabel htmlFor="username-login">Uporabniško ime</InputLabel>
                   <OutlinedInput
                     id="username-login"
                     type="username"
@@ -112,7 +114,7 @@ const AuthLogin = () => {
                     name="username"
                     onBlur={handleBlur}
                     onChange={handleChange}
-                    placeholder="Enter username address"
+                    placeholder="Vpiši uporabniško ime"
                     fullWidth
                     error={Boolean(touched.username && errors.username)}
                   />
@@ -125,7 +127,7 @@ const AuthLogin = () => {
               </Grid>
               <Grid item xs={12}>
                 <Stack spacing={1}>
-                  <InputLabel htmlFor="password-login">Password</InputLabel>
+                  <InputLabel htmlFor="password-login">Geslo</InputLabel>
                   <OutlinedInput
                     fullWidth
                     error={Boolean(touched.password && errors.password)}
@@ -148,7 +150,7 @@ const AuthLogin = () => {
                         </IconButton>
                       </InputAdornment>
                     }
-                    placeholder="Enter password"
+                    placeholder="Vpiši geslo"
                   />
                   {touched.password && errors.password && (
                     <FormHelperText error id="standard-weight-helper-text-password-login">
@@ -170,10 +172,10 @@ const AuthLogin = () => {
                         size="small"
                       />
                     }
-                    label={<Typography variant="h6">Keep me sign in</Typography>}
+                    label={<Typography variant="h6">Zapomni si me</Typography>}
                   />
                   <Link variant="h6" component={RouterLink} to="" color="text.primary">
-                    Forgot Password?
+                    Pozabljeno Geslo?
                   </Link>
                 </Stack>
               </Grid>
@@ -185,7 +187,7 @@ const AuthLogin = () => {
               <Grid item xs={12}>
                 <AnimateButton>
                   <Button disableElevation disabled={isSubmitting} fullWidth size="large" type="submit" variant="contained" color="primary">
-                    Login
+                    PRIJAVA
                   </Button>
                 </AnimateButton>
               </Grid>

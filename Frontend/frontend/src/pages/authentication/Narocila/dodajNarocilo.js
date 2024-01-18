@@ -181,7 +181,7 @@ const DodajNarocilo = () => {
         console.log(result.data);
       })
       .catch((error) => {
-        console.error('There was an error creating new user!', error);
+        console.error('There was an error creating new order!', error);
       });
     };
   

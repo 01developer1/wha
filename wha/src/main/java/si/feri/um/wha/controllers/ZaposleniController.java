@@ -88,20 +88,17 @@ public class ZaposleniController {
             Zaposleni zaposleniPodatki = zaposleniDao.vrniDolocenegaZaposlenegaUsername(username);
 
             if (zaposleniPodatki != null && zaposleniPodatki.getPassword().equals(password)) {
-                // Passwords match, return the authenticated user
-                // Customize the response as needed, e.g., return only ime, priimek, and id
                 Map<String, Object> response = new HashMap<>();
                 response.put("ime", zaposleniPodatki.getIme());
                 response.put("priimek", zaposleniPodatki.getPriimek());
                 response.put("id", zaposleniPodatki.getID_zaposleni());
-                response.put("role", zaposleniPodatki.getRoles());
+                response.put("role", zaposleniPodatki.getTip_zaposlenega());
+                response.put("isAuthenticated", true);
                 return ResponseEntity.ok(response);
             } else {
-                // Passwords do not match or user not found
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
             }
         } catch (Exception e) {
-            // Handle any exceptions here
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
         }
