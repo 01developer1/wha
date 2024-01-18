@@ -3,6 +3,7 @@ import { lazy } from 'react';
 // project import
 import Loadable from 'components/Loadable';
 import MainLayout from 'layout/MainLayout';
+import ProtectedRoute from './ProtectedRoute';
 
 // render - dashboard
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
@@ -29,7 +30,7 @@ const MainRoutes = {
   children: [
     {
       path: '/',
-      element: <DashboardDefault />
+      element: <ProtectedRoute element={<DashboardDefault />} />
     },/*
     {
       path: 'color',
@@ -40,7 +41,7 @@ const MainRoutes = {
       children: [
         {
           path: 'default',
-          element: <DashboardDefault />
+          element: <ProtectedRoute element={<DashboardDefault />} />
         }
       ]
     },/*
@@ -62,19 +63,19 @@ const MainRoutes = {
     },*/
     {
       path: 'zaposleni',
-      element: <Zaposleni />
+      element: <ProtectedRoute element={<Zaposleni />} />
     },
     {
       path: 'artikli',
-      element: <Artikli />
+      element: <ProtectedRoute element={<Artikli />} />
     },
     {
-      path: 'narocila',
-      element: <Narocila />
+      path: 'narocila/*',
+      element: <ProtectedRoute element={<Narocila />} />
     },
     {
       path: 'artikli/dodaj',
-      element: <DodajArtikel />
+      element: <ProtectedRoute element={<DodajArtikel />} />
     }
   ]
 };

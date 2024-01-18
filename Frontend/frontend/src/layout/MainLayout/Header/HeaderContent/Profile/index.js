@@ -56,10 +56,6 @@ function a11yProps(index) {
 const Profile = () => {
   const theme = useTheme();
 
-  const handleLogout = async () => {
-    // logout
-  };
-
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
   const handleToggle = () => {
@@ -78,6 +74,11 @@ const Profile = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const handleLogout = () => {
+   sessionStorage.clear();
+   window.location.reload();
+   };
 
   const iconBackColorOpen = 'grey.300';
 
