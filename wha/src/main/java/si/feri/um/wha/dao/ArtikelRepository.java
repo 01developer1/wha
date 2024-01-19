@@ -12,6 +12,7 @@ public interface ArtikelRepository extends CrudRepository<Artikel, Long> {
     @Query("select a from Artikel a where a.ID_artikel = :id")
     Artikel vrniDolocenArtikel(@Param("id") Long id);
 
+
     @Query("SELECT a FROM Artikel a WHERE " +
             "(:naziv IS NULL OR a.naziv LIKE %:naziv%) " +
             "AND (:kolicinaMin IS NULL OR a.kolicina >= :kolicinaMin) " +

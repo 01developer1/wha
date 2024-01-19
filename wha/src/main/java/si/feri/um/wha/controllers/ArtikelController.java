@@ -1,12 +1,17 @@
 package si.feri.um.wha.controllers;
 
+import com.google.zxing.WriterException;
 import org.springframework.http.ResponseEntity;
 import si.feri.um.wha.dao.ArtikelRepository;
 import si.feri.um.wha.models.Artikel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import si.feri.um.wha.models.QRCodeGenerator;
 import si.feri.um.wha.models.Tip_artikla;
+import org.springframework.ui.Model;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 
@@ -98,6 +103,39 @@ public class ArtikelController {
         return ResponseEntity.ok("Artikel uspešno posodobljen.");
     }
 
+    private static final String QR_CODE_IMAGE_PATH = "/qrcode/QRCode.png";
+
+    @GetMapping("/qrcode/{id_artikla}")
+    public String getQRCode(@PathVariable(name = "id_artikla") Long id_artikla, Model model) {
+
+        byte[] image = new byte[0];
+        try {
+            // Retrieve the Artikel object by ID
+            Artikel artikel = artikelDao.vrniDolocenArtikel(id_artikla);
+
+            if (artikel != null) {
+                // Serialize the Artikel object to JSON (you can use any serialization method)
+                String qrCodeData = String.valueOf(artikel);
+
+                // Generate and Return Qr Code in Byte Array using qrCodeData
+                image = QRCodeGenerator.getQRCodeImage(qrCodeData, 250, 250);
+
+                // Generate and Save Qr Code Image using the absolute file path
+                QRCodeGenerator.generateQRCodeImage(qrCodeData, 250, 250);
+            } else {
+                // Handle the case where the Artikel with the specified ID is not found
+                // You can return an error message or handle it as per your requirements.
+            }
+        } catch (WriterException | IOException e) {
+            e.printStackTrace();
+        }
+        // Convert Byte Array into Base64 Encode String
+        String qrcode = Base64.getEncoder().encodeToString(image);
+
+        model.addAttribute("qrcode", qrcode);
+
+        return "qrcode";
+    }
 
 
 }
