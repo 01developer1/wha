@@ -12,9 +12,19 @@ import EditIcon from '@mui/icons-material/Edit';
 import api from "../../../services/api";
 import UrediArtikel from './UrediArtikel';
 import MainCard from 'components/MainCard';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from "@mui/material/Button";
+
 
 export default function ArtikliTable({ artikli, fetchArtikli, showDeleteAlert }) {
   const [editingArticle, setEditingArticle] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
+const [selectedArtikelId, setSelectedArtikelId] = useState(null);
+
 
   const izbrisiArtikel = (artikel_id) => {
     api.delete(`/artikli/izbrisi/${artikel_id}`)
@@ -29,8 +39,21 @@ export default function ArtikliTable({ artikli, fetchArtikli, showDeleteAlert })
   };
 
   const handleDeleteClick = (artikel_id) => {
-    return () => izbrisiArtikel(artikel_id);
-  };
+   return () => {
+       setSelectedArtikelId(artikel_id);
+       setOpenDialog(true); // Open the dialog
+   };
+};
+
+const handleCloseDialog = () => {
+   setOpenDialog(false);
+};
+
+const handleConfirmDelete = () => {
+   izbrisiArtikel(selectedArtikelId);
+   setOpenDialog(false); // Close the dialog
+};
+
 
   const handleEditClick = (artikel) => {
     return () => setEditingArticle(artikel);
@@ -51,6 +74,25 @@ export default function ArtikliTable({ artikli, fetchArtikli, showDeleteAlert })
         />
         </MainCard>
       )}
+      <Dialog
+            open={openDialog}
+            onClose={handleCloseDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+        >
+            <DialogTitle id="alert-dialog-title">{"Potrditev brisanja artikla"}</DialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    Ali ste prepričani, da želite izbrisati artikel?
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleCloseDialog}>Ne</Button>
+                <Button onClick={handleConfirmDelete} autoFocus>
+                    Da
+                </Button>
+            </DialogActions>
+        </Dialog>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>

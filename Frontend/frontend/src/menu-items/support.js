@@ -1,26 +1,30 @@
 // assets
-import { ChromeOutlined, QuestionOutlined } from '@ant-design/icons';
+import { ChromeOutlined, QuestionOutlined, CameraOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
   ChromeOutlined,
-  QuestionOutlined
+  QuestionOutlined,
+  CameraOutlined
 };
 
 // ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
 
 const support = {
   id: 'support',
-  //title: 'Support',
-  type: 'group',/*
+  title: 'Scanner',
+  type: 'group',
   children: [
-    {
-      id: 'sample-page',
-      title: 'Sample Page',
+   {
+      id: 'scanner',
+      title: 'Scanner',
       type: 'item',
-      url: '/sample-page',
-      icon: icons.ChromeOutlined
-    },
+      url: '/artikli/scanner',
+      icon: icons.CameraOutlined,
+      target: false
+    }
+   ]
+    /*
     {
       id: 'documentation',
       title: 'Documentation',

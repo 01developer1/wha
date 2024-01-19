@@ -1,12 +1,16 @@
 package si.feri.um.wha.controllers;
 
+import com.github.sarxos.webcam.Webcam;
+import com.google.zxing.NotFoundException;
 import com.google.zxing.WriterException;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import si.feri.um.wha.dao.ArtikelRepository;
 import si.feri.um.wha.models.Artikel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import si.feri.um.wha.models.QRCodeGenerator;
+import si.feri.um.wha.models.QRCodeScannerService;
 import si.feri.um.wha.models.Tip_artikla;
 import org.springframework.ui.Model;
 
@@ -135,6 +139,18 @@ public class ArtikelController {
         model.addAttribute("qrcode", qrcode);
 
         return "qrcode";
+    }
+
+    private final QRCodeScannerService qrCodeScannerService = new QRCodeScannerService();
+
+    @GetMapping("/scanner")
+    public String scanQRCode() {
+        try {
+            return qrCodeScannerService.decodeQRCode();
+        } catch (IOException | NotFoundException e) {
+            e.printStackTrace();
+            return "Error: " + e.getMessage();
+        }
     }
 
 
