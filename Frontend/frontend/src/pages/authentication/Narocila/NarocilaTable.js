@@ -139,7 +139,8 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
                           <TableCell>Naziv</TableCell>
                           <TableCell>Dobavna Cena</TableCell>
                           <TableCell>Prodajna Cena</TableCell>
-                          <TableCell>Kolicina</TableCell>
+                          <TableCell>Količina</TableCell>
+                          <TableCell>Skupaj</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -151,6 +152,7 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
                               <TableCell>{product.dobavnaCena +" €"}</TableCell>
                               <TableCell>{product.prodajnaCena +" €"}</TableCell>
                               <TableCell>{narocilo.seznamKolicin[index]}</TableCell>
+                              <TableCell>{(product.prodajnaCena * narocilo.seznamKolicin[index]).toFixed(2)+" €"}</TableCell>
                             </TableRow>
                           ))}
                       </TableBody>
