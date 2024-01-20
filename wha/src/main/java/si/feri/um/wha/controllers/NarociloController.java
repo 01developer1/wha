@@ -2,12 +2,12 @@ package si.feri.um.wha.controllers;
 
 import org.springframework.http.ResponseEntity;
 import si.feri.um.wha.dao.NarociloRepository;
-import si.feri.um.wha.models.*;
+import si.feri.um.wha.models.Artikel;
+import si.feri.um.wha.models.Narocilo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import si.feri.um.wha.models.Zaposleni;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -81,21 +81,6 @@ public class NarociloController {
         narociloDao.save(existingNarocilo);
 
         return ResponseEntity.ok("Naročilo uspešno posodobljeno.");
-    }
-
-    @GetMapping("/search")
-    public Iterable<Narocilo> vrniNarociloFilter(
-            @RequestParam(name = "cenaSkupaj", required = false) double cenaSkupaj,
-            @RequestParam(name = "seznamKolicin", required = false) ArrayList<Integer> seznamKolicin,
-            @RequestParam(name = "zaposlen", required = false) Zaposleni zaposlen,
-            @RequestParam(name = "artikli", required = false) List<Artikel> artikli,
-            @RequestParam(name = "datumVnosa", required = false) LocalDateTime datumVnosa,
-            @RequestParam(name = "rokPriprave", required = false) LocalDateTime rokPriprave,
-            @RequestParam(name = "casPriprave", required = false) LocalDateTime casPriprave,
-            @RequestParam(name = "stanjeNarocila", required = false) String stanjeNarocila
-    ) {
-        Stanje_narocila stanjeNarocilaEnum = (stanjeNarocila != null) ? Stanje_narocila.valueOf(stanjeNarocila) : null;
-        return narociloDao.poisceVsaNarocilaPoKriteriju(cenaSkupaj, seznamKolicin, zaposlen, artikli, datumVnosa, rokPriprave, casPriprave, stanjeNarocilaEnum);
     }
 
 }

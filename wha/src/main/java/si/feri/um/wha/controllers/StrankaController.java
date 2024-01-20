@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import si.feri.um.wha.dao.StrankaRepository;
-import si.feri.um.wha.models.Artikel;
 import si.feri.um.wha.models.Stranka;
-import si.feri.um.wha.models.Tip_artikla;
 import si.feri.um.wha.models.Zaposleni;
 
 import java.util.List;
@@ -31,6 +29,12 @@ public class StrankaController {
     @GetMapping("/{ID_stranka}")
     public Stranka vrniDolocenoStranko(@PathVariable(name = "ID_stranka") Long ID_stranka){
         return strankaDao.vrniDolocenoStranko(ID_stranka);
+    }
+
+    @GetMapping("/suggestions")
+    public ResponseEntity<List<Stranka>> getStrankaSuggestions(@RequestParam String q) {
+        List<Stranka> suggestions = strankaDao.findByNazivContainingIgnoreCase(q);
+        return ResponseEntity.ok(suggestions);
     }
 
     @DeleteMapping("/izbrisi/{ID_stranka}")
@@ -82,18 +86,4 @@ public class StrankaController {
 
         return ResponseEntity.ok("stranka uspešno posodobljen.");
     }
-
-    @GetMapping("/search")
-    public Iterable<Stranka> vrniStrankeFilter(
-            @RequestParam(name = "naziv", required = false) String naziv,
-            @RequestParam(name = "kraj", required = false) String kraj,
-            @RequestParam(name = "ulica", required = false) String ulica,
-            @RequestParam(name = "postnaSt", required = false) Integer postnaSt,
-            @RequestParam(name = "drzava", required = false) String drzava,
-            @RequestParam(name = "telefon", required = false) String telefon,
-            @RequestParam(name = "email", required = false) String email
-    ) {
-        return strankaDao.poisceVseStrankePoKriteriju(naziv, kraj, ulica, postnaSt, drzava, telefon, email);
-    }
-
 }
