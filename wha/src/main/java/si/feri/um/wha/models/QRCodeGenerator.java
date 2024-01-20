@@ -16,7 +16,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 
 public class QRCodeGenerator {
 
-    private static final String IMAGE_PATH = "C:/Users/aljaz/OneDrive/Dokumenti/FERI/RIS/Projekt1/qrcodes";
+    private static final String IMAGE_PATH = "/Users/rokfonovic/Desktop/Sola/2_LETNIK/RIS/Projekt/qrcodes";
     private static int imageNumber = 0;
 
     public static void generateQRCodeImage(String text, int width, int height)

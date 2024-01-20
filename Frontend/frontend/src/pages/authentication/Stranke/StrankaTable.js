@@ -87,9 +87,9 @@ const handleConfirmDelete = () => {
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleCloseDialog}>Ne</Button>
-                <Button onClick={handleConfirmDelete} autoFocus>
-                    Da
+                  <Button variant="outlined" onClick={handleCloseDialog}>Prekliči</Button>
+                  <Button variant="outlined" color="error"onClick={handleConfirmDelete} autoFocus>
+                    Potrdi
                 </Button>
             </DialogActions>
         </Dialog>
