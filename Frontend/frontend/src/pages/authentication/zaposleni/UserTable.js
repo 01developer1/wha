@@ -11,10 +11,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import api from "../../../services/api";
 import EditIcon from '@mui/icons-material/Edit';
 import HoverDot from './HoverDot';
-import UrediZaposleni from './UrediZaposleni'; // Update the import
+import UrediZaposleni from './UrediZaposleni';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Button from "@mui/material/Button";
 
 export default function UserTable({ users, fetchUser, showDeleteAlert }) {
   const [editingZaposleni, setEditingZaposleni] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
 
   const izbrisiUser = (user_id) => {
     api.delete(`/zaposleni/izbrisi/${user_id}`)
@@ -29,8 +37,20 @@ export default function UserTable({ users, fetchUser, showDeleteAlert }) {
   };
 
   const handleDeleteClick = (user_id) => {
-    return () => izbrisiUser(user_id);
-  };
+   return () => {
+       setSelectedUserId(user_id);
+       setOpenDialog(true); // Open the dialog
+   };
+};
+
+const handleCloseDialog = () => {
+   setOpenDialog(false);
+};
+
+const handleConfirmDelete = () => {
+   izbrisiUser(selectedUserId);
+   setOpenDialog(false); // Close the dialog
+};
 
   const handleEditClick = (user) => {
     setEditingZaposleni(user);
@@ -49,6 +69,25 @@ export default function UserTable({ users, fetchUser, showDeleteAlert }) {
           onCancel={handleCancelEdit}
         />
       )}
+      <Dialog
+            open={openDialog}
+            onClose={handleCloseDialog}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+        >
+            <DialogTitle id="alert-dialog-title">{"Potrditev brisanja zaposlenega"}</DialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                    Ali ste prepričani, da želite izbrisati zaposlenega?
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleCloseDialog}>Ne</Button>
+                <Button onClick={handleConfirmDelete} autoFocus>
+                    Da
+                </Button>
+            </DialogActions>
+        </Dialog>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>

@@ -5,14 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="Varovane poti pred prijavo">
-      <change afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/models/QRCodeScannerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/menu-items/support.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/menu-items/support.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Artikli/DodajArtikel.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/menu-items/pages.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/menu-items/pages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/zaposleni/UserTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/zaposleni/UserTable.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/routes/MainRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/routes/MainRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ArtikelController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ArtikelController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

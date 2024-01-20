@@ -20,6 +20,7 @@ const Zaposleni = Loadable(lazy(() => import('pages/authentication/zaposleni/Zap
 const Artikli = Loadable(lazy(() => import('pages/authentication/Artikli/Artikli')));
 const Narocila = Loadable(lazy(() => import('pages/authentication/Narocila/Narocila')));
 const Scanner = Loadable(lazy(() => import('pages/authentication/Scanner/Scanner')));
+const Stranke = Loadable(lazy(() => import('pages/authentication/Stranke/Stranke')));
 
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -76,6 +77,10 @@ const MainRoutes = {
     {
       path: 'artikli/scanner',
       element: <ProtectedRoute element={<Scanner />} />
+    },
+    {
+      path: 'stranka',
+      element: <ProtectedRoute element={<Stranke />} />
     }
   ]
 };

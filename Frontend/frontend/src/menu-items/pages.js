@@ -1,10 +1,13 @@
 // assets
-import { LoginOutlined, ProfileOutlined } from '@ant-design/icons';
+import { LoginOutlined, ProfileOutlined, UserOutlined, UnorderedListOutlined, TeamOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
   LoginOutlined,
-  ProfileOutlined
+  ProfileOutlined,
+  UserOutlined,
+  UnorderedListOutlined,
+  TeamOutlined
 };
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
@@ -27,7 +30,7 @@ const pages = {
       title: 'Zaposleni',
       type: 'item',
       url: '/zaposleni',
-      icon: icons.ProfileOutlined,
+      icon: icons.UserOutlined,
       target: false
     },
     {
@@ -35,7 +38,7 @@ const pages = {
       title: 'Artikli',
       type: 'item',
       url: '/artikli',
-      icon: icons.ProfileOutlined,
+      icon: icons.UnorderedListOutlined,
       target: false
     }
     ,
@@ -45,6 +48,14 @@ const pages = {
       type: 'item',
       url: '/narocila',
       icon: icons.ProfileOutlined,
+      target: false
+    },
+    {
+      id: 'pregledStrank',
+      title: 'Stranke',
+      type: 'item',
+      url: '/stranka',
+      icon: icons.TeamOutlined,
       target: false
     }
   ]
