@@ -10,7 +10,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import api from "../../../services/api";
-import UrediArtikel from './UrediArtikel';
+import UrediStranka from './UrediStranka';
 import MainCard from 'components/MainCard';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -20,27 +20,27 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Button from "@mui/material/Button";
 
 
-export default function ArtikliTable({ artikli, fetchArtikli, showDeleteAlert }) {
-  const [editingArticle, setEditingArticle] = useState(null);
+export default function StrankaTable({ stranka, fetchStranka, showDeleteAlert }) {
+  const [editingStranka, setEditingStranka] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
-const [selectedArtikelId, setSelectedArtikelId] = useState(null);
+const [selectedStrankaId, setSelectedStrankaId] = useState(null);
 
 
-  const izbrisiArtikel = (artikel_id) => {
-    api.delete(`/artikli/izbrisi/${artikel_id}`)
+  const izbrisiStranka = (stranka_id) => {
+    api.delete(`/stranka/izbrisi/${stranka_id}`)
       .then((result) => {
         console.log(result.data);
-        fetchArtikli();
+        fetchStranka();
         showDeleteAlert();
       })
       .catch((error) => {
-        console.error('There was an error deleting the artikel!', error);
+        console.error('There was an error deleting stranka!', error);
       });
   };
 
-  const handleDeleteClick = (artikel_id) => {
+  const handleDeleteClick = (stranka_id) => {
    return () => {
-       setSelectedArtikelId(artikel_id);
+       setSelectedStrankaId(stranka_id);
        setOpenDialog(true); // Open the dialog
    };
 };
@@ -50,26 +50,26 @@ const handleCloseDialog = () => {
 };
 
 const handleConfirmDelete = () => {
-   izbrisiArtikel(selectedArtikelId);
+   izbrisiStranka(selectedStrankaId);
    setOpenDialog(false); // Close the dialog
 };
 
 
-  const handleEditClick = (artikel) => {
-    return () => setEditingArticle(artikel);
+  const handleEditClick = (stranka) => {
+    return () => setEditingStranka(stranka);
   };
 
   const handleCancelEdit = () => {
-    setEditingArticle(null);
+    setEditingStranka(null);
   };
 
   return (
     <div>
-      {editingArticle && (
+      {editingStranka && (
         <MainCard style={{ marginBottom: '20px' }}>
-        <UrediArtikel
-          articleToEdit={editingArticle}
-          fetchArtikli={fetchArtikli}
+        <UrediStranka
+          strankaToEdit={editingStranka}
+          fetchStranka={fetchStranka}
           onCancel={handleCancelEdit}
         />
         </MainCard>
@@ -80,10 +80,10 @@ const handleConfirmDelete = () => {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{"Potrditev brisanja artikla"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Potrditev brisanja stranke"}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    Ali ste prepričani, da želite izbrisati artikel?
+                    Ali ste prepričani, da želite izbrisati stranko?
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
@@ -99,34 +99,37 @@ const handleConfirmDelete = () => {
               <TableRow>
                 <TableCell>Id</TableCell>
                 <TableCell align="right">Naziv</TableCell>
-                <TableCell align="right">Količina</TableCell>
-                <TableCell align="right">Prodajna Cena</TableCell>
-                <TableCell align="right">Dobavna Cena</TableCell>
-                <TableCell align="right">Lokacija</TableCell>
-                <TableCell align="right">Tip</TableCell>
+                <TableCell align="right">Kraj</TableCell>
+                <TableCell align="right">Ulica</TableCell>
+                <TableCell align="right">Poštna številka</TableCell>
+                <TableCell align="right">Država</TableCell>
+                <TableCell align="right">Telefon</TableCell>
+                <TableCell align="right">Email</TableCell>
                 <TableCell align="right"> </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {artikli.map((artikel) => (
+              {stranka.map((stranka) => (
                 <TableRow
-                  key={artikel.id_artikel}
+                  key={stranka.id_stranka}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell component="th" scope="row" style={{ color: 'grey' }}>
-                    {artikel.id_artikel}
+                    {stranka.id_stranka}
                   </TableCell>
-                  <TableCell align="right">{artikel.naziv}</TableCell>
-                  <TableCell align="right">{artikel.kolicina}</TableCell>
-                  <TableCell align="right">{artikel.prodajnaCena} €</TableCell>
-                  <TableCell align="right">{artikel.dobavnaCena} €</TableCell>
-                  <TableCell align="right">{artikel.lokacijaArtikla}</TableCell>
-                  <TableCell align="right">{artikel.tip_artikla}</TableCell>
+                  <TableCell align="right">{stranka.naziv}</TableCell>
+                  <TableCell align="right">{stranka.kraj}</TableCell>
+                  <TableCell align="right">{stranka.ulica}</TableCell>
+                  <TableCell align="right">{stranka.postnaSt}</TableCell>
+                  <TableCell align="right">{stranka.drzava}</TableCell>
+                  <TableCell align="right">{stranka.telefon}</TableCell>
+                  <TableCell align="right">{stranka.email}</TableCell>
+
                   <TableCell align="right">
-                    <IconButton aria-label="edit" size="large" onClick={handleEditClick(artikel)}>
+                    <IconButton aria-label="edit" size="large" onClick={handleEditClick(stranka)}>
                       <EditIcon />
                     </IconButton>
-                    <IconButton aria-label="delete" size="large" onClick={handleDeleteClick(artikel.id_artikel)}>
+                    <IconButton aria-label="delete" size="large" onClick={handleDeleteClick(stranka.id_stranka)}>
                       <DeleteIcon />
                     </IconButton>
                   </TableCell>

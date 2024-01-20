@@ -9,7 +9,7 @@ import ProtectedRoute from './ProtectedRoute';
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard')));
 
 // render - sample page
-const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
+//const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
 
 // render - utilities
 //const Typography = Loadable(lazy(() => import('pages/components-overview/Typography')));
@@ -19,7 +19,8 @@ const SamplePage = Loadable(lazy(() => import('pages/extra-pages/SamplePage')));
 const Zaposleni = Loadable(lazy(() => import('pages/authentication/zaposleni/Zaposleni')));
 const Artikli = Loadable(lazy(() => import('pages/authentication/Artikli/Artikli')));
 const Narocila = Loadable(lazy(() => import('pages/authentication/Narocila/Narocila')));
-const DodajArtikel = Loadable(lazy(() => import('pages/authentication/Artikli/DodajArtikel')));
+const Scanner = Loadable(lazy(() => import('pages/authentication/Scanner/Scanner')));
+const Stranke = Loadable(lazy(() => import('pages/authentication/Stranke/Stranke')));
 
 
 // ==============================|| MAIN ROUTING ||============================== //
@@ -74,8 +75,12 @@ const MainRoutes = {
       element: <ProtectedRoute element={<Narocila />} />
     },
     {
-      path: 'artikli/dodaj',
-      element: <ProtectedRoute element={<DodajArtikel />} />
+      path: 'artikli/scanner',
+      element: <ProtectedRoute element={<Scanner />} />
+    },
+    {
+      path: 'stranka',
+      element: <ProtectedRoute element={<Stranke />} />
     }
   ]
 };
