@@ -6,6 +6,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import api from '../../../services/api';
 import { format, addDays } from 'date-fns';
 
+
 const DodajNarocilo = () => {
   // ===================================================================================== STRANKA =========================================================================
     const [selectedStranka, setSelectedStranka] = useState(null); // Store the selected stranka object
@@ -45,12 +46,12 @@ const DodajNarocilo = () => {
   
     // ===================================================================================== ARTIKLI =========================================================================
     const [tableData, setTableData] = useState([
-      { col1: '', col2: '', col3: '', col4: '', col5: '', selectedArtikel: null },
+      { col1: '', col2: '', col3: '', col4: '', col5: '', col6:'', selectedArtikel: null },
     ]);
     const [suggestionsArtikli, setArtikliSuggestions] = useState([]);
   
     const addRow = () => {
-      setTableData([...tableData, { col1: '', col2: '', col3: '', col4: '', col5: '', selectedArtikel: null }]);
+      setTableData([...tableData, { col1: '', col2: '', col3: '', col4: '', col5: '', col6:'', selectedArtikel: null }]);
     };
   
     const handleArtikelChange = async (event, newValue, index) => {
@@ -64,11 +65,12 @@ const DodajNarocilo = () => {
       if (newValue) {
         try {
           const response = await api.get(`/artikli/${newValue.id_artikel}`);
-          const { dobavnaCena, prodajnaCena } = response.data;
+          const { dobavnaCena, prodajnaCena, kolicina } = response.data;
     
           // Update dobavna cena and prodajna cena in the row
           updatedTableData[index].col3 = dobavnaCena.toString();
           updatedTableData[index].col4 = prodajnaCena.toString();
+          updatedTableData[index].col6 = kolicina.toString();
     
           // Calculate and update skupaj based on prodajna cena and kolicina
           if (!isNaN(updatedTableData[index].col2)) {
@@ -82,6 +84,7 @@ const DodajNarocilo = () => {
         updatedTableData[index].col3 = '';
         updatedTableData[index].col4 = '';
         updatedTableData[index].col5 = '';
+        updatedTableData[index].col6 = '';
       }
     
       setTableData(updatedTableData);
@@ -149,6 +152,25 @@ const DodajNarocilo = () => {
 
     // ===================================================================================== SHRANJEVANJE =========================================================================
     const handleSave = async () => {
+      const invalidRow = tableData.find(row => parseFloat(row.col2) > parseFloat(row.col6));
+
+      if (invalidRow) {
+        // Show an alert if there is an invalid row
+        alert('The quantity in some rows is greater than "na zalogi". Please correct it before saving.');
+        return; // Prevent saving
+      }
+      if (!selectedStranka || !selectedStranka.naziv) {
+        alert('Naziv Stranke must not be empty.');
+        return; // Prevent saving
+      }
+    
+      // Check if "Artikel" is empty in any row
+      const emptyArtikel = tableData.find(row => !row.selectedArtikel);
+    
+      if (emptyArtikel) {
+        alert('Artikel must not be empty in some rows. Please select an Artikel for each row.');
+        return; // Prevent saving
+      }
       // Gather and structure the data
       const dataToSave = {
         casPriprave: "0000-01-01T00:00:00",
@@ -181,10 +203,41 @@ const DodajNarocilo = () => {
         console.log(result.data);
       })
       .catch((error) => {
-        console.error('There was an error creating new order!', error);
+        console.error('There was an error creating new narocilo!', error);
       });
     };
-  
+
+    
+    const handleDownloadPDF = async () => {
+      try {
+        // Gather all the data needed for the PDF on the client side
+        const clientData = {
+          selectedStranka,
+          tableData,
+          bottomLeft1,
+          bottomLeft2,
+          bottomLeft3,
+        };
+
+        console.log(clientData)
+    
+        // Send a POST request to generate the PDF with client data
+        const response = await api.post('/generate-pdf', clientData, { responseType: 'arraybuffer' });
+    
+        // Create a Blob from the response data
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+    
+        // Create a download link and trigger the download
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'generated-pdf.pdf';
+        link.click();
+      } catch (error) {
+        console.error('Error downloading PDF:', error);
+      }
+    };
+    
+
   
     return (
       <MainCard>
@@ -218,8 +271,11 @@ const DodajNarocilo = () => {
             <Grid item xs={2}>
               <Typography>Artikel</Typography>
             </Grid>
-            <Grid item xs={2}>
+            <Grid item xs={1}>
               <Typography>Količina</Typography>
+            </Grid>
+            <Grid item xs={1}>
+              <Typography>Na zalogi</Typography>
             </Grid>
             <Grid item xs={2}>
               <Typography>Dobavna Cena</Typography>
@@ -244,12 +300,15 @@ const DodajNarocilo = () => {
                 renderInput={(params) => <TextField {...params} fullWidth />}
                 />
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={1}>
                 <TextField
                 value={row.col2}
                 onChange={(event) => handleKolicinaChange(event, index)}
                 fullWidth
                />
+              </Grid>
+              <Grid item xs={1}>
+                <TextField value={row.col6} fullWidth />
               </Grid>
               <Grid item xs={2}>
                 <TextField value={row.col3} fullWidth />
@@ -271,12 +330,12 @@ const DodajNarocilo = () => {
 
         {/* Bottom Left Corner Fields */}
         <Grid container spacing={2} style={{ marginTop: '20px' }}>
-          <Grid item xs={4}>
-            <TextField label="Bottom Left 1" value={bottomLeft1} fullWidth disabled />
+        <Grid item xs={4}>
+            <TextField label="Datum vnosa" value={bottomLeft1} fullWidth disabled />
           </Grid>
           <Grid item xs={4}>
             <TextField
-              label="Bottom Left 2"
+              label="Rok priprave"
               type="datetime-local"
               value={bottomLeft2}
               onChange={(e) => setBottomLeft2(e.target.value)}
@@ -284,21 +343,19 @@ const DodajNarocilo = () => {
             />
           </Grid>
           <Grid item xs={4}>
-            <TextField label="Bottom Left 3" value={bottomLeft3} fullWidth disabled />
+            <TextField label="Cena skupaj:" value={bottomLeft3} fullWidth disabled />
           </Grid>
         </Grid>
 
         {/* Bottom Right Corner Buttons */}
-        <Grid container spacing={2} style={{ marginTop: '20px' }}>
-          <Grid item xs={6}>
-            <Button variant="contained" color="primary" onClick={handleSave}>
-              Save
-            </Button>
-          </Grid>
-          <Grid item xs={6}>
-            <Button variant="contained" color="secondary">
-              Cancel
-            </Button>
+        <Grid container spacing={2}  style={{ marginTop: '20px', justifyContent: 'flex-end' }}>
+          <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <Button variant="contained" color="secondary" onClick={handleDownloadPDF}>
+                Download PDF
+              </Button>
+              <Button variant="contained" color="primary" onClick={handleSave} style={{ marginLeft: '10px' }}>
+                Save
+              </Button>
           </Grid>
         </Grid>
       </div>

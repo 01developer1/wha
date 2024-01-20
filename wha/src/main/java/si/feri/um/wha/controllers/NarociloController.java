@@ -30,7 +30,6 @@ public class NarociloController {
 
     @PostMapping
     public Narocilo dodajNarocilo(@RequestBody Narocilo narocilo){
-
         return narociloDao.save(narocilo);
     }
 

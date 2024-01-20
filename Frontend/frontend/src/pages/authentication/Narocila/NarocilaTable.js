@@ -103,12 +103,12 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
               <TableCell component="th" scope="row" style={{ color: 'grey' }}>
                 {narocilo.id_narocilo}
               </TableCell>
-              <TableCell align="right">{narocilo.datumVnosa}</TableCell>
-              <TableCell align="right">{narocilo.stranka.id_stranka}</TableCell>
-              <TableCell align="right">{narocilo.zaposlen.id_zaposleni}</TableCell>
-              <TableCell align="right">{narocilo.rokPriprave}</TableCell>
+              <TableCell align="right">{new Date(narocilo.datumVnosa).toLocaleString()}</TableCell>
+              <TableCell align="right">{narocilo.stranka.naziv}</TableCell>
+              <TableCell align="right">{narocilo.zaposlen.ime} {narocilo.zaposlen.priimek}</TableCell>
+              <TableCell align="right">{new Date(narocilo.rokPriprave).toLocaleString()}</TableCell>
               <TableCell align="right">{narocilo.stanjeNarocila}</TableCell>
-              <TableCell align="right">{narocilo.cenaSkupaj}</TableCell>
+              <TableCell align="right">{narocilo.cenaSkupaj +" €"}</TableCell>
               <TableCell align="right">
                   <IconButton aria-label="edit" size="large">
                     <EditIcon />
@@ -139,18 +139,18 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
                           <TableCell>Naziv</TableCell>
                           <TableCell>Dobavna Cena</TableCell>
                           <TableCell>Prodajna Cena</TableCell>
-                          <TableCell>Skupaj</TableCell>
+                          <TableCell>Kolicina</TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {orderProducts[narocilo.id_narocilo] &&
-                          orderProducts[narocilo.id_narocilo].map((product) => (
+                          orderProducts[narocilo.id_narocilo].map((product, index) => (
                             <TableRow key={product.id_artikel}>
                               <TableCell>{product.id_artikel}</TableCell>
                               <TableCell>{product.naziv}</TableCell>
-                              <TableCell>{product.dobavnaCena}</TableCell>
-                              <TableCell>{product.prodajnaCena}</TableCell>
-                              <TableCell>{product.skupaj}</TableCell>
+                              <TableCell>{product.dobavnaCena +" €"}</TableCell>
+                              <TableCell>{product.prodajnaCena +" €"}</TableCell>
+                              <TableCell>{narocilo.seznamKolicin[index]}</TableCell>
                             </TableRow>
                           ))}
                       </TableBody>

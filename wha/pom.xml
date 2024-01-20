@@ -41,6 +41,11 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>3.0.1</version> <!-- Use the latest version available -->
+		</dependency>
+		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>core</artifactId>
 			<version>3.5.2</version>
@@ -50,8 +55,6 @@
 			<artifactId>javase</artifactId>
 			<version>3.5.2</version>
 		</dependency>
-
-
 	</dependencies>
 
 	<build>
