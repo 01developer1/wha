@@ -4,9 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import si.feri.um.wha.dao.Delovni_CasRepository;
-import si.feri.um.wha.models.Delovni_Cas;
+import si.feri.um.wha.models.*;
 import si.feri.um.wha.models.Delovni_Cas;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -64,5 +65,14 @@ public class Delovni_CasController {
         delovni_casDao.save(existingDelovni_Cas);
 
         return ResponseEntity.ok("Delovni cas uspešno posodobljen.");
+    }
+
+    @GetMapping("/search")
+    public Iterable<Delovni_Cas> vrniDelovniCasFilter(
+            @RequestParam(name = "ura_zacetka", required = false) LocalDateTime ura_zacetka,
+            @RequestParam(name = "ura_zakljucka", required = false) LocalDateTime ura_zakljucka,
+            @RequestParam(name = "zaposlen", required = false) Zaposleni zaposlen
+    ) {
+        return delovni_casDao.poisceVseDelovneCasePoKriteriju(ura_zacetka, ura_zakljucka, zaposlen);
     }
 }

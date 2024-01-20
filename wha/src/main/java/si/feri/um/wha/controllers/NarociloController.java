@@ -82,4 +82,5 @@ public class NarociloController {
 
         return ResponseEntity.ok("Naročilo uspešno posodobljeno.");
     }
+
 }

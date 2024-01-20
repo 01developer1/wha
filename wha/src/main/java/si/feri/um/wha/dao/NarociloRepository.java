@@ -10,4 +10,6 @@ public interface NarociloRepository extends CrudRepository<Narocilo, Long>{
 
     @Query("select a from Narocilo a where a.ID_narocilo = :id")
     Narocilo vrniDolocenoNarocilo(@Param("id") Long id);
+
+
 }
