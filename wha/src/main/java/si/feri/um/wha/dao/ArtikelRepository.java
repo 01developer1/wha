@@ -38,5 +38,9 @@ public interface ArtikelRepository extends CrudRepository<Artikel, Long> {
 
     @Query("SELECT a FROM Artikel a")
     Iterable<Artikel> findArtikle();
+
+
+    @Query("SELECT a FROM Artikel a WHERE a.kolicina < 10")
+    Iterable<Artikel> findArtikleZNizkoZalogo();
 }
 

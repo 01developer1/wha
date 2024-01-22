@@ -1,4 +1,7 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
+import React, { useState, useEffect } from 'react';
+import api from "../../../../services/api";
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -63,6 +66,29 @@ const Notification = () => {
     setOpen(false);
   };
 
+  const [lowInventoryItems, setLowInventoryItems] = useState([]);
+
+  useEffect(() => {
+    const fetchLowInventoryArtikli = () => {
+      api.get("artikli/nizkaZaloga")
+         .then((result) => {
+           setLowInventoryItems(result.data);
+         })
+         .catch(error => {
+           console.error("Error fetching low inventory data:", error);
+         });
+    };
+
+    //fetchLowInventoryArtikli();
+
+    const interval = setInterval(() => {
+      fetchLowInventoryArtikli();
+    }, 1000);
+
+    // Clear interval on component unmount
+    return () => clearInterval(interval);
+  }, []); // P
+
   const iconBackColorOpen = 'grey.300';
   const iconBackColor = 'grey.100';
 
@@ -78,7 +104,7 @@ const Notification = () => {
         aria-haspopup="true"
         onClick={handleToggle}
       >
-        <Badge badgeContent={4} color="primary">
+        <Badge  badgeContent={lowInventoryItems.length} color="primary">
           <BellOutlined />
         </Badge>
       </IconButton>
@@ -115,7 +141,7 @@ const Notification = () => {
             >
               <ClickAwayListener onClickAway={handleClose}>
                 <MainCard
-                  title="Notification"
+                  title="Obvestila"
                   elevation={0}
                   border={false}
                   content={false}
@@ -125,147 +151,21 @@ const Notification = () => {
                     </IconButton>
                   }
                 >
-                  <List
-                    component="nav"
-                    sx={{
-                      p: 0,
-                      '& .MuiListItemButton-root': {
-                        py: 0.5,
-                        '& .MuiAvatar-root': avatarSX,
-                        '& .MuiListItemSecondaryAction-root': { ...actionSX, position: 'relative' }
-                      }
-                    }}
-                  >
-                    <ListItemButton>
-                      <ListItemAvatar>
-                        <Avatar
-                          sx={{
-                            color: 'success.main',
-                            bgcolor: 'success.lighter'
-                          }}
-                        >
-                          <GiftOutlined />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6">
-                            It&apos;s{' '}
-                            <Typography component="span" variant="subtitle1">
-                              Cristina danny&apos;s
-                            </Typography>{' '}
-                            birthday today.
-                          </Typography>
-                        }
-                        secondary="2 min ago"
-                      />
-                      <ListItemSecondaryAction>
-                        <Typography variant="caption" noWrap>
-                          3:00 AM
-                        </Typography>
-                      </ListItemSecondaryAction>
-                    </ListItemButton>
-                    <Divider />
-                    <ListItemButton>
-                      <ListItemAvatar>
-                        <Avatar
-                          sx={{
-                            color: 'primary.main',
-                            bgcolor: 'primary.lighter'
-                          }}
-                        >
-                          <MessageOutlined />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6">
-                            <Typography component="span" variant="subtitle1">
-                              Aida Burg
-                            </Typography>{' '}
-                            commented your post.
-                          </Typography>
-                        }
-                        secondary="5 August"
-                      />
-                      <ListItemSecondaryAction>
-                        <Typography variant="caption" noWrap>
-                          6:00 PM
-                        </Typography>
-                      </ListItemSecondaryAction>
-                    </ListItemButton>
-                    <Divider />
-                    <ListItemButton>
-                      <ListItemAvatar>
-                        <Avatar
-                          sx={{
-                            color: 'error.main',
-                            bgcolor: 'error.lighter'
-                          }}
-                        >
-                          <SettingOutlined />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6">
-                            Your Profile is Complete &nbsp;
-                            <Typography component="span" variant="subtitle1">
-                              60%
-                            </Typography>{' '}
-                          </Typography>
-                        }
-                        secondary="7 hours ago"
-                      />
-                      <ListItemSecondaryAction>
-                        <Typography variant="caption" noWrap>
-                          2:45 PM
-                        </Typography>
-                      </ListItemSecondaryAction>
-                    </ListItemButton>
-                    <Divider />
-                    <ListItemButton>
-                      <ListItemAvatar>
-                        <Avatar
-                          sx={{
-                            color: 'primary.main',
-                            bgcolor: 'primary.lighter'
-                          }}
-                        >
-                          C
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6">
-                            <Typography component="span" variant="subtitle1">
-                              Cristina Danny
-                            </Typography>{' '}
-                            invited to join{' '}
-                            <Typography component="span" variant="subtitle1">
-                              Meeting.
-                            </Typography>
-                          </Typography>
-                        }
-                        secondary="Daily scrum meeting time"
-                      />
-                      <ListItemSecondaryAction>
-                        <Typography variant="caption" noWrap>
-                          9:10 PM
-                        </Typography>
-                      </ListItemSecondaryAction>
-                    </ListItemButton>
-                    <Divider />
-                    <ListItemButton sx={{ textAlign: 'center', py: `${12}px !important` }}>
-                      <ListItemText
-                        primary={
-                          <Typography variant="h6" color="primary">
-                            View All
-                          </Typography>
-                        }
-                      />
-                    </ListItemButton>
-                  </List>
+                <List component="nav">
+                  {lowInventoryItems.map(item => (
+                     <ListItemButton key={item.id_artikel}>
+                        <ListItemText 
+                           primary={`Artikel ID: ${item.id_artikel}, Naziv: ${item.naziv}`} 
+                           secondary={
+                              <>
+                              <PriorityHighIcon sx={{ color: 'red', verticalAlign: 'middle', mr: 0.5 }} />
+                              {`Artiklov na zalogi: ${item.kolicina}`}
+                              </>
+                           } 
+                        />
+                     </ListItemButton>
+                  ))}
+                </List>
                 </MainCard>
               </ClickAwayListener>
             </Paper>
