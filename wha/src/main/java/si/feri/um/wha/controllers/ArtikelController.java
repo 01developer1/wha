@@ -53,6 +53,11 @@ public class ArtikelController {
         return ResponseEntity.ok("Uspesno izbrisan artikel.");
     }
 
+    @GetMapping("/nizkaZaloga")
+    public Iterable<Artikel> vrniArtikelNizkaZaloga() {
+        return artikelDao.findArtikleZNizkoZalogo();
+    }
+
     @GetMapping("/search")
     public Iterable<Artikel> vrniArtikleFilter(
             @RequestParam(name = "naziv", required = false) String naziv,
