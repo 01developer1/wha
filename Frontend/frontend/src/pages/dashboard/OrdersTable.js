@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import api from "../../services/api";
 
 // material-ui
 import { Box, Link, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
@@ -39,7 +40,7 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function getComparator(order, orderBy) {
-  return order === 'desc' ? (a, b) => descendingComparator(a, b, orderBy) : (a, b) => -descendingComparator(a, b, orderBy);
+  return order === 'asc' ? (a, b) => descendingComparator(a, b, orderBy) : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
 function stableSort(array, comparator) {
@@ -61,19 +62,19 @@ const headCells = [
     id: 'trackingNo',
     align: 'left',
     disablePadding: false,
-    label: 'Tracking No.'
+    label: 'ID'
   },
   {
     id: 'name',
     align: 'left',
     disablePadding: true,
-    label: 'Product Name'
+    label: 'Stranka'
   },
   {
     id: 'fat',
     align: 'right',
     disablePadding: false,
-    label: 'Total Order'
+    label: 'Št. Artiklov'
   },
   {
     id: 'carbs',
@@ -86,7 +87,7 @@ const headCells = [
     id: 'protein',
     align: 'right',
     disablePadding: false,
-    label: 'Total Amount'
+    label: 'Skupaj Cena'
   }
 ];
 
@@ -123,17 +124,17 @@ const OrderStatus = ({ status }) => {
   let title;
 
   switch (status) {
-    case 0:
+    case "DOING":
       color = 'warning';
-      title = 'Pending';
+      title = 'DOING';
       break;
-    case 1:
+    case "DONE":
       color = 'success';
-      title = 'Approved';
+      title = 'DONE';
       break;
-    case 2:
+    case "TODO":
       color = 'error';
-      title = 'Rejected';
+      title = 'TODO';
       break;
     default:
       color = 'primary';
@@ -154,12 +155,31 @@ OrderStatus.propTypes = {
 
 // ==============================|| ORDER TABLE ||============================== //
 
-export default function OrderTable({artikli}) {
-  const [order] = useState('asc');
+export default function OrderTable() {
+   const [narocila, setNarocila] = useState([]); 
+  const [narocilo] = useState('asc');
   const [orderBy] = useState('trackingNo');
   const [selected] = useState([]);
 
   const isSelected = (trackingNo) => selected.indexOf(trackingNo) !== -1;
+
+  useEffect(() => {
+   fetchNarocila(); // Fetch orders when the component mounts
+ }, []);
+
+ const fetchNarocila = () => {
+   api.get("/narocila").then((result) => {
+     const transformedData = result.data.map(item => ({
+       trackingNo: item.id_narocilo,
+       name: item.stranka.naziv, // Example: Using stranka's name as the product name
+       fat: item.seznamKolicin.reduce((a, b) => a + b, 0), // Example: Sum of quantities
+       carbs: item.stanjeNarocila, // Status of the order
+       protein: item.cenaSkupaj // Total amount
+     }));
+     setNarocila(transformedData);
+   });
+ };
+
 
   return (
     <Box>
@@ -184,11 +204,11 @@ export default function OrderTable({artikli}) {
             }
           }}
         >
-          <OrderTableHead order={order} orderBy={orderBy} />
+          <OrderTableHead order={narocilo} orderBy={orderBy} />
           <TableBody>
-            {stableSort(rows, getComparator(order, orderBy)).map((rows, index) => {
-              const isItemSelected = isSelected(rows.trackingNo);
-              const labelId = `enhanced-table-checkbox-${index}`;
+            {stableSort(narocila, getComparator(narocilo, orderBy)).map((narocilo, index) => {
+            const isItemSelected = isSelected(narocilo.trackingNo);
+            const labelId = `enhanced-table-checkbox-${index}`;
 
               return (
                 <TableRow
@@ -197,21 +217,21 @@ export default function OrderTable({artikli}) {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   aria-checked={isItemSelected}
                   tabIndex={-1}
-                  key={rows.naziv}
+                  key={narocilo.naziv}
                   selected={isItemSelected}
                 >
                   <TableCell component="th" id={labelId} scope="row" align="left">
                     <Link color="secondary" component={RouterLink} to="">
-                      {rows.trackingNo}
+                      {narocilo.trackingNo}
                     </Link>
                   </TableCell>
-                  <TableCell align="left">{rows.priimek}</TableCell>
-                  <TableCell align="right">{rows.fat}</TableCell>
+                  <TableCell align="left">{narocilo.name}</TableCell>
+                  <TableCell align="right">{narocilo.fat}</TableCell>
                   <TableCell align="left">
-                    <OrderStatus status={rows.carbs} />
+                    <OrderStatus status={narocilo.carbs} />
                   </TableCell>
                   <TableCell align="right">
-                    <NumberFormat value={rows.protein} displayType="text" thousandSeparator prefix="$" />
+                    <NumberFormat value={narocilo.protein} displayType="text" thousandSeparator   suffix=" €" />
                   </TableCell>
                 </TableRow>
               );
