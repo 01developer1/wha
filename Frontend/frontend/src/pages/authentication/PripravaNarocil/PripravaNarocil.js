@@ -1,38 +1,50 @@
-import { Link } from 'react-router-dom';
-import api from "../../../services/api";
 import React, { useEffect, useState } from "react";
-import PrikazNarocil from "./PrikazNarocil";
-import Alert from '@mui/material/Alert';
-import AddIcon from '@mui/icons-material/Add';
+import api from "../../../services/api";
 import MainCard from '../../../components/MainCard';
-import { Button } from "@mui/material";
+import PrikazNarocil from './PrikazNarocil';
+import PripravaPrikaz from './PripravaPrikaz';
 
 // ================================|| PripravaNarocil ||================================ //
 
 const PripravaNarocil = () => {
    const [narocila, setNarocila] = useState([]);
-   const [showTable, setShowTable] = useState(true);
-   
+   const [showPrikazNarocil, setShowPrikazNarocil] = useState(true);
+   const [selectedNarociloId, setSelectedNarociloId] = useState(null);
 
-  const fetchNarocila = () => {
-     api.get("/narocila/TODO").then((result) => {
+   const fetchNarocila = () => {
+      api.get("/narocila/TODO").then((result) => {
          setNarocila(result.data);
-     });
-  };
+      });
+   };
 
-  useEffect(() => {
-    fetchNarocila();
-  }, []);
+   const handleShowPrikazNarocil = (id) => {
+      setShowPrikazNarocil(false);
+      setSelectedNarociloId(id);
+    };
 
-return (
-   <MainCard>
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
-      </div>
-    
-    {showTable && <PrikazNarocil narocila={narocila} fetchNarocila={fetchNarocila} />}
-   </MainCard>
- );
- 
+   useEffect(() => {
+      fetchNarocila();
+   }, []);
+
+   return (
+      <MainCard>
+         <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
+            {/* If you have any buttons or elements to be placed here, add them */}
+         </div>
+         {showPrikazNarocil ? (
+            <PrikazNarocil 
+               narocila={narocila}
+               fetchNarocila={fetchNarocila}
+               handleShowPrikazNarocil={handleShowPrikazNarocil} // Add this prop
+            />
+         ) : (
+            <PripravaPrikaz 
+               narocilo_id={selectedNarociloId}
+               setShowPrikazNarocil={setShowPrikazNarocil} // Add this prop
+            />
+         )}
+      </MainCard>
+   );
 };
 
 export default PripravaNarocil;

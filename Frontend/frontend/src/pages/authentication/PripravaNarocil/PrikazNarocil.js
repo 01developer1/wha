@@ -1,69 +1,73 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import IconButton from '@mui/material/IconButton';
+import React, { useState } from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import IconButton from "@mui/material/IconButton";
 import { Button } from "@mui/material";
-import AddIcon from '@mui/icons-material/Add';
+import AddIcon from "@mui/icons-material/Add";
 import api from "../../../services/api";
-import { useState, useEffect } from 'react';
 
 // ================================|| PrikazNarocil ||================================ //
- 
-export default function PrikazNarocil({ narocila, fetchNarocila }) {
+
+export default function PrikazNarocil({
+  narocila,
+  fetchNarocila,
+  handleShowPrikazNarocil,
+}) {
   const [showHello, setShowHello] = useState({});
   const [orderProducts, setOrderProducts] = useState({});
 
-   // Function to handle the delete button click
-   const handlePripraviClick = (narocilo_id) => {
-      // Call the delete function only when the button is clicked
-      return () => console.log("Pripravi")
-    };
+  const handlePripraviClick = (narocilo_id) => {
+    handleShowPrikazNarocil(narocilo_id); // Call the prop to switch components
+  };
 
-  
-    const handlePlusClick = (narocilo_id) => {
-      if (showHello[narocilo_id]) {
-        // If the table is already visible, hide it
-        setShowHello((prevShowHello) => ({
-          ...prevShowHello,
-          [narocilo_id]: false,
-        }));
-      } else {
-        // Otherwise, fetch and show the table
-        api.get(`/narocila/${narocilo_id}`)
-          .then((result) => {
-            const numbers = result.data.artikli;
-            const fetchPromises = numbers.map((number) => api.get(`/artikli/${number}`));
-  
-            Promise.all(fetchPromises)
-              .then((productsData) => {
-                const fetchedProducts = productsData.map((productData) => productData.data);
-  
-                setOrderProducts((prevOrderProducts) => ({
-                  ...prevOrderProducts,
-                  [narocilo_id]: fetchedProducts,
-                }));
-  
-                setShowHello((prevShowHello) => ({
-                  ...prevShowHello,
-                  [narocilo_id]: true,
-                }));
-              })
-              .catch((error) => {
-                console.error('Error fetching products for the order!', error);
-              });
-          })
-          .catch((error) => {
-            console.error('Error fetching order details!', error);
-          });
-      }
-    };
-    
- 
+  const handlePlusClick = (narocilo_id) => {
+    if (showHello[narocilo_id]) {
+      // If the table is already visible, hide it
+      setShowHello((prevShowHello) => ({
+        ...prevShowHello,
+        [narocilo_id]: false,
+      }));
+    } else {
+      // Otherwise, fetch and show the table
+      api
+        .get(`/narocila/${narocilo_id}`)
+        .then((result) => {
+          const numbers = result.data.artikli;
+          const fetchPromises = numbers.map((number) =>
+            api.get(`/artikli/${number}`)
+          );
+
+          Promise.all(fetchPromises)
+            .then((productsData) => {
+              const fetchedProducts = productsData.map(
+                (productData) => productData.data
+              );
+
+              setOrderProducts((prevOrderProducts) => ({
+                ...prevOrderProducts,
+                [narocilo_id]: fetchedProducts,
+              }));
+
+              setShowHello((prevShowHello) => ({
+                ...prevShowHello,
+                [narocilo_id]: true,
+              }));
+            })
+            .catch((error) => {
+              console.error("Error fetching products for the order!", error);
+            });
+        })
+        .catch((error) => {
+          console.error("Error fetching order details!", error);
+        });
+    }
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -82,20 +86,28 @@ export default function PrikazNarocil({ narocila, fetchNarocila }) {
         <TableBody>
           {narocila.map((narocilo) => (
             <React.Fragment key={narocilo.id_artikel}>
-            <TableRow
-              key={narocilo.id_artikel}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row" style={{ color: 'grey' }}>
-                {narocilo.id_narocilo}
-              </TableCell>
-              <TableCell align="right">{new Date(narocilo.datumVnosa).toLocaleString()}</TableCell>
-              <TableCell align="right">{narocilo.stranka.naziv}</TableCell>
-              <TableCell align="right">{narocilo.zaposlen.ime} {narocilo.zaposlen.priimek}</TableCell>
-              <TableCell align="right">{new Date(narocilo.rokPriprave).toLocaleString()}</TableCell>
-              <TableCell align="right">{narocilo.stanjeNarocila}</TableCell>
-              <TableCell align="right">{narocilo.cenaSkupaj +" €"}</TableCell>
-              <TableCell align="right">
+              <TableRow
+                key={narocilo.id_artikel}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell component="th" scope="row" style={{ color: "grey" }}>
+                  {narocilo.id_narocilo}
+                </TableCell>
+                <TableCell align="right">
+                  {new Date(narocilo.datumVnosa).toLocaleString()}
+                </TableCell>
+                <TableCell align="right">{narocilo.stranka.naziv}</TableCell>
+                <TableCell align="right">
+                  {narocilo.zaposlen.ime} {narocilo.zaposlen.priimek}
+                </TableCell>
+                <TableCell align="right">
+                  {new Date(narocilo.rokPriprave).toLocaleString()}
+                </TableCell>
+                <TableCell align="right">{narocilo.stanjeNarocila}</TableCell>
+                <TableCell align="right">
+                  {narocilo.cenaSkupaj + " €"}
+                </TableCell>
+                <TableCell align="right">
                   <IconButton
                     aria-label="add"
                     size="large"
@@ -103,12 +115,17 @@ export default function PrikazNarocil({ narocila, fetchNarocila }) {
                   >
                     <AddIcon />
                   </IconButton>
-                  <Button variant="contained" onClick={handlePripraviClick}>
-                     PRIPRAVI
+                  <Button
+                    variant="contained"
+                    onClick={() =>
+                      handleShowPrikazNarocil(narocilo.id_narocilo)
+                    }
+                  >
+                    PRIPRAVI
                   </Button>
                 </TableCell>
-                </TableRow>
-                {showHello[narocilo.id_narocilo] && (
+              </TableRow>
+              {showHello[narocilo.id_narocilo] && (
                 <TableRow>
                   <TableCell colSpan={5}>
                     <Table size="small" aria-label="product details">
@@ -124,16 +141,29 @@ export default function PrikazNarocil({ narocila, fetchNarocila }) {
                       </TableHead>
                       <TableBody>
                         {orderProducts[narocilo.id_narocilo] &&
-                          orderProducts[narocilo.id_narocilo].map((product, index) => (
-                            <TableRow key={product.id_artikel}>
-                              <TableCell>{product.id_artikel}</TableCell>
-                              <TableCell>{product.naziv}</TableCell>
-                              <TableCell>{product.dobavnaCena +" €"}</TableCell>
-                              <TableCell>{product.prodajnaCena +" €"}</TableCell>
-                              <TableCell>{narocilo.seznamKolicin[index]}</TableCell>
-                              <TableCell>{(product.prodajnaCena * narocilo.seznamKolicin[index]).toFixed(2)+" €"}</TableCell>
-                            </TableRow>
-                          ))}
+                          orderProducts[narocilo.id_narocilo].map(
+                            (product, index) => (
+                              <TableRow key={product.id_artikel}>
+                                <TableCell>{product.id_artikel}</TableCell>
+                                <TableCell>{product.naziv}</TableCell>
+                                <TableCell>
+                                  {product.dobavnaCena + " €"}
+                                </TableCell>
+                                <TableCell>
+                                  {product.prodajnaCena + " €"}
+                                </TableCell>
+                                <TableCell>
+                                  {narocilo.seznamKolicin[index]}
+                                </TableCell>
+                                <TableCell>
+                                  {(
+                                    product.prodajnaCena *
+                                    narocilo.seznamKolicin[index]
+                                  ).toFixed(2) + " €"}
+                                </TableCell>
+                              </TableRow>
+                            )
+                          )}
                       </TableBody>
                     </Table>
                   </TableCell>
