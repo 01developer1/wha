@@ -1,21 +1,11 @@
-import { Link } from 'react-router-dom';
+
 import api from "../../../services/api";
 import React, { useEffect, useState } from "react";
 import NarocilaTable from "./NarocilaTable";
 import Alert from '@mui/material/Alert';
 import AddIcon from '@mui/icons-material/Add';
-import CloseIcon from '@mui/icons-material/Close';
-//import CreateUser from './UserForm';
-
-
-// material-ui
-import { Grid, Stack, Typography } from '@mui/material';
-
-// project import
-//import FirebaseRegister from '../auth-forms/AuthRegister';
-import AuthWrapper from '../AuthWrapper';
 import MainCard from '../../../components/MainCard';
-import { Button, TextField, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { Button } from "@mui/material";
 import DodajNarocilo from './dodajNarocilo';
 
 // ================================|| NAROCILA ||================================ //

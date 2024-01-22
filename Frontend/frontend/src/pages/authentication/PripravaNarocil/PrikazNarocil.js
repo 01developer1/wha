@@ -7,36 +7,23 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+import { Button } from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import api from "../../../services/api";
 import { useState, useEffect } from 'react';
 
+// ================================|| PrikazNarocil ||================================ //
  
- 
-export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert }) {
+export default function PrikazNarocil({ narocila, fetchNarocila }) {
   const [showHello, setShowHello] = useState({});
   const [orderProducts, setOrderProducts] = useState({});
 
-   const izbrisiNarocilo = (narocilo_id) => {
-      api.delete(`/narocila/izbrisi/${narocilo_id}`)
-        .then((result) => {
-          // Refresh the article list after deletion
-          fetchNarocila();
- 
-          showDeleteAlert();
-        })
-        .catch((error) => {
-          console.error('There was an error deleting the artikel!', error);
-        });
-    };
-  
-    // Function to handle the delete button click
-    const handleDeleteClick = (narocilo_id) => {
+   // Function to handle the delete button click
+   const handlePripraviClick = (narocilo_id) => {
       // Call the delete function only when the button is clicked
-      return () => izbrisiNarocilo(narocilo_id);
+      return () => console.log("Pripravi")
     };
+
   
     const handlePlusClick = (narocilo_id) => {
       if (showHello[narocilo_id]) {
@@ -109,16 +96,6 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
               <TableCell align="right">{narocilo.stanjeNarocila}</TableCell>
               <TableCell align="right">{narocilo.cenaSkupaj +" €"}</TableCell>
               <TableCell align="right">
-                  <IconButton aria-label="edit" size="large">
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    aria-label="delete"
-                    size="large"
-                    onClick={handleDeleteClick(narocilo.id_narocilo)}
-                  >
-                    <DeleteIcon />
-                  </IconButton>
                   <IconButton
                     aria-label="add"
                     size="large"
@@ -126,6 +103,9 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
                   >
                     <AddIcon />
                   </IconButton>
+                  <Button variant="contained" onClick={handlePripraviClick}>
+                     PRIPRAVI
+                  </Button>
                 </TableCell>
                 </TableRow>
                 {showHello[narocilo.id_narocilo] && (

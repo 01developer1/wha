@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import si.feri.um.wha.models.Zaposleni;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -21,6 +22,11 @@ public class NarociloController {
     @GetMapping
     public Iterable<Narocilo> vrniNarocilo(){
         return narociloDao.findAll();
+    }
+
+    @GetMapping("/TODO")
+    public List<Narocilo> getTodoNarocila() {
+        return narociloDao.findAllTodoNarocila();
     }
 
     @GetMapping("/{ID_narocilo}")

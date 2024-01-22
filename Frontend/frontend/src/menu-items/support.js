@@ -1,18 +1,19 @@
 // assets
-import { ChromeOutlined, QuestionOutlined, CameraOutlined } from '@ant-design/icons';
+import { ChromeOutlined, QuestionOutlined, CameraOutlined, FormOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
   ChromeOutlined,
   QuestionOutlined,
-  CameraOutlined
+  CameraOutlined,
+  FormOutlined
 };
 
 // ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
 
 const support = {
   id: 'support',
-  title: 'Scanner',
+  title: 'Priprava Naročil',
   type: 'group',
   children: [
    {
@@ -21,6 +22,14 @@ const support = {
       type: 'item',
       url: '/artikli/scanner',
       icon: icons.CameraOutlined,
+      target: false
+    },
+    {
+      id: 'priprava',
+      title: 'Priprava',
+      type: 'item',
+      url: '/priprava',
+      icon: icons.FormOutlined,
       target: false
     }
    ]
