@@ -16,7 +16,7 @@ import { useState, useEffect } from 'react';
 
  
  
-export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert }) {
+export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert, handleEditClick }) {
   const [showHello, setShowHello] = useState({});
   const [orderProducts, setOrderProducts] = useState({});
 
@@ -76,6 +76,8 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
           });
       }
     };
+
+  
     
  
   return (
@@ -110,7 +112,7 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
               <TableCell align="right">{narocilo.stanjeNarocila}</TableCell>
               <TableCell align="right">{narocilo.cenaSkupaj +" €"}</TableCell>
               <TableCell align="right">
-                  <IconButton aria-label="edit" size="large">
+                  <IconButton aria-label="edit" size="large" onClick={() => handleEditClick(narocilo.id_narocilo)} >
                     <EditIcon />
                   </IconButton>
                   <IconButton
