@@ -5,6 +5,8 @@ import MainCard from 'components/MainCard';
 import Autocomplete from '@mui/material/Autocomplete';
 import api from '../../../services/api';
 import { format, addDays } from 'date-fns';
+import DeleteIcon from '@mui/icons-material/Delete';
+
  
  
 const DodajNarocilo = ({ setShowTable, setShowNarocilo, fetchNarocila }) => {
@@ -217,40 +219,15 @@ const DodajNarocilo = ({ setShowTable, setShowNarocilo, fetchNarocila }) => {
         console.log(result)
       }
     };
+
+    const deleteRow = (index) => {
+      const updatedTableData = [...tableData];
+      updatedTableData.splice(index, 1);
+      setTableData(updatedTableData);
+    };
  
    
-    /*const handleDownloadPDF = async () => {
-      try {
-        // Gather all the data needed for the PDF on the client side
-        const dataToSend = {
-          selectedStranka,
-          tableData: tableData.map(item => ({
-            col2: item.col2,
-            selectedArtikel: item.selectedArtikel,
-          })),
-          bottomLeft1,
-          bottomLeft2,
-          bottomLeft3,
-        };
-    
-        console.log(dataToSend);
-    
-        // Send a POST request to generate the PDF with client data
-        const response = await api.post('/generate-pdf', dataToSend, { responseType: 'arraybuffer' });
-    
-        // Create a Blob from the response data
-        const blob = new Blob([response.data], { type: 'application/pdf' });
-    
-        // Create a download link and trigger the download
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(blob);
-        link.download = 'generated-pdf.pdf';
-        link.click();
-      } catch (error) {
-        console.error('Error downloading PDF:', error);
-      }
-    };
-   */
+  
  
  
     return (
@@ -333,7 +310,16 @@ const DodajNarocilo = ({ setShowTable, setShowNarocilo, fetchNarocila }) => {
               <Grid item xs={2}>
                 <TextField value={row.col5} fullWidth />
               </Grid>
-            </Grid>
+              <Grid item xs={2}>
+            {/* Add a delete button for each row */}
+            {index > 0 && (
+              <IconButton onClick={() => deleteRow(index)} color="secondary">
+                <DeleteIcon />
+              </IconButton>
+            )}
+          </Grid>
+        </Grid>
+            
           ))}
  
           {/* Plus Sign to Add Another Row */}
