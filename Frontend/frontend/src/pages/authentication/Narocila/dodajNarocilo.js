@@ -217,7 +217,7 @@ const DodajNarocilo = ({ setShowTable, setShowNarocilo, fetchNarocila }) => {
     };
  
    
-    const handleDownloadPDF = async () => {
+    /*const handleDownloadPDF = async () => {
       try {
         // Gather all the data needed for the PDF on the client side
         const dataToSend = {
@@ -248,7 +248,7 @@ const DodajNarocilo = ({ setShowTable, setShowNarocilo, fetchNarocila }) => {
         console.error('Error downloading PDF:', error);
       }
     };
-   
+   */
  
  
     return (
@@ -362,9 +362,6 @@ const DodajNarocilo = ({ setShowTable, setShowNarocilo, fetchNarocila }) => {
         {/* Bottom Right Corner Buttons */}
         <Grid container spacing={2}  style={{ marginTop: '20px', justifyContent: 'flex-end' }}>
           <Grid item xs={12} style={{ display: 'flex', justifyContent: 'flex-end' }}>
-              <Button variant="contained" color="secondary" onClick={handleDownloadPDF}>
-                Download PDF
-              </Button>
               <Button variant="contained" color="primary" onClick={handleSave} style={{ marginLeft: '10px' }}>
                 Save
               </Button>
