@@ -68,6 +68,23 @@ export default function PrikazNarocil({
     }
   };
 
+  const handleStanjeUpdate = (narocilo_id) => {
+   // Make an API call to update the stanjeNarocila to "DOING"
+   api
+     .put(`/narocila/posodobi/${narocilo_id}`, { stanjeNarocila: "DOING" })
+     .then((response) => {
+       // Update the state of stanjeNarocila in your component
+       // Assuming that the response contains the updated order details
+       const updatedOrder = response.data;
+       // Update the state with the updated order
+       // For example, you can update the 'narocila' state with the updated order
+       // This will trigger a re-render and show the updated "DOING" state
+     })
+     .catch((error) => {
+       console.error("Error updating stanjeNarocila!", error);
+     });
+ };
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -116,12 +133,13 @@ export default function PrikazNarocil({
                     <AddIcon />
                   </IconButton>
                   <Button
-                    variant="contained"
-                    onClick={() =>
-                      handleShowPrikazNarocil(narocilo.id_narocilo)
-                    }
+                     variant="contained"
+                     onClick={() => {
+                        handleShowPrikazNarocil(narocilo.id_narocilo);
+                        handleStanjeUpdate(narocilo.id_narocilo);
+                     }}
                   >
-                    PRIPRAVI
+                  PRIPRAVI
                   </Button>
                 </TableCell>
               </TableRow>
