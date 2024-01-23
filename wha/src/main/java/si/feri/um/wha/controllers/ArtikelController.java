@@ -6,12 +6,9 @@ import com.google.zxing.WriterException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import si.feri.um.wha.dao.ArtikelRepository;
-import si.feri.um.wha.models.Artikel;
+import si.feri.um.wha.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import si.feri.um.wha.models.QRCodeGenerator;
-import si.feri.um.wha.models.QRCodeScannerService;
-import si.feri.um.wha.models.Tip_artikla;
 import org.springframework.ui.Model;
 
 import java.io.IOException;
@@ -158,5 +155,14 @@ public class ArtikelController {
         }
     }
 
+    @PutMapping("/posodobiZalogo/{ID_artikel}")
+    public ResponseEntity<String> posodobiZalogo(@PathVariable(name = "ID_artikel") Long ID_artikel, @RequestBody Artikel artikel2) {
+        Artikel artikel = artikelDao.vrniDolocenArtikel(ID_artikel);
+        int novaKolicina = artikel.getKolicina()-artikel2.getKolicina();
+        artikel.setKolicina(novaKolicina);
 
+        artikelDao.save(artikel);
+
+        return ResponseEntity.ok("Zaloga uspešno posodobljena.");
+    }
 }

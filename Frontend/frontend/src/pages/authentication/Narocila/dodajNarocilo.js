@@ -211,8 +211,10 @@ const DodajNarocilo = ({ setShowTable, setShowNarocilo, fetchNarocila }) => {
     const spremeniZalogo = async (artikli, kolicine) => {
       for (let i = 0; i < artikli.length; i++) {
         let data = { kolicina: kolicine[i] };
+        console.log(data)
         let id_artikel = artikli[i].id_artikel;
-        const result = await api.put(`/artikli/posodobi/${id_artikel}`, data);
+        const result = await api.put(`/artikli/posodobiZalogo/${id_artikel}`, data);
+        console.log(result)
       }
     };
  
