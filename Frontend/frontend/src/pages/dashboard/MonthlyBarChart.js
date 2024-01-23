@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import api from "../../services/api";
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -25,7 +26,7 @@ const barChartOptions = {
     enabled: false
   },
   xaxis: {
-    categories: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+    categories: ['Pon', 'Tor', 'Sre', 'Cet', 'Pet'],
     axisBorder: {
       show: false
     },
@@ -34,10 +35,10 @@ const barChartOptions = {
     }
   },
   yaxis: {
-    show: false
+    show: true
   },
   grid: {
-    show: false
+    show: true
   }
 };
 
@@ -45,35 +46,48 @@ const barChartOptions = {
 
 const MonthlyBarChart = () => {
   const theme = useTheme();
-
-  const { primary, secondary } = theme.palette.text;
+  const { secondary } = theme.palette.text;
   const info = theme.palette.info.light;
 
-  const [series] = useState([
-    {
-      data: [80, 95, 70, 42, 65, 55, 78]
-    }
-  ]);
-
+  // Initialize series state here
+  const [series, setSeries] = useState([{ data: [] }]);
   const [options, setOptions] = useState(barChartOptions);
 
   useEffect(() => {
-    setOptions((prevState) => ({
-      ...prevState,
-      colors: [info],
-      xaxis: {
-        labels: {
-          style: {
-            colors: [secondary, secondary, secondary, secondary, secondary, secondary, secondary]
-          }
-        }
-      },
-      tooltip: {
-        theme: 'light'
-      }
-    }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [primary, info, secondary]);
+   const fetchOrderTotals = () => {
+     try {
+       // Correct API endpoint should be used here
+       api.get("/narocila/tedensko").then((result) => {
+         const data = result.data;
+         const chartData = Object.values(data);
+         setSeries([{ data: chartData }]);
+       });
+       // Ensure that the data structure matches your expected format
+     } catch (error) {
+       console.error('Error fetching order totals:', error);
+     }
+   };
+
+   fetchOrderTotals();
+ }, []);
+
+ useEffect(() => {
+   setOptions((prevState) => ({
+     ...prevState,
+     colors: [info],
+     xaxis: {
+       labels: {
+         style: {
+           colors: new Array(7).fill(secondary)
+         }
+       }
+     },
+     tooltip: {
+       theme: 'light'
+     }
+   }));
+ }, [theme, info, secondary]);
+// Removed primary since it's not being used
 
   return (
     <div id="chart">

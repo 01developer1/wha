@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import api from "../../services/api"
 
 // material-ui
@@ -81,6 +81,16 @@ const DashboardDefault = () => {
            setValue(result.data);
        });
    };
+
+   const [totalIncome, setTotalIncome] = useState(0);
+
+   useEffect(() => {
+     api.get("/narocila/tedensko/skupaj")
+       .then(response => {
+         setTotalIncome(response.data);
+       })
+       .catch(error => console.error('Error fetching total income:', error));
+   }, []);
  
    //useEffect(fetchArtikli, []);
 
@@ -141,7 +151,7 @@ const DashboardDefault = () => {
       <Grid item xs={12} md={5} lg={4}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
-            <Typography variant="h5">Income Overview</Typography>
+            <Typography variant="h5">Tedenski zaslužek</Typography>
           </Grid>
           <Grid item />
         </Grid>
@@ -149,9 +159,12 @@ const DashboardDefault = () => {
           <Box sx={{ p: 3, pb: 0 }}>
             <Stack spacing={2}>
               <Typography variant="h6" color="textSecondary">
-                This Week Statistics
+                Skupaj
               </Typography>
-              <Typography variant="h3">$7,650</Typography>
+              <Typography variant="h3">
+                  {new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(totalIncome)}
+               </Typography>
+
             </Stack>
           </Box>
           <MonthlyBarChart />

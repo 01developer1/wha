@@ -56,7 +56,7 @@ export default function UserTable({ users, fetchUser, showDeleteAlert }) {
    useEffect(() => {
       const intervalId = setInterval(() => {
          fetchUserStatus();
-      }, 1000);
+      }, 5000);
    
       return () => clearInterval(intervalId);
    }, []); // Prazna odvisnost, da se izvede samo ob montiranju in razmontiranju

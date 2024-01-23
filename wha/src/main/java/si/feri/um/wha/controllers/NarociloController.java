@@ -8,8 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import si.feri.um.wha.models.Zaposleni;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.Locale;
+
 
 @RestController
 @CrossOrigin
@@ -28,6 +34,51 @@ public class NarociloController {
     public Narocilo vrniDolocenoNarocilo(@PathVariable(name = "ID_narocilo") Long ID_narocilo){
         return narociloDao.vrniDolocenoNarocilo(ID_narocilo);
     }
+
+
+    @GetMapping("/tedensko/skupaj")
+    public ResponseEntity<Double> getTedenSkupaj() {
+        LocalDate today = LocalDate.now();
+        LocalDateTime startOfWeek = today.with(DayOfWeek.MONDAY).atStartOfDay();
+        LocalDateTime endOfToday = today.atTime(23, 59, 59);
+
+        List<Narocilo> weeklyOrders = narociloDao.findNarocilaBetweenDates(startOfWeek, endOfToday);
+
+        double total = weeklyOrders.stream()
+                .mapToDouble(Narocilo::getCenaSkupaj) // Predpostavljam, da Narocilo ima metodo getCenaSkupaj
+                .sum();
+
+        return ResponseEntity.ok(total);
+    }
+
+
+    @GetMapping("/tedensko")
+    public ResponseEntity<Map<String, Double>> getWeeklyIncome() {
+        LocalDate today = LocalDate.now();
+        LocalDateTime startOfWeek = today.with(DayOfWeek.MONDAY).atStartOfDay();
+        LocalDateTime endOfToday = today.atTime(23, 59, 59);
+
+        List<Narocilo> weeklyOrders = narociloDao.findNarocilaBetweenDates(startOfWeek, endOfToday);
+
+        Map<String, Double> weeklyIncome = new LinkedHashMap<>(); // Uporabite LinkedHashMap za ohranjanje vrstnega reda
+        for (LocalDate date = startOfWeek.toLocalDate(); !date.isAfter(today); date = date.plusDays(1)) {
+            final LocalDate finalDate = date; // Končna spremenljivka za uporabo v lambda izrazu
+            final DayOfWeek day = finalDate.getDayOfWeek();
+            double dailyTotal = weeklyOrders.stream()
+                    .filter(narocilo -> narocilo.getDatumVnosa().toLocalDate().equals(finalDate))
+                    .mapToDouble(Narocilo::getCenaSkupaj)
+                    .sum();
+            weeklyIncome.put(day.getDisplayName(TextStyle.SHORT, Locale.getDefault()), dailyTotal);
+        }
+
+        System.out.println(weeklyIncome);
+        return ResponseEntity.ok(weeklyIncome);
+    }
+
+
+
+
+
 
     @PostMapping
     public Narocilo dodajNarocilo(@RequestBody Narocilo narocilo){
