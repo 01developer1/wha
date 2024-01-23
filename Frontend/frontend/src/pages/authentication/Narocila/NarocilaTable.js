@@ -13,6 +13,7 @@ import AddIcon from '@mui/icons-material/Add';
 import api from "../../../services/api";
 import { Edit } from '../../../../node_modules/@mui/icons-material/index';
 import { useState, useEffect } from 'react';
+import DownloadIcon from '@mui/icons-material/Download';
 
  
  
@@ -77,6 +78,40 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
       }
     };
 
+    const handleDownloadPDF = (narocilo) => {
+      const numbers = narocilo.artikli;
+      const fetchPromises = numbers.map((number) => api.get(`/artikli/${number}`));
+  
+            Promise.all(fetchPromises)
+              .then(async (productsData) => {
+                const fetchedProducts = productsData.map((productData) => productData.data);
+                const imenaArtiklov = fetchedProducts.map((product) => product.naziv);
+                const prodajnaCene = fetchedProducts.map((product) => product.prodajnaCena);
+
+                const dataToSend = {
+                  stranka: narocilo.stranka,
+                  narociloID: narocilo.id_narocilo,
+                  datum: narocilo.datumVnosa,
+                  zaposleni: narocilo.zaposlen.ime + " " + narocilo.zaposlen.priimek,
+                  imenaArtiklov: imenaArtiklov,
+                  seznamProdajnihCen: prodajnaCene,
+                  seznamKolicin: narocilo.seznamKolicin
+                }
+                console.log(dataToSend)
+
+                const response = await api.post('/generate-pdf', dataToSend, { responseType: 'arraybuffer' });
+                const blob = new Blob([response.data], { type: 'application/pdf' });
+    
+                // Create a download link and trigger the download
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'generated-pdf.pdf';
+                link.click();
+              })
+              .catch((error) => {
+                console.error('Error fetching products for the order!', error);
+              });
+    };
   
     
  
@@ -112,6 +147,9 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
               <TableCell align="right">{narocilo.stanjeNarocila}</TableCell>
               <TableCell align="right">{narocilo.cenaSkupaj +" €"}</TableCell>
               <TableCell align="right">
+                  <IconButton aria-label="download" size="large" onClick={() => handleDownloadPDF(narocilo)} >
+                    <DownloadIcon/>
+                  </IconButton>
                   <IconButton aria-label="edit" size="large" onClick={() => handleEditClick(narocilo.id_narocilo)} >
                     <EditIcon />
                   </IconButton>
