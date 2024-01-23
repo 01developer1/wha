@@ -172,7 +172,7 @@ const DashboardDefault = () => {
       <Grid item xs={12} md={5} lg={4}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
-            <Typography variant="h5">Tedenski zaslužek</Typography>
+            <Typography variant="h5">Tedenski Promet</Typography>
           </Grid>
           <Grid item />
         </Grid>
@@ -196,7 +196,7 @@ const DashboardDefault = () => {
       <Grid item xs={12} md={7} lg={8}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
-            <Typography variant="h5">Zadnja naročila</Typography>
+            <Typography variant="h5">Zadnja Naročila</Typography>
           </Grid>
           <Grid item />
         </Grid>

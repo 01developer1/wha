@@ -36,6 +36,68 @@ public class NarociloController {
     }
 
 
+    @GetMapping("/st_teden1")
+    public ResponseEntity<Map<String, Integer>> getNumberOfOrdersForFirstWeek() {
+        // Define your start and end dates for the week you want to analyze
+        LocalDate startOfWeek = LocalDate.now().with(DayOfWeek.MONDAY);
+        // Adjust the end date to be Friday, not Sunday
+        LocalDateTime startDateTime = startOfWeek.atStartOfDay();
+        LocalDateTime endDateTime = startOfWeek.with(DayOfWeek.FRIDAY).atTime(23, 59, 59);
+
+        // Fetch your orders based on the dates
+        List<Narocilo> orders = narociloDao.findNarocilaBetweenDates(startDateTime, endDateTime);
+
+        // Calculate the number of orders per day
+        Map<String, Integer> ordersPerDay = new LinkedHashMap<>(); // Use LinkedHashMap to maintain insertion order
+        LocalDate date = startOfWeek;
+        while (!date.isAfter(endDateTime.toLocalDate())) {
+            final LocalDateTime finalStartOfDay = date.atStartOfDay();
+            final LocalDateTime finalEndOfDay = date.atTime(23, 59, 59);
+            int dayOrders = (int) orders.stream()
+                    .filter(narocilo -> !narocilo.getDatumVnosa().isBefore(finalStartOfDay) &&
+                            !narocilo.getDatumVnosa().isAfter(finalEndOfDay))
+                    .count();
+            ordersPerDay.put(date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.getDefault()), dayOrders);
+            date = date.plusDays(1); // Move to the next day
+        }
+
+        // Return the map in the response entity
+        return ResponseEntity.ok(ordersPerDay);
+    }
+
+
+
+    @GetMapping("/st_teden2")
+    public ResponseEntity<Map<String, Integer>> getNumberOfOrdersForSecondWeek() {
+        // Define your start and end dates for the week you want to analyze
+        LocalDate startOfWeek = LocalDate.now().minusWeeks(1).with(DayOfWeek.MONDAY);
+        // Adjust the end date to be Friday, not Sunday
+        LocalDateTime startDateTime = startOfWeek.atStartOfDay();
+        LocalDateTime endDateTime = startOfWeek.with(DayOfWeek.FRIDAY).atTime(23, 59, 59);
+
+        // Fetch your orders based on the dates
+        List<Narocilo> orders = narociloDao.findNarocilaBetweenDates(startDateTime, endDateTime);
+
+        // Calculate the number of orders per day
+        Map<String, Integer> ordersPerDay = new LinkedHashMap<>(); // Use LinkedHashMap to maintain insertion order
+        LocalDate date = startOfWeek;
+        while (!date.isAfter(endDateTime.toLocalDate())) {
+            final LocalDateTime finalStartOfDay = date.atStartOfDay();
+            final LocalDateTime finalEndOfDay = date.atTime(23, 59, 59);
+            int dayOrders = (int) orders.stream()
+                    .filter(narocilo -> !narocilo.getDatumVnosa().isBefore(finalStartOfDay) &&
+                            !narocilo.getDatumVnosa().isAfter(finalEndOfDay))
+                    .count();
+            ordersPerDay.put(date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.getDefault()), dayOrders);
+            date = date.plusDays(1); // Move to the next day
+        }
+
+        // Return the map in the response entity
+        return ResponseEntity.ok(ordersPerDay);
+    }
+
+
+
     @GetMapping("/tedensko/skupaj")
     public ResponseEntity<Double> getTedenSkupaj() {
         LocalDate today = LocalDate.now();
