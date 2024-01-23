@@ -10,6 +10,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_19_2024_1_02_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_19_2024_1_02_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_20_2024_11_58_AM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_20_2024_11_58_AM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/controllers/ZaposleniController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/ZaposleniRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/dao/ZaposleniRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

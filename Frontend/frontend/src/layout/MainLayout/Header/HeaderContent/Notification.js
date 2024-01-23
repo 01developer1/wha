@@ -151,21 +151,25 @@ const Notification = () => {
                     </IconButton>
                   }
                 >
-                <List component="nav">
+                  <List component="nav">
                   {lowInventoryItems.map(item => (
                      <ListItemButton key={item.id_artikel}>
                         <ListItemText 
-                           primary={`Artikel ID: ${item.id_artikel}, Naziv: ${item.naziv}`} 
-                           secondary={
-                              <>
+                        primary={<>
+                           <span style={{ fontWeight: 'bold' }}>PRIMANKUJE:</span> <span style={{color: "grey", fontWeight: "bold"}}>ID: {item.id_artikel}, Naziv: {item.naziv}</span>
+                           
+                        </>}
+                        secondary={
+                           <>
                               <PriorityHighIcon sx={{ color: 'red', verticalAlign: 'middle', mr: 0.5 }} />
-                              {`Artiklov na zalogi: ${item.kolicina}`}
-                              </>
-                           } 
+                              <span style={{ fontWeight: 'bold', fontSize: 13 }}>Artiklov na zalogi: {item.kolicina}</span>
+                           </>
+                        } 
                         />
                      </ListItemButton>
                   ))}
-                </List>
+                  </List>
+
                 </MainCard>
               </ClickAwayListener>
             </Paper>

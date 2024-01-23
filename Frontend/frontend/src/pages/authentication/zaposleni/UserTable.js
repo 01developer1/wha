@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -23,6 +23,45 @@ export default function UserTable({ users, fetchUser, showDeleteAlert }) {
   const [editingZaposleni, setEditingZaposleni] = useState(null);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
+  const [userStatus, setUserStatus] = useState({});
+  const [forceUpdate, setForceUpdate] = useState(0);
+
+
+  const fetchUserStatus = async () => {
+   let shouldFetchUsers = false;
+   const updatedStatuses = { ...userStatus };
+ 
+   for (const user of users) {
+     try {
+       const result = await api.get(`/zaposleni/preveriAuth/${user.id_zaposleni}`);
+       const isEnabled = result.data;
+       if (updatedStatuses[user.id_zaposleni] !== isEnabled) {
+         shouldFetchUsers = true;
+         updatedStatuses[user.id_zaposleni] = isEnabled;
+       }
+     } catch (error) {
+       console.error('There was an error checking the user status!', error);
+     }
+   }
+ 
+   setUserStatus(updatedStatuses);
+ 
+   if (shouldFetchUsers) {
+     fetchUser();
+   }
+ };
+ 
+   
+
+   useEffect(() => {
+      const intervalId = setInterval(() => {
+         fetchUserStatus();
+      }, 1000);
+   
+      return () => clearInterval(intervalId);
+   }, []); // Prazna odvisnost, da se izvede samo ob montiranju in razmontiranju
+   
+
 
   const izbrisiUser = (user_id) => {
     api.delete(`/zaposleni/izbrisi/${user_id}`)
@@ -112,7 +151,7 @@ const handleConfirmDelete = () => {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell align="left">
-                  <HoverDot user={user} />
+                  <HoverDot user={user} isEnabled={userStatus[user.id_zaposleni]} /> 
                 </TableCell>
                 <TableCell component="th" scope="row" style={{ color: 'grey' }}>
                   {user.id_zaposleni}

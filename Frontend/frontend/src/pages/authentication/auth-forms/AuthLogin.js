@@ -59,15 +59,16 @@ const AuthLogin = ({ setLoginError }) => {
    api.post(`/zaposleni/prijava`, formValues)
     .then((result) => {
       console.log(result.data);
-      if (result.data && result.data.ime && result.data.priimek && result.data.id && result.data.isAuthenticated) {
+      if (result.data && result.data.ime && result.data.priimek && result.data.id) {
         const user = {
           ime: result.data.ime,
           priimek: result.data.priimek,
           id: result.data.id,
           role: result.data.role,
-          isAuthenticated: result.data.isAuthenticated
+          isAuthenticated: true
         }
         sessionStorage.setItem('user', JSON.stringify(user));
+        prijavaEnabled()
         navigate('/');
       } else {
          setLoginError('Login failed. Please check your username and password.');
@@ -77,6 +78,26 @@ const AuthLogin = ({ setLoginError }) => {
       console.error('There was an error logging in!', error);
       setLoginError('Napaka. Napačno uporabniško ime ali geslo.');
     });
+   };
+
+   const prijavaEnabled = () => {
+      const userString = sessionStorage.getItem('user');
+
+      if (userString) {
+       const userObject = JSON.parse(userString);
+       const zaposleni_id = userObject.id
+       enabled(zaposleni_id)
+      }
+   }
+
+   const enabled = (zaposleni_id) => {
+      api.put(`/zaposleni/posodobiAuthTrue/${zaposleni_id}`)
+      .then((result) => {
+
+      })
+      .catch((error) => {
+          console.error('There was an error editing Artikel!', error);
+      });
    };
 
   return (

@@ -61,6 +61,50 @@ public class ZaposleniController {
         }
     }
 
+
+    @GetMapping("/preveriAuth/{ID_zaposleni}")
+    public ResponseEntity<Boolean> preveriAuth(@PathVariable(name = "ID_zaposleni") Long ID_zaposleni) {
+        Zaposleni existingZaposleni = zaposleniDao.vrniDolocenegaZaposlenega(ID_zaposleni);
+
+        if (existingZaposleni != null) {
+            boolean isEnabled = existingZaposleni.isEnabled();
+            return ResponseEntity.ok(isEnabled);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+
+    @PutMapping("/posodobiAuthTrue/{ID_zaposleni}")
+    public ResponseEntity<String> spremeniAuthTrue(@PathVariable(name = "ID_zaposleni") Long ID_zaposleni) {
+        Zaposleni existingZaposleni = zaposleniDao.vrniDolocenegaZaposlenega(ID_zaposleni);
+
+        if (existingZaposleni == null) {
+            return ResponseEntity.notFound().build();
+        }
+        existingZaposleni.setEnabled(true);
+
+        zaposleniDao.save(existingZaposleni);
+
+        return ResponseEntity.ok("Zaposleni uspešno avtoriziran.");
+    }
+
+    @PutMapping("/posodobiAuthFalse/{ID_zaposleni}")
+    public ResponseEntity<String> spremeniAuthFalse(@PathVariable(name="ID_zaposleni") Long ID_zaposleni) {
+        Zaposleni existingZaposleni = zaposleniDao.vrniDolocenegaZaposlenega(ID_zaposleni);
+
+        if (existingZaposleni == null) {
+            return ResponseEntity.notFound().build();
+        }
+        existingZaposleni.setEnabled(false);
+
+        zaposleniDao.save(existingZaposleni);
+
+        return ResponseEntity.ok("Zaposleni uspešno avtoriziran.");
+    }
+
+
     @GetMapping("/{ID_zaposleni}")
     public Zaposleni vrniDolocenegaZaposlenega(@PathVariable(name = "ID_zaposleni") Long ID_zaposleni){
         return zaposleniDao.vrniDolocenegaZaposlenega(ID_zaposleni);

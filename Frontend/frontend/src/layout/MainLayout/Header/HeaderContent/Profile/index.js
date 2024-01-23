@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useRef, useState } from 'react';
+import api from '../../../../../services/api';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -75,9 +76,26 @@ const Profile = () => {
     setValue(newValue);
   };
 
-  const handleLogout = () => {
-   sessionStorage.clear();
-   window.location.reload();
+  const handleLogout = async () => {
+   const userString = sessionStorage.getItem('user');
+
+   if (userString) {
+    const userObject = JSON.parse(userString);
+    const zaposleni_id = userObject.id
+    await notAuthenticated(zaposleni_id)
+   }
+      sessionStorage.clear();
+      window.location.reload();
+   };
+
+   const notAuthenticated = async (zaposleni_id) => {
+      await api.put(`/zaposleni/posodobiAuthFalse/${zaposleni_id}`)
+         .then((result) => {
+            
+         })
+         .catch((error) => {
+            console.error('There was an error authenticating you!', error);
+         });
    };
 
   const iconBackColorOpen = 'grey.300';

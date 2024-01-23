@@ -18,4 +18,5 @@ public interface ZaposleniRepository extends CrudRepository<Zaposleni, Long> {
 
     @Query("select z from Zaposleni z where z.username = :username")
     Zaposleni vrniDolocenegaZaposlenegaUsername(@Param("username") String username);
+
 }
