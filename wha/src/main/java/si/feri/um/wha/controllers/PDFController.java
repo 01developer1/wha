@@ -69,7 +69,7 @@ public class PDFController {
             // Draw "NAROČILNICA" at the top right corner
             contentStream.beginText();
             contentStream.newLineAtOffset(text2X, text2Y);
-            contentStream.showText("NAROČILNICA");
+            contentStream.showText("NAROCILNICA");
             contentStream.endText();
 
             // Draw a line below the text
