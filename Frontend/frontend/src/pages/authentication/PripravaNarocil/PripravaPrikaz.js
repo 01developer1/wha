@@ -27,7 +27,7 @@ export default function PripravaPrikaz({ narocilo_id }) {
   const handleStanjeUpdate = () => {
     // Make an API call to update the stanjeNarocila to "DOING"
     api
-      .put(`/narocila/posodobi/${narocilo_id}`, {
+      .put(`/narocila/posodobi/stanje/${narocilo_id}`, {
         stanjeNarocila: "DONE",
         casPriprave: new Date().toISOString(),
       })
@@ -219,7 +219,6 @@ export default function PripravaPrikaz({ narocilo_id }) {
            <TableCell align="right">Stranka</TableCell>
            <TableCell align="right">Zaposleni</TableCell>
            <TableCell align="right">Rok Priprave</TableCell>
-           <TableCell align="right">Stanje</TableCell>
            <TableCell align="right">Skupaj Cena</TableCell>
          </TableRow>
        </TableHead>
@@ -230,13 +229,6 @@ export default function PripravaPrikaz({ narocilo_id }) {
                key={orderDetails.id_artikel}
                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
              >
-               <TableCell
-                 component="th"
-                 scope="row"
-                 style={{ color: "grey" }}
-               >
-                 {orderDetails.id_narocilo}
-               </TableCell>
                <TableCell
                  component="th"
                  scope="row"
@@ -260,11 +252,6 @@ export default function PripravaPrikaz({ narocilo_id }) {
                <TableCell align="right">
                  {orderDetails.rokPriprave
                    ? new Date(orderDetails.rokPriprave).toLocaleString()
-                   : ""}
-               </TableCell>
-               <TableCell align="right">
-                 {orderDetails.stanjeNarocila
-                   ? orderDetails.stanjeNarocila
                    : ""}
                </TableCell>
                <TableCell align="right">

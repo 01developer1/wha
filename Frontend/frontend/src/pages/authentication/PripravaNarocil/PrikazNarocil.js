@@ -71,7 +71,7 @@ export default function PrikazNarocil({
   const handleStanjeUpdate = (narocilo_id) => {
    // Make an API call to update the stanjeNarocila to "DOING"
    api
-     .put(`/narocila/posodobi/${narocilo_id}`, { stanjeNarocila: "DOING" })
+     .put(`/narocila/posodobi/stanje/${narocilo_id}`, { stanjeNarocila: "DOING" })
      .then((response) => {
        // Update the state of stanjeNarocila in your component
        // Assuming that the response contains the updated order details
