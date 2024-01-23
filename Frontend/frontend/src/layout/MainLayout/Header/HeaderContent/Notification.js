@@ -161,7 +161,7 @@ const Notification = () => {
                         </>}
                         secondary={
                            <>
-                              <PriorityHighIcon sx={{ color: 'red', verticalAlign: 'middle', mr: 0.5 }} />
+                              <PriorityHighIcon sx={{ color: '#DC3023', verticalAlign: 'middle', mr: 0.5 }} />
                               <span style={{ fontWeight: 'bold', fontSize: 13 }}>Artiklov na zalogi: {item.kolicina}</span>
                            </>
                         } 

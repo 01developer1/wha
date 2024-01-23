@@ -73,7 +73,7 @@ const status = [
 const DashboardDefault = () => {
   const [value, setValue] = useState('today');
   const [slot, setSlot] = useState('week');
-
+  const [valueNarocila, setValueNarocila] = useState();
   //const [artikli, setArtikel] = useState([]);
  
    const fetchArtikli = () => {
@@ -81,6 +81,18 @@ const DashboardDefault = () => {
            setValue(result.data);
        });
    };
+
+   const fetchNarocila = () => {
+      api.get("/narocila").then((result) => {
+        setValueNarocila(result.data);
+        console.log(result.data)
+      });
+    };
+
+    useEffect(() => {
+      fetchNarocila(); // Call the fetchNarocila function when the component mounts
+    }, []);
+    
 
    const [totalIncome, setTotalIncome] = useState(0);
 
@@ -91,23 +103,32 @@ const DashboardDefault = () => {
        })
        .catch(error => console.error('Error fetching total income:', error));
    }, []);
- 
+
+   const doneOrdersCount = valueNarocila ? valueNarocila.filter(narocilo => narocilo.stanjeNarocila === "DONE").length : 0;
+   console.log(doneOrdersCount)
+   const doingOrdersCount = valueNarocila ? valueNarocila.filter(narocilo => narocilo.stanjeNarocila === "DOING").length : 0;
+   const todoOrdersCount = valueNarocila ? valueNarocila.filter(narocilo => narocilo.stanjeNarocila === "TODO").length : 0;
+   
    //useEffect(fetchArtikli, []);
 
   return (
     <Grid container rowSpacing={4.5} columnSpacing={2.75}>
       {/* row 1 */}
       <Grid item xs={12} sx={{ mb: -2.25 }}>
-        <Typography variant="h5">Dashboard</Typography>
+        <Typography variant="h5">Nadzorna Plošča</Typography>
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Page Views" count="4,42,236" percentage={59.3} extra="35,000" />
+         <AnalyticEcommerce
+            title="DONE Naročila"
+            count={doneOrdersCount.toString()}
+            sx={{ backgroundColor: 'lightgreen' }}
+         />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Users" count="78,250" percentage={70.5} extra="8,900" />
+         <AnalyticEcommerce title="DOING Naročila" count={doingOrdersCount.toString()} />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Order" count="18,800" percentage={27.4} isLoss color="warning" extra="1,943" />
+         <AnalyticEcommerce title="TODO Naročila" count={todoOrdersCount.toString()} />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <AnalyticEcommerce title="Total Sales" count="$35,078" percentage={27.4} isLoss color="warning" extra="$20,395" />

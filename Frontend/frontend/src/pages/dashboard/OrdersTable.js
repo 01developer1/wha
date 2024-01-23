@@ -180,6 +180,8 @@ export default function OrderTable() {
    });
  };
 
+ const displayedNarocila = stableSort(narocila, getComparator(narocilo, orderBy)).slice(0, 10);
+
 
   return (
     <Box>
@@ -206,7 +208,7 @@ export default function OrderTable() {
         >
           <OrderTableHead order={narocilo} orderBy={orderBy} />
           <TableBody>
-            {stableSort(narocila, getComparator(narocilo, orderBy)).map((narocilo, index) => {
+          {displayedNarocila.map((narocilo, index) => {
             const isItemSelected = isSelected(narocilo.trackingNo);
             const labelId = `enhanced-table-checkbox-${index}`;
 
