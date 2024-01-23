@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import si.feri.um.wha.models.Zaposleni;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,11 @@ public class NarociloController {
 
     @PostMapping
     public Narocilo dodajNarocilo(@RequestBody Narocilo narocilo){
+        ArrayList<Integer> artikli = narocilo.getArtikli();
+        ArrayList<Integer> kolicine = narocilo.getSeznamKolicin();
+        for(int i = 0; i<artikli.size();i++){
+            int trenutniArtikel;
+        }
         return narociloDao.save(narocilo);
     }
 
@@ -82,5 +88,6 @@ public class NarociloController {
 
         return ResponseEntity.ok("Naročilo uspešno posodobljeno.");
     }
+
 
 }

@@ -92,7 +92,7 @@ public class ArtikelController {
             existingArtikel.setNaziv(updatedArtikel.getNaziv());
         }
         if (updatedArtikel.getKolicina() != 0) {
-            existingArtikel.setKolicina(updatedArtikel.getKolicina());
+            existingArtikel.setKolicina(existingArtikel.getKolicina() - updatedArtikel.getKolicina());
         }
         if (updatedArtikel.getProdajnaCena() != 0.0) {
             existingArtikel.setProdajnaCena(updatedArtikel.getProdajnaCena());

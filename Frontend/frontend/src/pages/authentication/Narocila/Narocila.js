@@ -26,7 +26,9 @@ const Narocila = () => {
    const [showTable, setShowTable] = useState(true);
    const [showDodajNarocilo, setShowNarocilo] = useState(false);
    
+   
 
+   
   const fetchNarocila = () => {
      api.get("/narocila").then((result) => {
          setNarocila(result.data);
@@ -59,18 +61,36 @@ const Narocila = () => {
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'
 };
 
+const [editMode, setEditMode] = useState(false);
+const [editFormData, setEditFormData] = useState(null);
+
+const handleEditClick = (narocilo) => {
+   console.log(narocilo)
+   setEditMode(true);
+   setEditFormData({
+   
+   });
+   handleUstvariClick(); 
+ };
+
 return (
    <MainCard>
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
-                  <Button variant="contained" onClick={handleUstvariClick}>
-                     <AddIcon />Ustvari
-                  </Button>
+        <Button variant="contained" onClick={handleUstvariClick}>
+          {showDodajNarocilo ? <><CloseIcon /> Zapri</> : <><AddIcon /> Ustvari</>}
+        </Button>
       </div>
-    
-    {showAlert && <Alert  style={alertStyle} severity="success">Narocilo uspešno izbrisano</Alert>}
-    {showTable && <NarocilaTable narocila={narocila} fetchNarocila={fetchNarocila} showDeleteAlert={showDeleteAlert} />}
-    {showDodajNarocilo && <DodajNarocilo></DodajNarocilo>}
-   </MainCard>
+
+      {showAlert && <Alert style={alertStyle} severity="success">Narocilo uspešno izbrisano</Alert>}
+      {showTable && <NarocilaTable narocila={narocila} fetchNarocila={fetchNarocila} showDeleteAlert={showDeleteAlert} handleEditClick={handleEditClick} />}
+      {showDodajNarocilo && <DodajNarocilo
+          editMode={editMode}
+          editFormData={editFormData}
+          fetchNarocila={fetchNarocila}  // Pass the fetchNarocila function
+          setShowTable={setShowTable}    // Pass other necessary props
+          setShowNarocilo={setShowNarocilo}
+        />}
+    </MainCard>
  );
  
 };

@@ -7,7 +7,7 @@ import api from '../../../services/api';
 import { format, addDays } from 'date-fns';
  
  
-const DodajNarocilo = () => {
+const DodajNarocilo = ({ setShowTable, setShowNarocilo, fetchNarocila }) => {
   // ===================================================================================== STRANKA =========================================================================
     const [selectedStranka, setSelectedStranka] = useState(null); // Store the selected stranka object
     const [field2Value, setField2Value] = useState('');
@@ -129,17 +129,13 @@ const DodajNarocilo = () => {
       const currentDate = new Date();
       const formattedDate = currentDate.toISOString().split('T')[0]; // ISO format without time
       setBottomLeft1(formattedDate);
+  
+      // Set bottomLeft2 to today's date plus 1 day at 10 am
+      const tomorrowDate = addDays(currentDate, 1);
+      tomorrowDate.setHours(11, 0, 0, 0);
+      const formattedTomorrowDate = tomorrowDate.toISOString().split('.')[0]; // Remove milliseconds
+      setBottomLeft2(formattedTomorrowDate);
     }, []);
- 
-    // Effect to set "rok priprave" one day after Bottom Left 1
-    useEffect(() => {
-      if (bottomLeft1) {
-        const dateBottomLeft1 = new Date(bottomLeft1);
-        const dateBottomLeft2 = addDays(dateBottomLeft1, 1);
-        const formattedDate = format(dateBottomLeft2, 'yyyy-MM-dd');
-        setBottomLeft2(formattedDate);
-      }
-    }, [bottomLeft1]);
  
     useEffect(() => {
       const sum = tableData.reduce((acc, row) => acc + parseFloat(row.col5 || 0), 0);
@@ -149,11 +145,13 @@ const DodajNarocilo = () => {
     useEffect(() => {
       setBottomLeft3(skupajSum.toFixed(2));
     }, [skupajSum]);
+
+    
  
     // ===================================================================================== SHRANJEVANJE =========================================================================
     const handleSave = async () => {
       const invalidRow = tableData.find(row => parseFloat(row.col2) > parseFloat(row.col6));
- 
+    
       if (invalidRow) {
         // Show an alert if there is an invalid row
         alert('The quantity in some rows is greater than "na zalogi". Please correct it before saving.');
@@ -163,70 +161,84 @@ const DodajNarocilo = () => {
         alert('Naziv Stranke must not be empty.');
         return; // Prevent saving
       }
-   
+    
       // Check if "Artikel" is empty in any row
       const emptyArtikel = tableData.find(row => !row.selectedArtikel);
-   
+    
       if (emptyArtikel) {
         alert('Artikel must not be empty in some rows. Please select an Artikel for each row.');
         return; // Prevent saving
       }
-      // Gather and structure the data
-      const dataToSave = {
-        casPriprave: "0000-01-01T00:00:00",
-        cenaSkupaj: bottomLeft3,
-        datumVnosa: new Date().toISOString(),
-        rokPriprave: bottomLeft2,
-        seznamKolicin: tableData.map(row => row.col2),
-        stanjeNarocila: "TODO",
-        stranka: selectedStranka,
-        artikli: tableData.map(row => row.selectedArtikel.id_artikel),
-        zaposlen: {
-          "ime": "Luka",
-          "priimek": "Car",
-          "telefon": "4123'041292",
-          "placa": 1.0,
-          "email": null,
-          "username": "0",
-          "password": null,
-          "enabled": false,
-          "tokenExpired": false,
-          "roles": [],
-          "tip_zaposlenega": "VODJA_PODJETJA",
-          "id_zaposleni": 1
+    
+      const userString = sessionStorage.getItem('user');
+      const user = JSON.parse(userString);
+      const zaposleniID = user.id;
+    
+      try {
+        // Fetch the current zaposleni
+        const zaposleniResponse = await api.get(`/zaposleni/${zaposleniID}`);
+        const zaposleni = zaposleniResponse.data;
+    
+        // Prepare data to save
+        const dataToSave = {
+          casPriprave: "0000-01-01T00:00:00",
+          cenaSkupaj: bottomLeft3,
+          datumVnosa: new Date().toISOString(),
+          rokPriprave: bottomLeft2,
+          seznamKolicin: tableData.map(row => row.col2),
+          stanjeNarocila: "TODO",
+          stranka: selectedStranka,
+          artikli: tableData.map(row => row.selectedArtikel.id_artikel),
+          zaposlen: zaposleni
+        };
+    
+        // Save the new narocilo
+        const result = await api.post(`/narocila`, dataToSave);
+        
+        // Fetch all narocila again
+        await fetchNarocila();
+    
+        // Toggle visibility of NarocilaTable
+        setShowTable(true);  // Set this to true to make NarocilaTable visible
+        setShowNarocilo(false);
+        let celiArtikli = tableData.map(row => row.selectedArtikel);
+        spremeniZalogo(celiArtikli, tableData.map(row=> row.col2));
+      } catch (error) {
+        console.error('Error creating new narocilo or fetching orders:', error);
       }
-      };
- 
-      console.log(dataToSave)
-      api.post(`/narocila`, dataToSave)
-      .then((result) => {
-        console.log(result.data);
-      })
-      .catch((error) => {
-        console.error('There was an error creating new narocilo!', error);
-      });
+    };
+    
+    const spremeniZalogo = async (artikli, kolicine) => {
+      for (let i = 0; i < artikli.length; i++) {
+        let data = { kolicina: kolicine[i] };
+        let id_artikel = artikli[i].id_artikel;
+        const result = await api.put(`/artikli/posodobi/${id_artikel}`, data);
+      }
     };
  
    
     const handleDownloadPDF = async () => {
       try {
         // Gather all the data needed for the PDF on the client side
-        const clientData = {
+        const dataToSend = {
           selectedStranka,
-          tableData,
+          tableData: tableData.map(item => ({
+            col2: item.col2,
+            selectedArtikel: item.selectedArtikel,
+          })),
           bottomLeft1,
           bottomLeft2,
           bottomLeft3,
         };
- 
-        console.log(clientData)
-   
+    
+        console.log(dataToSend);
+    
         // Send a POST request to generate the PDF with client data
-        const response = await api.post('/generate-pdf', clientData, { responseType: 'arraybuffer' });
-   
+        const response = await api.post('/generate-pdf', dataToSend, { responseType: 'arraybuffer' });
+    
         // Create a Blob from the response data
         const blob = new Blob([response.data], { type: 'application/pdf' });
-   
+    
         // Create a download link and trigger the download
         const link = document.createElement('a');
         link.href = window.URL.createObjectURL(blob);
@@ -330,7 +342,7 @@ const DodajNarocilo = () => {
  
         {/* Bottom Left Corner Fields */}
         <Grid container spacing={2} style={{ marginTop: '20px' }}>
-        <Grid item xs={4}>
+          <Grid item xs={4}>
             <TextField label="Datum vnosa" value={bottomLeft1} fullWidth disabled />
           </Grid>
           <Grid item xs={4}>
