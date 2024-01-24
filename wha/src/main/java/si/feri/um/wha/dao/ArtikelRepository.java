@@ -42,5 +42,11 @@ public interface ArtikelRepository extends CrudRepository<Artikel, Long> {
 
     @Query("SELECT a FROM Artikel a WHERE a.kolicina < 10")
     Iterable<Artikel> findArtikleZNizkoZalogo();
+
+    @Query("SELECT a FROM Artikel a WHERE a.naziv LIKE %:like%")
+    Iterable<Artikel> findArtikelLike(String like);
+
+    @Query("SELECT a FROM Artikel a WHERE a.tip_artikla = :tip")
+    Iterable<Artikel> poisciPoKategoriji(Tip_artikla tip);
 }
 

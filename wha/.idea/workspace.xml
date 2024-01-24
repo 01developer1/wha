@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="Enum stanje narocila">
+      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Narocila/NarocilaTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Narocila/NarocilaTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/WhaApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/si/feri/um/wha/WhaApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -8,20 +8,25 @@ export default function HoverDot({user}) {
     setIsHovered(!isHovered);
   };
 
+  const colors = {
+   success: '#28a745', // example color for success
+   warning: '#ffc107', // example color for warning
+   };
+
   return (
     <TableCell align="center">
       <span
         style={{
           height: '10px',
           width: '10px',
-          backgroundColor: user.enabled ? 'green' : 'grey',
+          backgroundColor: colors[user.enabled ? 'success' : 'warning'],
           borderRadius: '50%',
           display: 'inline-block',
         }}
         onMouseEnter={toggleHover}
         onMouseLeave={toggleHover}
       />
-      {isHovered ? (user.enabled ? 'Aktiven' : 'Neaktiven') : null}
+     
     </TableCell>
   );
 }

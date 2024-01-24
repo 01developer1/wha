@@ -21,6 +21,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { useDropzone } from "react-dropzone";
+import { Stack, Typography }  from '@mui/material';// Replace 'your-component-library' with the actual library name
+import PropTypes from 'prop-types';
+import Dot from 'components/@extended/Dot';
+
+
 
 export default function NarocilaTable({
   narocila,
@@ -207,6 +212,48 @@ export default function NarocilaTable({
     },
   });
 
+
+
+  const OrderStatus = ({ status }) => {
+   let color;
+   let title;
+ 
+   switch (status) {
+     case "DOING":
+       color = 'warning';
+       title = 'DOING';
+       break;
+     case "DONE":
+       color = 'success';
+       title = 'DONE';
+       break;
+     case "TODO":
+       color = 'error';
+       title = 'TODO';
+       break;
+     default:
+       color = 'primary';
+       title = 'None';
+   }
+ 
+   return (
+     <Stack direction="row" spacing={1} alignItems="center">
+       <Dot color={color} />
+       <Typography>{title}</Typography>
+     </Stack>
+   );
+ };
+ 
+ OrderStatus.propTypes = {
+   status: PropTypes.number
+ };
+
+
+
+
+
+
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -242,10 +289,11 @@ export default function NarocilaTable({
                 <TableCell align="right">
                   {new Date(narocilo.rokPriprave).toLocaleString()}
                 </TableCell>
-                <TableCell align="right">{narocilo.stanjeNarocila}</TableCell>
                 <TableCell align="right">
-                  {narocilo.cenaSkupaj + " €"}
-                </TableCell>
+                  <OrderStatus status={narocilo.stanjeNarocila} />
+               </TableCell>
+
+                <TableCell align="right">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(narocilo.cenaSkupaj)}</TableCell>
                 <TableCell align="right">
                   <IconButton
                     aria-label="email"

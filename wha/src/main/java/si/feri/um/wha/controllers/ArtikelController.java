@@ -170,4 +170,6 @@ public class ArtikelController {
 
         return ResponseEntity.ok("Zaloga uspešno posodobljena.");
     }
+
+
 }
