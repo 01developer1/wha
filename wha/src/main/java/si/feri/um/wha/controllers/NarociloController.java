@@ -16,6 +16,8 @@ import java.time.LocalDate;
 import java.time.format.TextStyle;
 import java.util.Locale;
 
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -28,6 +30,11 @@ public class NarociloController {
     @GetMapping
     public Iterable<Narocilo> vrniNarocilo(){
         return narociloDao.findAll();
+    }
+
+    @GetMapping("/TODO")
+    public List<Narocilo> getTodoNarocila() {
+        return narociloDao.findAllTodoNarocila();
     }
 
     @GetMapping("/{ID_narocilo}")
@@ -201,6 +208,27 @@ public class NarociloController {
 
         return ResponseEntity.ok("Naročilo uspešno posodobljeno.");
     }
+
+    @PutMapping("/posodobi/stanje/{ID_narocilo}")
+    public ResponseEntity<String> posodobiStanjeNarocila(@PathVariable(name = "ID_narocilo") Long ID_narocilo, @RequestBody Narocilo updatedNarocilo) {
+        Narocilo existingNarocilo = narociloDao.vrniDolocenoNarocilo(ID_narocilo);
+
+        if (existingNarocilo == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        if (updatedNarocilo.getStanjeNarocila() != null) {
+            existingNarocilo.setStanjeNarocila(updatedNarocilo.getStanjeNarocila());
+        }
+        if (updatedNarocilo.getCasPriprave() != null) {
+            existingNarocilo.setCasPriprave(updatedNarocilo.getCasPriprave());
+        }
+
+        narociloDao.save(existingNarocilo);
+
+        return ResponseEntity.ok("Stanje naročila uspešno posodobljeno.");
+    }
+
 
 
 }

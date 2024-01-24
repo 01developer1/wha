@@ -11,7 +11,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import api from "../../../services/api";
-import { Edit } from '../../../../node_modules/@mui/icons-material/index';
 import { useState, useEffect } from 'react';
 import DownloadIcon from '@mui/icons-material/Download';
 
