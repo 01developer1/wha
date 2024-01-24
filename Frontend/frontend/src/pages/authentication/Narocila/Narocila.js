@@ -17,6 +17,7 @@ const Narocila = () => {
    const [showAlert, setShowAlert] = useState(false);
    const [showTable, setShowTable] = useState(true);
    const [showDodajNarocilo, setShowNarocilo] = useState(false);
+   const [showForm, setShowForm] = useState(true);
    
    
 
@@ -34,6 +35,8 @@ const Narocila = () => {
   const handleUstvariClick = () => {
    setShowTable(!showTable);
    setShowNarocilo(!showDodajNarocilo);
+   setShowForm(!showForm);
+   setEditMode(false);
 };
 
   const showDeleteAlert = () => {
@@ -57,12 +60,12 @@ const [editMode, setEditMode] = useState(false);
 const [editFormData, setEditFormData] = useState(null);
 
 const handleEditClick = (narocilo) => {
-   console.log(narocilo)
+   setEditFormData(narocilo);
    setEditMode(true);
-   setEditFormData({
-   
-   });
-   handleUstvariClick(); 
+   setShowForm(!showForm);
+   setShowTable(!showTable);
+   setShowNarocilo(!showDodajNarocilo);
+   setShowForm(!showForm);
  };
 
 
@@ -91,7 +94,7 @@ const handleEditClick = (narocilo) => {
 return (
    <MainCard>
       
-      <FormControl style={{ minWidth: 120 }}>
+      {showForm && <FormControl style={{ minWidth: 120 }}>
             <InputLabel id="sort-label">Sortiraj</InputLabel>
             <Select
               labelId="sort-label"
@@ -104,7 +107,7 @@ return (
               <MenuItem value="DOING">DOING</MenuItem>
               <MenuItem value="DONE">DONE</MenuItem>
             </Select>
-          </FormControl>
+          </FormControl>}
 
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
         <Button variant="contained" onClick={handleUstvariClick}>
@@ -117,9 +120,10 @@ return (
       {showDodajNarocilo && <DodajNarocilo
           editMode={editMode}
           editFormData={editFormData}
-          fetchNarocila={fetchNarocila}  // Pass the fetchNarocila function
-          setShowTable={setShowTable}    // Pass other necessary props
+          fetchNarocila={fetchNarocila}  
+          setShowTable={setShowTable}    
           setShowNarocilo={setShowNarocilo}
+          setShowForm={setShowForm}
         />}
     </MainCard>
  );
