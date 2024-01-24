@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="Enum stanje narocila" />
+    <list default="true" id="bd434cf2-e57e-4cbb-ae2e-d810ebb65cf4" name="Changes" comment="Enum stanje narocila">
+      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/menu-items/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/menu-items/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/menu-items/pages.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/menu-items/pages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Narocila/NarocilaTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Frontend/frontend/src/pages/authentication/Narocila/NarocilaTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

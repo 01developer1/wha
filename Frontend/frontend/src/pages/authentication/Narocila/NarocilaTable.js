@@ -13,8 +13,46 @@ import AddIcon from '@mui/icons-material/Add';
 import api from "../../../services/api";
 import { useState, useEffect } from 'react';
 import DownloadIcon from '@mui/icons-material/Download';
+import { Box, Link, Stack, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 
+import Dot from 'components/@extended/Dot';
+
+
+const OrderStatus = ({ status }) => {
+   let color;
+   let title;
  
+   switch (status) {
+     case "DOING":
+       color = 'warning';
+       title = 'DOING';
+       break;
+     case "DONE":
+       color = 'success';
+       title = 'DONE';
+       break;
+     case "TODO":
+       color = 'error';
+       title = 'TODO';
+       break;
+     default:
+       color = 'primary';
+       title = 'None';
+   }
+ 
+   return (
+     <Stack direction="row" spacing={1} alignItems="center">
+       <Dot color={color} />
+       <Typography>{title}</Typography>
+     </Stack>
+   );
+ };
+ 
+ OrderStatus.propTypes = {
+   status: PropTypes.number
+ };
+
  
 export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert, handleEditClick }) {
   console.log('narocila', narocila)
@@ -24,7 +62,6 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
    const izbrisiNarocilo = (narocilo_id) => {
       api.delete(`/narocila/izbrisi/${narocilo_id}`)
         .then((result) => {
-          // Refresh the article list after deletion
           fetchNarocila();
  
           showDeleteAlert();
@@ -33,22 +70,18 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
           console.error('There was an error deleting the artikel!', error);
         });
     };
-  
-    // Function to handle the delete button click
+
     const handleDeleteClick = (narocilo_id) => {
-      // Call the delete function only when the button is clicked
       return () => izbrisiNarocilo(narocilo_id);
     };
   
     const handlePlusClick = (narocilo_id) => {
       if (showHello[narocilo_id]) {
-        // If the table is already visible, hide it
         setShowHello((prevShowHello) => ({
           ...prevShowHello,
           [narocilo_id]: false,
         }));
       } else {
-        // Otherwise, fetch and show the table
         api.get(`/narocila/${narocilo_id}`)
           .then((result) => {
             const numbers = result.data.artikli;
@@ -112,6 +145,7 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
                 console.error('Error fetching products for the order!', error);
               });
     };
+
   
     
  
@@ -125,7 +159,7 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
             <TableCell align="right">Stranka</TableCell>
             <TableCell align="right">Zaposleni</TableCell>
             <TableCell align="right">Rok Priprave</TableCell>
-            <TableCell align="right">Stanje</TableCell>
+            <TableCell align="left">Stanje</TableCell>
             <TableCell align="right">Skupaj Cena</TableCell>
             <TableCell align="right"> </TableCell>
           </TableRow>
@@ -144,7 +178,9 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
               <TableCell align="right">{narocilo.stranka.naziv}</TableCell>
               <TableCell align="right">{narocilo.zaposlen.ime} {narocilo.zaposlen.priimek}</TableCell>
               <TableCell align="right">{new Date(narocilo.rokPriprave).toLocaleString()}</TableCell>
-              <TableCell align="right">{narocilo.stanjeNarocila}</TableCell>
+              <TableCell align="right">
+               <OrderStatus status={narocilo.stanjeNarocila} />
+               </TableCell>
               <TableCell align="right">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(narocilo.cenaSkupaj)}</TableCell>
               <TableCell align="right">
                   <IconButton aria-label="download" size="large" onClick={() => handleDownloadPDF(narocilo)} >
