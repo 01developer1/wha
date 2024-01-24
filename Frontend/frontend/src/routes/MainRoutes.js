@@ -89,6 +89,11 @@ const MainRoutes = {
       path: 'priprava',
       element: <ProtectedRoute element={<Priprava />} />
     }
+    ,
+    {
+      path: 'delovniCas',
+      element: <ProtectedRoute element={<DelovniCas />} />
+    }
   ]
 };
 

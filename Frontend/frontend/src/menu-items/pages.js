@@ -58,15 +58,7 @@ const pages = {
       url: '/stranka',
       icon: icons.TeamOutlined,
       target: false
-    },
-    {
-      id: 'delovniCas',
-      title: 'Delovni Čas',
-      type: 'item',
-      url: '/delovniCas',
-      icon: icons.FieldTimeOutlined,
-      target: false
-    },
+    }
   ]
 };
 

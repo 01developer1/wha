@@ -5,7 +5,8 @@ import {
   BarcodeOutlined,
   BgColorsOutlined,
   FontSizeOutlined,
-  LoadingOutlined
+  LoadingOutlined,
+  FieldTimeOutlined
 } from '@ant-design/icons';
 
 // icons
@@ -15,16 +16,26 @@ const icons = {
   BarcodeOutlined,
   AntDesignOutlined,
   LoadingOutlined,
-  AppstoreAddOutlined
+  AppstoreAddOutlined,
+  FieldTimeOutlined
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
 
 const utilities = {
   id: 'utilities',
-  //title: 'Utilities',
+  title: 'Delovni Čas',
   type: 'group',
   children: [
+    
+    {
+      id: 'delovniCas',
+      title: 'Delovni Čas',
+      type: 'item',
+      url: '/delovniCas',
+      icon: icons.FieldTimeOutlined,
+      target: false
+    },
     /*{
       id: 'util-typography',
       title: 'Typography',
