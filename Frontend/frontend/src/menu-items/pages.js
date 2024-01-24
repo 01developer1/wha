@@ -13,53 +13,52 @@ const icons = {
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
 
-const pages = {
-  id: 'authentication',
-  title: 'Pregled',
-  type: 'group',
-  children: [
-    /*{
-      id: 'login1',
-      title: 'Login',
-      type: 'item',
-      url: '/login',
-      icon: icons.LoginOutlined,
-      target: false
-    },*/
-    {
-      id: 'register1',
-      title: 'Zaposleni',
-      type: 'item',
-      url: '/zaposleni',
-      icon: icons.UserOutlined,
-      target: false
-    },
-    {
-      id: 'pregledArtiklov',
-      title: 'Artikli',
-      type: 'item',
-      url: '/artikli',
-      icon: icons.UnorderedListOutlined,
-      target: false
-    }
-    ,
-    {
-      id: 'pregledNarocil',
-      title: 'Naročila',
-      type: 'item',
-      url: '/narocila',
-      icon: icons.ProfileOutlined,
-      target: false
-    },
-    {
-      id: 'pregledStrank',
-      title: 'Stranke',
-      type: 'item',
-      url: '/stranka',
-      icon: icons.TeamOutlined,
-      target: false
-    }
-  ]
-};
 
-export default pages;
+ const isUserRole = (role) => {
+   const user = JSON.parse(sessionStorage.getItem('user'));
+   return user && user.role === role;
+ };
+ 
+ const filteredChildren = [
+   isUserRole('VODJA_PODJETJA') && {
+     id: 'register1',
+     title: 'Zaposleni',
+     type: 'item',
+     url: '/zaposleni',
+     icon: icons.UserOutlined,
+     target: false
+   },
+   (isUserRole('VODJA_SKLADISCA') || isUserRole('DOKUMENTARIST') || isUserRole('VODJA_PODJETJA')) && {
+     id: 'pregledArtiklov',
+     title: 'Artikli',
+     type: 'item',
+     url: '/artikli',
+     icon: icons.UnorderedListOutlined,
+     target: false
+   },
+   (isUserRole('VODJA_PODJETJA') || isUserRole('DOKUMENTARIST')) && {
+     id: 'pregledNarocil',
+     title: 'Naročila',
+     type: 'item',
+     url: '/narocila',
+     icon: icons.ProfileOutlined,
+     target: false
+   },
+   (isUserRole('VODJA_PODJETJA') || isUserRole('DOKUMENTARIST')) && {
+     id: 'pregledStrank',
+     title: 'Stranke',
+     type: 'item',
+     url: '/stranka',
+     icon: icons.TeamOutlined,
+     target: false
+   }
+ ].filter(Boolean);
+ 
+ const pages = {
+   id: 'authentication',
+   title: isUserRole('VODJA_PODJETJA') ? 'Pregled' : '',
+   type: 'group',
+   children: filteredChildren
+ };
+ 
+ export default pages;

@@ -11,20 +11,22 @@ const icons = {
 
 // ==============================|| MENU ITEMS - SAMPLE PAGE & DOCUMENTATION ||============================== //
 
-const support = {
-  id: 'support',
-  title: 'Priprava Naročil',
-  type: 'group',
-  children: [
-   {
-      id: 'scanner',
-      title: 'Scanner',
-      type: 'item',
-      url: '/artikli/scanner',
-      icon: icons.CameraOutlined,
-      target: false
-    },
-    {
+
+const isUserRole = (role) => {
+   const user = JSON.parse(sessionStorage.getItem('user'));
+   return user && user.role === role;
+ };
+ 
+ const supportChildren = [
+   (isUserRole('SKLADISCNIK') || isUserRole('VODJA_SKLADISCA') || isUserRole('VODJA_PODJETJA')) && {
+     id: 'scanner',
+     title: 'Scanner',
+     type: 'item',
+     url: '/artikli/scanner',
+     icon: icons.CameraOutlined,
+     target: false
+   },
+   (isUserRole('SKLADISCNIK') || isUserRole('VODJA_SKLADISCA') || isUserRole('VODJA_PODJETJA')) && {
       id: 'priprava',
       title: 'Priprava',
       type: 'item',
@@ -32,18 +34,13 @@ const support = {
       icon: icons.FormOutlined,
       target: false
     }
-   ]
-    /*
-    {
-      id: 'documentation',
-      title: 'Documentation',
-      type: 'item',
-      url: 'https://codedthemes.gitbook.io/mantis/',
-      icon: icons.QuestionOutlined,
-      external: true,
-      target: true
-    }
-  ]*/
-};
-
-export default support;
+ ].filter(Boolean);
+ 
+ const support = {
+   id: 'support',
+   title: 'Priprava Naročil',
+   type: 'group',
+   children: supportChildren
+ };
+ 
+ export default support;

@@ -8,6 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import MainCard from '../../../components/MainCard';
 import { Button } from "@mui/material";
 import DodajNarocilo from './dodajNarocilo';
+import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 
 // ================================|| NAROCILA ||================================ //
 
@@ -64,8 +65,47 @@ const handleEditClick = (narocilo) => {
    handleUstvariClick(); 
  };
 
+
+ const [sortOption, setSortOption] = useState(''); // New state for sorting
+
+ // Function to handle sort option change
+ const handleSortChange = (event) => {
+   setSortOption(event.target.value);
+ };
+
+ // Function to sort the articles
+ const sortedNarocila = () => {
+   switch(sortOption) {
+     case 'TODO':
+       return narocila.filter(a => a.stanjeNarocila === 'TODO');
+     case 'DOING':
+       return narocila.filter(a => a.stanjeNarocila === 'DOING');
+     case 'DONE':
+       return narocila.filter(a => a.stanjeNarocila === 'DONE');
+     default:
+       return narocila;
+   }
+ };
+
+
 return (
    <MainCard>
+      
+      <FormControl style={{ minWidth: 120 }}>
+            <InputLabel id="sort-label">Sortiraj</InputLabel>
+            <Select
+              labelId="sort-label"
+              value={sortOption}
+              label="Sortiraj"
+              onChange={handleSortChange}
+            >
+              <MenuItem value=""><em>*</em></MenuItem>
+              <MenuItem value="TODO">TODO</MenuItem>
+              <MenuItem value="DOING">DOING</MenuItem>
+              <MenuItem value="DONE">DONE</MenuItem>
+            </Select>
+          </FormControl>
+
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}>
         <Button variant="contained" onClick={handleUstvariClick}>
           {showDodajNarocilo ? <><CloseIcon /> Zapri</> : <><AddIcon /> Ustvari</>}
@@ -73,7 +113,7 @@ return (
       </div>
 
       {showAlert && <Alert style={alertStyle} severity="success">Narocilo uspešno izbrisano</Alert>}
-      {showTable && <NarocilaTable narocila={narocila} fetchNarocila={fetchNarocila} showDeleteAlert={showDeleteAlert} handleEditClick={handleEditClick} />}
+      {showTable && <NarocilaTable narocila={sortedNarocila()} fetchNarocila={fetchNarocila} showDeleteAlert={showDeleteAlert} handleEditClick={handleEditClick} />}
       {showDodajNarocilo && <DodajNarocilo
           editMode={editMode}
           editFormData={editFormData}
