@@ -18,6 +18,7 @@ import java.util.Locale;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.StreamSupport;
 
 @RestController
 @CrossOrigin
@@ -40,6 +41,18 @@ public class NarociloController {
     @GetMapping("/{ID_narocilo}")
     public Narocilo vrniDolocenoNarocilo(@PathVariable(name = "ID_narocilo") Long ID_narocilo){
         return narociloDao.vrniDolocenoNarocilo(ID_narocilo);
+    }
+
+    @GetMapping("/zasluzek")
+    public ResponseEntity<Double> getZasluzekSkupaj() {
+
+        Iterable<Narocilo> allOrders = narociloDao.findAll();
+
+        double total = StreamSupport.stream(allOrders.spliterator(), false)
+                .mapToDouble(Narocilo::getCenaSkupaj)
+                .sum();
+
+        return ResponseEntity.ok(total);
     }
 
 

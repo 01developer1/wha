@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 
@@ -34,6 +35,10 @@ public class ArtikelController {
 
     @PostMapping
     public Artikel dodajArtikel(@RequestBody Artikel artikel){
+        Tip_artikla izbranTipArtikla = artikel.getTip_artikla();
+        System.out.println(artikel);
+
+        artikel.setTip_artikla(izbranTipArtikla);
 
         // Dodaj if stavek za preverjanje TIP_Artikla
         return artikelDao.save(artikel);
