@@ -18,6 +18,7 @@ import DownloadIcon from '@mui/icons-material/Download';
  
  
 export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert, handleEditClick }) {
+  console.log('narocila', narocila)
   const [showHello, setShowHello] = useState({});
   const [orderProducts, setOrderProducts] = useState({});
 

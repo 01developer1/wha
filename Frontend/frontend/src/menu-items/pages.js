@@ -1,5 +1,5 @@
 // assets
-import { LoginOutlined, ProfileOutlined, UserOutlined, UnorderedListOutlined, TeamOutlined } from '@ant-design/icons';
+import { LoginOutlined, ProfileOutlined, UserOutlined, UnorderedListOutlined, TeamOutlined, FieldTimeOutlined } from '@ant-design/icons';
 
 // icons
 const icons = {
@@ -7,7 +7,8 @@ const icons = {
   ProfileOutlined,
   UserOutlined,
   UnorderedListOutlined,
-  TeamOutlined
+  TeamOutlined,
+  FieldTimeOutlined
 };
 
 // ==============================|| MENU ITEMS - EXTRA PAGES ||============================== //
@@ -57,7 +58,15 @@ const pages = {
       url: '/stranka',
       icon: icons.TeamOutlined,
       target: false
-    }
+    },
+    {
+      id: 'delovniCas',
+      title: 'Delovni Čas',
+      type: 'item',
+      url: '/delovniCas',
+      icon: icons.FieldTimeOutlined,
+      target: false
+    },
   ]
 };
 
