@@ -314,20 +314,20 @@ export default function NarocilaTable({
                            body: "",
                            attachment: "",
                          });}}
-                      aria-labelledby="email-dialog-title"
+                         aria-labelledby="email-dialog-title"
                       aria-describedby="email-dialog-description"
+                      
 
                       BackdropProps={{
                         style: {
                           backgroundColor: 'rgba(255, 255, 255, 0.01 )',
-                          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.03)',
                         },
                      }}
                     >
-                      <DialogTitle id="email-dialog-title">
+                      <DialogTitle id="email-dialog-title" style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
                         {"Send Email"}
                       </DialogTitle>
-                      <DialogContent>
+                      <DialogContent style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
                         <form onSubmit={handleEmailFormSubmit}>
                           <TextField
                             label="To"
@@ -378,7 +378,7 @@ export default function NarocilaTable({
                           </div>
                         </form>
                       </DialogContent>
-                      <DialogActions>
+                      <DialogActions style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
                         <Button
                           variant="outlined"
                           onClick={() => setEmailModalOpen(false)}
