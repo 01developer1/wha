@@ -75,4 +75,9 @@ public class Delovni_CasController {
     ) {
         return delovni_casDao.poisceVseDelovneCasePoKriteriju(ura_zacetka, ura_zakljucka, zaposlen);
     }
+
+    @GetMapping("/zaposleni/{ID_zaposleni}")
+    public Iterable<Delovni_Cas> vrniDelovniCasZaposlenega(@PathVariable(name="ID_zaposleni") Long id_zaposleni){
+        return delovni_casDao.vrniVseDelovneCaseZaposlenega(id_zaposleni);
+    }
 }

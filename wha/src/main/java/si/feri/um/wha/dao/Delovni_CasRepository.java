@@ -25,5 +25,6 @@ public interface Delovni_CasRepository extends CrudRepository<Delovni_Cas, Long>
             @Param("zaposlen") Zaposleni zaposlen
     );
 
-
+    @Query("SELECT d FROM Delovni_Cas d WHERE d.zaposlen.ID_zaposleni = :id_zaposleni")
+    Iterable<Delovni_Cas> vrniVseDelovneCaseZaposlenega(@Param("id_zaposleni") Long id_zaposleni);
 }
