@@ -10,7 +10,7 @@ export default function ProductForm({fetchArtikli}) {
         prodajnaCena: '',
         dobavnaCena: '',
         lokacijaArtikla: '',
-        tipArtikla: ''
+        tip_artikla: ''
     });
 
     const tipArtiklaOptions = [
@@ -94,8 +94,8 @@ export default function ProductForm({fetchArtikli}) {
                 <Select
                     labelId="tip-artikla-label"
                     label="Tip Artikla"
-                    name="tipArtikla"
-                    value={formData.tipArtikla}
+                    name="tip_artikla"
+                    value={formData.tip_artikla}
                     onChange={handleChange}
                 >
                     {tipArtiklaOptions.map((option) => (

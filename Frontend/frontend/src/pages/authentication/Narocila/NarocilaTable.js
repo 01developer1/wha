@@ -120,7 +120,7 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Id</TableCell>
+            <TableCell>ID</TableCell>
             <TableCell align="right">Datum Vnosa</TableCell>
             <TableCell align="right">Stranka</TableCell>
             <TableCell align="right">Zaposleni</TableCell>
@@ -145,7 +145,7 @@ export default function NarocilaTable({ narocila, fetchNarocila, showDeleteAlert
               <TableCell align="right">{narocilo.zaposlen.ime} {narocilo.zaposlen.priimek}</TableCell>
               <TableCell align="right">{new Date(narocilo.rokPriprave).toLocaleString()}</TableCell>
               <TableCell align="right">{narocilo.stanjeNarocila}</TableCell>
-              <TableCell align="right">{narocilo.cenaSkupaj +" €"}</TableCell>
+              <TableCell align="right">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(narocilo.cenaSkupaj)}</TableCell>
               <TableCell align="right">
                   <IconButton aria-label="download" size="large" onClick={() => handleDownloadPDF(narocilo)} >
                     <DownloadIcon/>

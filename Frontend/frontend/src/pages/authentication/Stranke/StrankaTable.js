@@ -97,7 +97,7 @@ const handleConfirmDelete = () => {
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>Id</TableCell>
+                <TableCell>ID</TableCell>
                 <TableCell align="right">Naziv</TableCell>
                 <TableCell align="right">Kraj</TableCell>
                 <TableCell align="right">Ulica</TableCell>

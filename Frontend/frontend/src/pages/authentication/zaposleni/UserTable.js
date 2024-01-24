@@ -132,7 +132,7 @@ const handleConfirmDelete = () => {
           <TableHead>
             <TableRow>
               <TableCell align="left"></TableCell>
-              <TableCell>Id</TableCell>
+              <TableCell>ID</TableCell>
               <TableCell align="right">Ime</TableCell>
               <TableCell align="right">Priimek</TableCell>
               <TableCell align="center">Uporabniško ime</TableCell>
