@@ -74,12 +74,19 @@ const DashboardDefault = () => {
   const [value, setValue] = useState('today');
   const [slot, setSlot] = useState('week');
   const [valueNarocila, setValueNarocila] = useState();
+  const [valueZasluzek, setZasluzek] = useState()
   //const [artikli, setArtikel] = useState([]);
  
    const fetchArtikli = () => {
        api.get("/artikli").then((result) => {
            setValue(result.data);
        });
+   };
+
+   const fetchZasluzek = () => {
+      api.get("/narocila/zasluzek").then((result) => {
+         setZasluzek(result.data)
+      });
    };
 
    const fetchNarocila = () => {
@@ -90,7 +97,8 @@ const DashboardDefault = () => {
     };
 
     useEffect(() => {
-      fetchNarocila(); // Call the fetchNarocila function when the component mounts
+      fetchNarocila(); 
+      fetchZasluzek();
     }, []);
     
 
@@ -113,7 +121,6 @@ const DashboardDefault = () => {
 
   return (
     <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-      {/* row 1 */}
       <Grid item xs={12} sx={{ mb: -2.25 }}>
         <Typography variant="h5">Nadzorna Plošča</Typography>
       </Grid>
@@ -131,8 +138,9 @@ const DashboardDefault = () => {
          <AnalyticEcommerce title="TODO Naročila" count={todoOrdersCount.toString()} />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Sales" count="$35,078" percentage={27.4} isLoss color="warning" extra="$20,395" />
+         <AnalyticEcommerce title="Skupen Promet" count={new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(valueZasluzek)} />
       </Grid>
+
 
       <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
 

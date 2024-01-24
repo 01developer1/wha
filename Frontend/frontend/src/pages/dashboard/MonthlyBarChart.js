@@ -87,7 +87,6 @@ const MonthlyBarChart = () => {
      }
    }));
  }, [theme, info, secondary]);
-// Removed primary since it's not being used
 
   return (
     <div id="chart">
