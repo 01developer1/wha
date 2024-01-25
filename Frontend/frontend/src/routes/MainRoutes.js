@@ -34,7 +34,7 @@ const MainRoutes = {
   children: [
     {
       path: '/',
-      element: <ProtectedRoute element={<DashboardDefault />} />
+      element: <ProtectedRoute element2={<DashboardDefault />} />
     },/*
     {
       path: 'color',
@@ -45,7 +45,7 @@ const MainRoutes = {
       children: [
         {
           path: 'default',
-          element: <ProtectedRoute element={<DashboardDefault />} />
+          element: <ProtectedRoute element2={<DashboardDefault />} />
         }
       ]
     },/*
@@ -67,32 +67,32 @@ const MainRoutes = {
     },*/
     {
       path: 'zaposleni',
-      element: <ProtectedRoute element={<Zaposleni />} />
+      element: <ProtectedRoute element2={<Zaposleni />} />
     },
     {
       path: 'artikli',
-      element: <ProtectedRoute element={<Artikli />} />
+      element: <ProtectedRoute element2={<Artikli />} element={<Artikli />} />
     },
     {
       path: 'narocila/*',
-      element: <ProtectedRoute element={<Narocila />} />
+      element: <ProtectedRoute element={<Narocila />} element2={<Narocila />}/>
     },
     {
       path: 'artikli/scanner',
-      element: <ProtectedRoute element={<Scanner />} />
+      element: <ProtectedRoute element={<Scanner />} element2={<Scanner />}/>
     },
     {
       path: 'stranka',
-      element: <ProtectedRoute element={<Stranke />} />
+      element: <ProtectedRoute element={<Stranke />} element2={<Stranke />}/>
     },
     {
       path: 'priprava',
-      element: <ProtectedRoute element={<Priprava />} />
+      element: <ProtectedRoute element={<Priprava />} element2={<Priprava />} />
     }
     ,
     {
       path: 'delovniCas',
-      element: <ProtectedRoute element={<DelovniCas />} />
+      element: <ProtectedRoute element={<DelovniCas />} element2={<DelovniCas />}/>
     }
   ]
 };

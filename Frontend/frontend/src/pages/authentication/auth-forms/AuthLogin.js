@@ -69,7 +69,7 @@ const AuthLogin = ({ setLoginError }) => {
         }
         sessionStorage.setItem('user', JSON.stringify(user));
         prijavaEnabled()
-        navigate('/');
+        navigate('/delovniCas');
       } else {
          setLoginError('Login failed. Please check your username and password.');
       }

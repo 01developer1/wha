@@ -212,13 +212,16 @@ const DodajNarocilo = ({ setShowTable, setShowNarocilo, fetchNarocila, setShowFo
   };
 
   const spremeniZalogo = async (artikli, kolicine) => {
-    for (let i = 0; i < artikli.length; i++) {
-      let data = { kolicina: kolicine[i] };
-      console.log(data)
-      let id_artikel = artikli[i].id_artikel;
-      const result = await api.put(`/artikli/posodobiZalogo/${id_artikel}`, data);
-      console.log(result)
-    }
+    
+      for (let i = 0; i < artikli.length; i++) {
+        let data = { kolicina: kolicine[i] };
+        console.log(data)
+        let id_artikel = artikli[i].id_artikel;
+        const result = await api.put(`/artikli/posodobiZalogo/${id_artikel}`, data);
+        console.log(result)
+      }
+    
+
   };
 
   const deleteRow = (index) => {
@@ -238,11 +241,12 @@ const DodajNarocilo = ({ setShowTable, setShowNarocilo, fetchNarocila, setShowFo
       throw error;
     }
   };
+
+
   const fetchEditData = async () => {
     if (editForm && editFormData) {
       try {
         const response = await getNarocilo(editFormData);
-
         const { stranka, artikli, datumVnosa, rokPriprave, seznamKolicin, cenaSkupaj } = response;
 
         setSelectedStranka(stranka);
@@ -334,8 +338,8 @@ const DodajNarocilo = ({ setShowTable, setShowNarocilo, fetchNarocila, setShowFo
       setShowTable(true);
       setShowNarocilo(false);
       setShowForm(true);
-      let celiArtikli = tableData.map(row => row.selectedArtikel);
-      spremeniZalogo(celiArtikli, tableData.map(row => row.col2));
+      //let celiArtikli = tableData.map(row => row.selectedArtikel);
+      //spremeniZalogo(celiArtikli, tableData.map(row => row.col2));
     } catch (error) {
       console.error('Napaka pri ustvarjanju novega naročila ali pridobivanju naročil:', error);
     }

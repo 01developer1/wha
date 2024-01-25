@@ -216,6 +216,9 @@ public class NarociloController {
         if (updatedNarocilo.getStanjeNarocila() != null) {
             existingNarocilo.setStanjeNarocila(updatedNarocilo.getStanjeNarocila());
         }
+        if(updatedNarocilo.getStranka() != null) {
+            existingNarocilo.setStranka(updatedNarocilo.getStranka());
+        }
 
         narociloDao.save(existingNarocilo);
 

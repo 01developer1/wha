@@ -56,7 +56,7 @@ const icons = {
  
  const pages = {
    id: 'authentication',
-   title: isUserRole('VODJA_PODJETJA') ? 'Pregled' : '',
+   title: (isUserRole('VODJA_PODJETJA') || isUserRole('DOKUMENTARIST') || isUserRole('VODJA_SKLADISCA')) ? 'Pregled' : '',
    type: 'group',
    children: filteredChildren
  };

@@ -38,7 +38,7 @@ const isUserRole = (role) => {
  
  const support = {
    id: 'support',
-   title: 'Priprava Naročil',
+   title: (isUserRole('VODJA_PODJETJA') || isUserRole('SKLADISCNIK') || isUserRole('VODJA_SKLADISCA')) ? 'Priprava Naročil' : '',
    type: 'group',
    children: supportChildren
  };

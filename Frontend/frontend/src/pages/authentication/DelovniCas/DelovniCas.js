@@ -56,6 +56,7 @@ const DelovniCas = () => {
 
     fetchDelovniCas();
     setShowZacniButton(false);
+    window.location.reload()
   };
   const handleKoncajClick = async () => {
     const lastItemIndex = delovniCasi.length - 1;

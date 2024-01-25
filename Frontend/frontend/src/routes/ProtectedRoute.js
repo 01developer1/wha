@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Routes } from 'react-router-dom';
 
-const ProtectedRoute = ({ element }) => {
+const ProtectedRoute = ({ element, element2 }) => {
 
    const isLoggedIn = Object.keys(sessionStorage).length > 0;
 
@@ -10,15 +10,19 @@ const ProtectedRoute = ({ element }) => {
    if (userString) {
       const userObject = JSON.parse(userString);
       const isAuthenticated = userObject.isAuthenticated;
+      const role = userObject.role;
 
-      console.log(userObject.isAuthenticated);  
+      console.log(userObject.isAuthenticated); 
 
-      if (isLoggedIn && isAuthenticated) {
-         return element;
+      if (  role == 'VODJA_PODJETJA' ) {
+         return element2;
       } else {
-         return <Navigate to="/login" />;
+         if (isLoggedIn && isAuthenticated) {
+            return element;
+         } else {
+            return <Navigate to="/login" />;
+         }
       }
-
    } else {
       return <Navigate to="/login" />;
    }
