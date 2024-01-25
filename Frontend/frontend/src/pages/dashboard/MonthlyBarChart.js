@@ -59,7 +59,7 @@ const MonthlyBarChart = () => {
        // Correct API endpoint should be used here
        api.get("/narocila/tedensko").then((result) => {
          const data = result.data;
-         const chartData = Object.values(data);
+         const chartData = Object.values(data).map(value => parseFloat(value.toFixed(2)));
          setSeries([{ data: chartData }]);
        });
        // Ensure that the data structure matches your expected format

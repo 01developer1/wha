@@ -31,7 +31,6 @@ const [selectedArtikelId, setSelectedArtikelId] = useState(null);
       .then((result) => {
         console.log(result.data);
         fetchArtikli();
-        showDeleteAlert();
       })
       .catch((error) => {
         console.error('There was an error deleting the artikel!', error);

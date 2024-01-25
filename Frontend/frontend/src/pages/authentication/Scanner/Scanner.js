@@ -44,7 +44,6 @@ const [selectedArtikelId, setSelectedArtikelId] = useState(null);
     api.delete(`/artikli/izbrisi/${artikel_id}`)
       .then((result) => {
         console.log(result.data);
-        showDeleteAlert();
       })
       .catch((error) => {
         console.error('There was an error deleting the artikel!', error);

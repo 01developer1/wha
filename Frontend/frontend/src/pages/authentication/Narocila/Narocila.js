@@ -22,11 +22,18 @@ const Narocila = () => {
    
 
    
-  const fetchNarocila = () => {
-     api.get("/narocila").then((result) => {
-         setNarocila(result.data);
-     });
-  };
+   const fetchNarocila = () => {
+    api.get("/narocila").then((result) => {
+       // Assuming 'datumVnosa' is the property by which you want to sort
+       const sortedNarocila = result.data.sort((a, b) => {
+          // Change 'datumVnosa' to the property you want to use for sorting
+          return new Date(b.datumVnosa) - new Date(a.datumVnosa);
+       });
+ 
+       setNarocila(sortedNarocila);
+    });
+ };
+  
 
   useEffect(() => {
     fetchNarocila();

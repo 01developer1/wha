@@ -21,7 +21,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 import { useDropzone } from "react-dropzone";
-import { Stack, Typography }  from '@mui/material';// Replace 'your-component-library' with the actual library name
+import { Stack, Typography } from '@mui/material';// Replace 'your-component-library' with the actual library name
 import PropTypes from 'prop-types';
 import Dot from 'components/@extended/Dot';
 
@@ -43,7 +43,6 @@ export default function NarocilaTable({
         // Refresh the article list after deletion
         fetchNarocila();
 
-        showDeleteAlert();
       })
       .catch((error) => {
         console.error("There was an error deleting the artikel!", error);
@@ -215,38 +214,38 @@ export default function NarocilaTable({
 
 
   const OrderStatus = ({ status }) => {
-   let color;
-   let title;
- 
-   switch (status) {
-     case "DOING":
-       color = 'warning';
-       title = 'DOING';
-       break;
-     case "DONE":
-       color = 'success';
-       title = 'DONE';
-       break;
-     case "TODO":
-       color = 'error';
-       title = 'TODO';
-       break;
-     default:
-       color = 'primary';
-       title = 'None';
-   }
- 
-   return (
-     <Stack direction="row" spacing={1} alignItems="center">
-       <Dot color={color} />
-       <Typography>{title}</Typography>
-     </Stack>
-   );
- };
- 
- OrderStatus.propTypes = {
-   status: PropTypes.number
- };
+    let color;
+    let title;
+
+    switch (status) {
+      case "DOING":
+        color = 'warning';
+        title = 'DOING';
+        break;
+      case "DONE":
+        color = 'success';
+        title = 'DONE';
+        break;
+      case "TODO":
+        color = 'error';
+        title = 'TODO';
+        break;
+      default:
+        color = 'primary';
+        title = 'None';
+    }
+
+    return (
+      <Stack direction="row" spacing={1} alignItems="center">
+        <Dot color={color} />
+        <Typography>{title}</Typography>
+      </Stack>
+    );
+  };
+
+  OrderStatus.propTypes = {
+    status: PropTypes.number
+  };
 
 
 
@@ -291,7 +290,7 @@ export default function NarocilaTable({
                 </TableCell>
                 <TableCell align="right">
                   <OrderStatus status={narocilo.stanjeNarocila} />
-               </TableCell>
+                </TableCell>
 
                 <TableCell align="right">{new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(narocilo.cenaSkupaj)}</TableCell>
                 <TableCell align="right">
@@ -306,28 +305,30 @@ export default function NarocilaTable({
                   {/* Email Modal */}
                   {emailModalOpen && (
                     <Dialog
-                      open={emailModalOpen}
-                      onClose={() => {setEmailModalOpen(false);
-                        setEmailFormData({
-                           to: "",
-                           subject: "",
-                           body: "",
-                           attachment: "",
-                         });}}
-                         aria-labelledby="email-dialog-title"
-                      aria-describedby="email-dialog-description"
-                      
-
-                      BackdropProps={{
-                        style: {
-                          backgroundColor: 'rgba(255, 255, 255, 0.01 )',
-                        },
-                     }}
-                    >
-                      <DialogTitle id="email-dialog-title" style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
+                    open={emailModalOpen}
+                    onClose={() => {
+                      setEmailModalOpen(false);
+                      setEmailFormData({
+                        to: "",
+                        subject: "",
+                        body: "",
+                        attachment: "",
+                      });
+                    }}
+                    
+                    aria-labelledby="email-dialog-title"
+                    aria-describedby="email-dialog-description"
+                    BackdropProps={{
+                      style: {
+                        backgroundColor: 'rgba(128, 128, 128, 0.17)', // Adjust the alpha value for transparency
+                      },
+                    }}
+                    
+                  >
+                      <DialogTitle id="email-dialog-title" >
                         {"Send Email"}
                       </DialogTitle>
-                      <DialogContent style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
+                      <DialogContent >
                         <form onSubmit={handleEmailFormSubmit}>
                           <TextField
                             label="To"
@@ -378,7 +379,7 @@ export default function NarocilaTable({
                           </div>
                         </form>
                       </DialogContent>
-                      <DialogActions style={{ backgroundColor: 'transparent', boxShadow: 'none' }}>
+                      <DialogActions>
                         <Button
                           variant="outlined"
                           onClick={() => setEmailModalOpen(false)}

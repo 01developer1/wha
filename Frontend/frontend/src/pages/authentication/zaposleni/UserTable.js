@@ -68,7 +68,6 @@ export default function UserTable({ users, fetchUser, showDeleteAlert }) {
       .then((result) => {
         console.log(result.data);
         fetchUser();
-        showDeleteAlert();
       })
       .catch((error) => {
         console.error('There was an error deleting the user!', error);
