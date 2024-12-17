@@ -49,7 +49,7 @@ jobs:
         run: |
           npx sonar-scanner \
             -Dsonar.projectKey=01developer1_wha \
-            -Dsonar.organization=carluka \
+            -Dsonar.organization=01developer1 \
             -Dsonar.sources=wha/src,Frontend/frontend/src \
             -Dsonar.java.binaries=wha/target/classes \
             -Dsonar.host.url=https://sonarcloud.io \
